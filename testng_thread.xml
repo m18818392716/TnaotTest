@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" thread-count="2">
+
+    <test verbose="2" preserve-order="true" name="Samsung">
+        <parameter name="serverURL" value="http://127.0.0.1:4723/wd/hub"/>
+        <!--<parameter name="automationName" value="Appium"/>-->
+        <parameter name="platformName" value="ANDROID"/>
+        <parameter name="platformVersion" value="6.0"/>
+        <parameter name="deviceName" value="Samsung Galaxy"/>
+        <!--<parameter name="appPath" value="src/test/resources/apps/app-uk-bdd-debug.apk"/>-->
+        <parameter name="androidAppPath" value="src/main/resources/GPB_Mobile_AOS_sprint2.apk"/>
+        <classes>
+            <class name="com.tnaot.demo.demoTest"/>
+        </classes>
+    </test>
+
+    <test verbose="2" preserve-order="true" name="Google">
+        <parameter name="serverURL" value="http://127.0.0.1:4723/wd/hub"/>
+        <!--<parameter name="automationName" value="Appium"/>-->
+        <parameter name="platformName" value="ANDROID"/>
+        <parameter name="platformVersion" value="7.0"/>
+        <parameter name="deviceName" value="Google Nexus 6"/>
+        <!--<parameter name="appPath" value="src/test/resources/apps/app-uk-bdd-debug.apk"/>-->
+        <parameter name="androidAppPath" value="src/main/resources/GPB_Mobile_AOS_sprint2.apk"/>
+        <classes>
+            <class name="com.tnaot.demo.demoTest"/>
+        </classes>
+    </test>
+
+</suite>

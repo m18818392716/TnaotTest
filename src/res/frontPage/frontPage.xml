@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--登录页-->
+<pages>
+    <page pageName="Login" url="http://118.184.217.39/Organizer/Login">
+        <locator by="id" value="UserInfo" desc="输入用户名"/>
+        <locator by="id" value="Password" desc="输入密码"/>
+        <locator by="id" value="button" desc="登录按钮"/>
+        <locator by="cssSelector" value="span[data-valmsg-for='UserInfo']" desc="用户名错误提示"/>
+        <locator by="cssSelector" value="span[data-valmsg-for='Password']" desc="密码错误提示"/>
+    </page>
+
+    <!--首页-->
+    <page pageName="HomePage" url="http://118.184.217.39/">
+        <locator by="cssSelector" value="a[href='/Organizer/Index']" desc="首页欢迎您文本"/>
+        <locator by="xpath" value="//div[@id='banner_list']/a" desc="首页banners"/>
+        <locator by="xpath" value="//td[@height='28']/a" desc="首页所有竞赛链接"/>
+    </page>
+
+    <!--竞赛搜索页-->
+    <page pageName="CompetitionSearch" url="http://118.184.217.39/Competition/Index">
+        <locator by="id" value="ProvinceCode" desc="选择省"/>
+        <locator by="id" value="CityCode" desc="选择市"/>
+        <locator by="id" value="AreaCode" desc="选择区"/>
+        <locator by="id" value="search_text" desc="竞赛搜索输入框"/>
+        <locator by="id" value="search_btn" desc="竞赛搜索按钮"/>
+        <locator by="id" value="loadMoreBtn" desc="点击加载更多"/>
+        <locator by="cssSelector" value="div[class='fl search_comp_list']" desc="页面所有竞赛"/>
+        <locator by="id" value="search_btn" desc="竞赛搜索按钮"/>
+    </page>
+    <!--报名页-->
+    <page pageName="ApplyCompetition" url="http://118.184.217.39/Project/Index/">
+        <locator by="cssSelector" value="[href='/Organizer/Login']" desc="登录按钮"/>
+        <locator by="xpath" value="//*[@id='EnrollType']/label/input" desc="角色类型"/>
+        <locator by="cssSelector" value="input[name='GroupType']" desc="选择组别"/>
+        <locator by="id" value="teamName" desc="团队全称"/>
+        <locator by="id" value="leaderName" desc="领队姓名"/>
+        <locator by="id" value="leaderPhone" desc="领队电话"/>
+        <locator by="id" value="coachName" desc="教练姓名"/>
+        <locator by="id" value="coachPhone" desc="教练电话"/>
+        <locator by="id" value="coachName2" desc="教练姓名2"/>
+        <locator by="id" value="coachPhone2" desc="教练电话2"/>
+        <locator by="id" value="coachName3" desc="教练姓名3"/>
+        <locator by="id" value="coachPhone3" desc="教练电话3"/>
+        <locator by="id" value="coachName4" desc="教练姓名4"/>
+        <locator by="id" value="coachPhone4" desc="教练电话4"/>
+        <locator by="id" value="parentName" desc="家长姓名"/>
+        <locator by="id" value="parentPhone" desc="家长电话"/>
+        <locator by="id" value="email" desc="电子邮箱"/>
+        <locator by="id" value="companyName" desc="单位名称"/>
+        <locator by="id" value="taxPayerNumber" desc="税号"/>
+        <locator by="id" value="row_name" desc="参赛人姓名"/>
+        <locator by="id" value="row_sex" desc="参赛人性别"/>
+        <locator by="id" value="row_idType" desc="参赛人证件类型"/>
+        <locator by="id" value="row_idno" desc="参赛人证件号码"/>
+        <locator by="id" value="row_birthday" desc="参赛人生日"/>
+        <locator by="id" value="row_add" desc="添加参赛人按钮"/>
+        <locator by="id" value="submit" desc="确定报名按钮"/>
+        <locator by="id" value="search_btn" desc="竞赛搜索按钮"/>
+    </page>
+</pages>

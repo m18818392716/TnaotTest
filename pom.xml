@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>mengxun</groupId>
+    <artifactId>tnaot</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <aspectj.version>1.8.10</aspectj.version>
+    </properties>
+
+    <dependencies>
+        <!--生成allure reports相关依赖-->
+        <!-- 依赖reportNg 关联testNg-->
+        <dependency>
+            <groupId>org.uncommons</groupId>
+            <artifactId>reportng</artifactId>
+            <version>1.1.4</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-testng-adaptor</artifactId>
+            <version>1.3.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 依赖Guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.7.0</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+
+
+        <!--读取XML-->
+        <dependency>
+            <groupId>org.dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <!--读取Excel-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.10-FINAL</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.10-FINAL</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-attachments</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+
+        <!--selenium相关依赖-->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
+        <!--testng依赖-->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.9</version>
+        </dependency>
+
+        <!--appium依赖-->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+
+        <!--生成注解-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!--生成extent reports相关依赖-->
+        <dependency>
+            <groupId>com.relevantcodes</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>2.41.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>4.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vimalselvam</groupId>
+            <artifactId>testng-extentsreport</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+
+
+        <!--发送邮件-->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <!--压缩文件-->
+        <dependency>
+            <groupId>de.idyl</groupId>
+            <artifactId>winzipaes</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+
+                    <!--<skipTests>false</skipTests>-->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${xmlFileName}</suiteXmlFile>
+                    </suiteXmlFiles>
+
+                    <!--设置参数命令行-->
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <systemPropertyVariables>
+                        <!--是否忽略html，解释见下图。与之后在reportNg报告上显示截图相关。当前已经使用allure了，这里可以直接去掉啦-->
+                        <!--<org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>-->
+
+                        <name>allure.results.directory</name>
+                        <value>./target/allure-results</value>
+
+                        <buildDirectory>${project.build.directory}</buildDirectory>
+
+                        <!--<name>usedefaultlisteners</name>-->
+                        <!--<value>false</value>-->
+
+                    </systemPropertyVariables>
+
+                    <!--测试失败后，是否忽略并继续测试-->
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -Dfile.encoding=UTF-8
+                    </argLine>
+
+                    <!--<suiteXmlFiles>-->
+                        <!--&lt;!&ndash;代表的是要执行的测试套件名称&ndash;&gt;-->
+                        <!--<suiteXmlFile>src/testng.xml</suiteXmlFile>-->
+                    <!--</suiteXmlFiles>-->
+
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+</project>

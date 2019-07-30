@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+
+    <test verbose="2" preserve-order="true" name="Samsung">
+        <parameter name="serverURL" value="http://127.0.0.1:4723/wd/hub"/>
+        <!--<parameter name="automationName" value="Appium"/>-->
+        <!--<parameter name="automationName" value="UIAutomator2"/>-->
+        <parameter name="platformName" value="ANDROID"/>
+        <parameter name="platformVersion" value="6.0"/>
+        <parameter name="deviceName" value="Samsung Galaxy"/>
+        <!--<parameter name="appPath" value="src/test/resources/apps/app-uk-bdd-debug.apk"/>-->
+        <!--<parameter name="androidAppPath" value="src/main/resources/GPB_Mobile_AOS_sprint2.apk"/>-->
+        <parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_preview_20190729.apk"/>
+        <classes>
+            <!--<class name="com.tnaot.demo.demoTest"/>-->
+            <class name="com.tnaot.step.LoginStep"/>
+            <!--<class name="com.tnaot.demo.AllureTest"/>-->
+        </classes>
+    </test>
+
+    <!--用例失败重跑机制-->
+    <listeners>
+        <!--失败重试-->
+        <!--<listener class-name="com.tnaot.utils.listener.TestRunnerListener" />-->
+        <!--<listener class-name="com.tnaot.utils.listener.RetryListener"/>-->
+
+        <!--生成extent report-->
+        <listener class-name="com.vimalselvam.testng.listener.ExtentTestNgFormatter" />
+        <listener class-name="com.tnaot.utils.extentutils.ExtentReporterNGListener" />
+
+
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+        <listener class-name="org.uncommons.reportng.HTMLReporter" />
+    </listeners>
+
+</suite>
