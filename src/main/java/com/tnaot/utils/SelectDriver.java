@@ -13,7 +13,8 @@ import io.appium.java_client.AppiumDriver;
 public class SelectDriver {
 
     //声明driver
-    public  AppiumDriver<WebElement> driver;
+//    public  AppiumDriver<WebElement> driver;
+    public static ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<>();
     //声明DesiredCapabilities
     public DesiredCapabilities capabilities;
     //声明ITestContext，用于获取testng配置文件内容
@@ -108,12 +109,12 @@ public class SelectDriver {
             //capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
             capabilities.setCapability("appPackage", appPackage);
             capabilities.setCapability("appActivity", appActivity);
-            driver = appiumUtil.getDriver(serverURL, capabilities,platformName);
-            testContext.setAttribute("APPIUM_DRIVER", driver);
+            appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities,platformName));
+            testContext.setAttribute("APPIUM_DRIVER", appiumDriver.get());
 //            logger.info(PropertiesDataProvider.getTestData(appFilePath, appPackage)+"已经启动");这个地方刚才是这里出的错。这里的意思是获取你配置文件里面的值打印出来。也就是properties里面的。你里面没有写东西所以报错
             System.out.println("-----------启动成功----------");
-            driver.manage().timeouts().implicitlyWait(elementTimeOut, TimeUnit.SECONDS);
-            return driver;
+            appiumDriver.get().manage().timeouts().implicitlyWait(elementTimeOut, TimeUnit.SECONDS);
+            return appiumDriver.get();
 
             //如果测试平台是ios的话，执行下面这个if语句内容
         }else if(platformName.equalsIgnoreCase("ios")){
@@ -124,9 +125,9 @@ public class SelectDriver {
             capabilities.setCapability("app", app.getAbsolutePath());
             //ios设置自动接收系统alert，注意IOS弹出的alert，APPIUM可以自动处理掉，支持ios8以上系统
             capabilities.setCapability("autoAcceptAlerts", true);
-            driver = appiumUtil.getDriver(serverURL, capabilities,platformName);
-            testContext.setAttribute("APPIUM_DRIVER", driver);
-            driver.manage().timeouts().implicitlyWait(elementTimeOut,TimeUnit.SECONDS);
+            appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities,platformName));
+            testContext.setAttribute("APPIUM_DRIVER", appiumDriver.get());
+            appiumDriver.get().manage().timeouts().implicitlyWait(elementTimeOut,TimeUnit.SECONDS);
 
         }else{
             logger.error("初始化driver失败");
@@ -134,8 +135,11 @@ public class SelectDriver {
         }
 
         //最后返回dirver对象
-        return driver;
+        return appiumDriver.get();
 
+    }
 
+    public static AppiumDriver getAppiumDriver(){
+        return appiumDriver.get();
     }
 }

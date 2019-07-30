@@ -10,12 +10,13 @@
         <parameter name="platformVersion" value="6.0"/>
         <parameter name="deviceName" value="Samsung Galaxy"/>
         <!--<parameter name="appPath" value="src/test/resources/apps/app-uk-bdd-debug.apk"/>-->
-        <!--<parameter name="androidAppPath" value="src/main/resources/GPB_Mobile_AOS_sprint2.apk"/>-->
-        <parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_preview_20190729.apk"/>
+        <parameter name="androidAppPath" value="src/main/resources/GPB_Mobile_AOS_sprint2.apk"/>
+        <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_preview_20190729.apk"/>-->
         <classes>
             <!--<class name="com.tnaot.demo.demoTest"/>-->
-            <class name="com.tnaot.step.LoginStep"/>
+            <!--<class name="com.tnaot.step.LoginStep"/>-->
             <!--<class name="com.tnaot.demo.AllureTest"/>-->
+            <class name="com.tnaot.demo.TestCaseFactory"/>
         </classes>
     </test>
 
@@ -26,12 +27,12 @@
         <!--<listener class-name="com.tnaot.utils.listener.RetryListener"/>-->
 
         <!--生成extent report-->
-        <listener class-name="com.vimalselvam.testng.listener.ExtentTestNgFormatter" />
-        <listener class-name="com.tnaot.utils.extentutils.ExtentReporterNGListener" />
+        <!--<listener class-name="com.vimalselvam.testng.listener.ExtentTestNgFormatter" />-->
+        <!--<listener class-name="com.tnaot.utils.extentutils.ExtentReporterNGListener" />-->
 
 
-        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-        <listener class-name="org.uncommons.reportng.HTMLReporter" />
+        <!--<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />-->
+        <!--<listener class-name="org.uncommons.reportng.HTMLReporter" />-->
     </listeners>
 
 </suite>
