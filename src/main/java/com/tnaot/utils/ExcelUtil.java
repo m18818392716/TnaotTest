@@ -4,12 +4,11 @@ import com.tnaot.utils.entity.CaseStep;
 import com.tnaot.utils.entity.Result;
 import com.tnaot.utils.entity.TestCase;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,7 +20,7 @@ import java.util.*;
 
 public class ExcelUtil {
 
-    private final static String EXCEL_PATH = "UILibrary.xls";
+    public static String excelPath;
     // 可配置多个sheet，以“,”分隔
     private final static String TEST_CASE_SHEET_INDEX = "5";
     private final static String CASE_STEP_SHEET_INDEX = "1";
@@ -34,7 +33,7 @@ public class ExcelUtil {
     private static ThreadLocal<Map<String, TestCase>> testCases = new ThreadLocal<>();
     private static ThreadLocal<Map<String, List<CaseStep>>> caseSteps = new ThreadLocal<>();
     private static ThreadLocal<Map<String, Result>> results = new ThreadLocal<>();
-    private final static Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
+    private final static LogUtils logger = new LogUtils(ExcelUtil.class);
 
     public static void readCaseExcel(){
         logger.info("Read Case Excel Start!");
@@ -260,7 +259,7 @@ public class ExcelUtil {
     public static Workbook getWorkbook(){
         try {
             if(workbook == null){
-                InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(EXCEL_PATH);
+                InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(excelPath);
                 workbook = WorkbookFactory.create(in);
                 in.close();
             }
@@ -272,9 +271,9 @@ public class ExcelUtil {
 
     public static void writeResult(){
         try{
-            InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(EXCEL_PATH);
+            InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(excelPath);
             Workbook workbook = null;
-            if(EXCEL_PATH.endsWith("xls")){
+            if(excelPath.endsWith("xls")){
                 workbook = new HSSFWorkbook(in);
             } else {
                 workbook = new XSSFWorkbook(in);
@@ -295,7 +294,7 @@ public class ExcelUtil {
                 }
             }
 
-            FileOutputStream excelFileOutPutStream = new FileOutputStream("src/main/resources/" + EXCEL_PATH);//写数据到这个路径上
+            FileOutputStream excelFileOutPutStream = new FileOutputStream("src/main/resources/" + excelPath);//写数据到这个路径上
             workbook.write(excelFileOutPutStream);
             excelFileOutPutStream.flush();
             excelFileOutPutStream.close();

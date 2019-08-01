@@ -4,32 +4,39 @@ import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
 import com.tnaot.utils.entity.TestCase;
+import com.tnaot.utils.entity.TestParameters;
+import io.appium.java_client.AppiumDriver;
+import org.testng.ITest;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.Factory;
+import org.testng.ITestNGMethod;
+import org.testng.annotations.*;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TestCaseFactory {
+public class TestCaseFactory{
 
     public void initProject(ITestContext context){
         System.out.println("初始化项目开始！");
         AppiumUtil appiumUtil = new AppiumUtil();
         SelectDriver selectDriver = new SelectDriver();
-        selectDriver.selectDriver(context, appiumUtil);
+        AppiumDriver appiumDriver = selectDriver.selectDriver(context, appiumUtil);
+
         ExcelUtil.readCaseExcel();
         ExcelUtil.readStepExcel();
-        System.out.println("step信息：");
-        for(String key : ExcelUtil.getCaseSteps().keySet()){
-            System.out.println(key+" : "+ ExcelUtil.getCaseSteps().get(key));
-        }
+//        System.out.println("step信息：");
+//        for(String key : ExcelUtil.getCaseSteps().keySet()){
+//            System.out.println(key+" : "+ ExcelUtil.getCaseSteps().get(key));
+//        }
         System.out.println("初始化项目结束！");
     }
 
     @Factory
-    public Object[] createInstances(ITestContext context) {
+    @Parameters({"excelPath"})
+    public Object[] createInstances(ITestContext context, @Optional String excelPath) {
+        ExcelUtil.excelPath = excelPath;
         initProject(context);
         Map<String, TestCase> testCases = ExcelUtil.getTestCases();
         // 遍历执行Case
@@ -48,11 +55,11 @@ public class TestCaseFactory {
     }
 
     @AfterSuite
-    public void quitProject(){
+    public void quitProject(ITestContext context){
         System.out.println("项目完结！！！！");
+        System.out.println("PASS用例："+context.getPassedTests());
+        System.out.println("FAIL用例："+context.getFailedTests());
         ExcelUtil.writeResult();
         SelectDriver.getAppiumDriver().quit();
     }
 }
-
-

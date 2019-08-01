@@ -1,7 +1,7 @@
 package com.tnaot.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import org.apache.log4j.Logger;
 
 public class LogUtils {
 
@@ -10,7 +10,7 @@ public class LogUtils {
 
     public LogUtils(Class<?> clazz) {
         this.clazz = clazz;
-        this.logger = LogManager.getLogger(this.clazz);
+        this.logger = Logger.getLogger(this.clazz);
     }
 
     public void info(String message) {
