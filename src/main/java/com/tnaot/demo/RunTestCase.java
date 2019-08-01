@@ -4,14 +4,11 @@ import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
 import com.tnaot.utils.entity.CaseStep;
 import com.tnaot.utils.entity.TestCase;
-import com.tnaot.utils.entity.TestParameters;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.ITest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Constructor;

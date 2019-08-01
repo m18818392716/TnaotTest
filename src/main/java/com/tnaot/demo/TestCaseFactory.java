@@ -4,7 +4,6 @@ import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
 import com.tnaot.utils.entity.TestCase;
-import com.tnaot.utils.entity.TestParameters;
 import io.appium.java_client.AppiumDriver;
 import org.testng.ITest;
 import org.testng.ITestContext;
