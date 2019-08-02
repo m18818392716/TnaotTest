@@ -8,8 +8,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import com.tnaot.core.AndroidDriverWait;
+import com.tnaot.enums.ScrollDirection;
+import com.tnaot.utils.AppiumUtils.ScreenScr;
+import io.appium.java_client.*;
+import io.appium.java_client.NoSuchContextException;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.functions.ExpectedCondition;
+import lombok.Getter;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,10 +22,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.ITestResult;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MultiTouchAction;
-import io.appium.java_client.NoSuchContextException;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
@@ -28,6 +29,9 @@ public class AppiumUtil {
 
     public AppiumDriver<WebElement> driver;
     public ITestResult it;
+
+    @Getter
+    private WebElement webElement;
     /**
      * 定义日志输出对象
      */
@@ -71,6 +75,9 @@ public class AppiumUtil {
     }
 
 
+    public void takescreen(String filename){
+        ScreenScr.getScreen(SelectDriver.getAppiumDriver(), filename);
+    }
 
 //    /**
 //     * 获取toast

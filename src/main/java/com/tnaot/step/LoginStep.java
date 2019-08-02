@@ -10,6 +10,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import lombok.Data;
 import org.testng.Assert;
+import org.testng.ITest;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -18,7 +19,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 @Data
-public class LoginStep {
+public class LoginStep implements ITest {
 
     @BeforeSuite
     public void initProject(ITestContext context) {
@@ -29,7 +30,8 @@ public class LoginStep {
     }
 
     /**失败用例重跑*/
-    @Test(retryAnalyzer= TestNGRetry.class)
+    //@Test(retryAnalyzer= TestNGRetry.class)
+    @Test
     public void login() throws InterruptedException {
 
         LoginPage loginPage = new LoginPage(SelectDriver.getAppiumDriver());
@@ -112,6 +114,12 @@ public class LoginStep {
 
     }
 
+
+    @Override
+    public String getTestName() {
+//        return String.format("%s(%s)", testCase.getId(), testCase.getDescription());
+        return "loginTest";
+    }
 
     @AfterSuite
     public void quitProject(){

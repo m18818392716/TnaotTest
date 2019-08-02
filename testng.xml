@@ -9,25 +9,27 @@
         <parameter name="platformName" value="ANDROID"/>
         <parameter name="platformVersion" value="6.0"/>
         <parameter name="deviceName" value="Samsung Galaxy"/>
-        <!--<parameter name="appPackage" value="com.tnaot.news"/>-->
-        <!--<parameter name="appActivity" value=".mctnews.detail.activity.MainActivity"/>-->
-        <!--<parameter name="appPath" value="src/test/resources/apps/app-uk-bdd-debug.apk"/>-->
-        <parameter name="androidAppPath" value="src/main/resources/GPB_Mobile_AOS_sprint2.apk"/>
-        <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.0.1_google_debug_20190801.apk"/>-->
+
+        <parameter name="appPackage" value="com.tnaot.news"/>
+        <parameter name="appActivity" value=".mctnews.detail.activity.MainActivity"/>
+        <parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190802.apk"/>
+
+        <!--<parameter name="androidAppPath" value="src/main/resources/GPB_Mobile_AOS_sprint2.apk"/>-->
         <parameter name="autoAcceptAlerts" value="true"/>
         <classes>
             <!--<class name="com.tnaot.demo.demoTest"/>-->
-            <!--<class name="com.tnaot.step.LoginStep"/>-->
+            <class name="com.tnaot.step.LoginStep"/>
             <!--<class name="com.tnaot.demo.AllureTest"/>-->
+
             <!--<class name="com.tnaot.demo.TestCaseFactory"/>-->
-            <class name="com.tnaot.demo.SampleTest"/>
+            <!--<class name="com.tnaot.demo.SampleTest"/>-->
         </classes>
     </test>
 
     <!--用例失败重跑机制-->
     <listeners>
         <!--失败重试-->
-        <!--<listener class-name="com.tnaot.utils.listener.TestRunnerListener" />-->
+        <listener class-name="com.tnaot.utils.listener.TestRunnerListener" />
         <!--<listener class-name="com.tnaot.utils.listener.RetryListener"/>-->
 
         <!--生成extent report-->

@@ -17,6 +17,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.relevantcodes.extentreports.NetworkMode;
 import com.relevantcodes.extentreports.ReporterType;
 
+import javax.imageio.ImageIO;
+
 public class ExtentReporterNGListener implements IReporter {
 
     private ExtentReports extent;
@@ -54,8 +56,8 @@ public class ExtentReporterNGListener implements IReporter {
         if (tests.size() > 0) {
             for (ITestResult result : tests.getAllResults()) {
 
-                test = extent.startTest(result.getMethod().getMethodName());
-//                test = extent.startTest(String.format("%s(%s)", result.getMethod().getMethodName(), "test"));
+                //test = extent.startTest(result.getMethod().getMethodName());
+                test = extent.startTest(result.getTestName());
 
                 test.setStartedTime(getTime(result.getStartMillis()));
                 test.setEndedTime(getTime(result.getEndMillis()));
@@ -64,8 +66,12 @@ public class ExtentReporterNGListener implements IReporter {
                     test.assignCategory(group);
 
                 if (result.getThrowable() != null) {
-                    test.log(status, test.addScreenCapture("../img/"+result.getMethod().getMethodName()+".png"));
-                    test.log(status, result.getThrowable());
+
+//                    String fileName=System.getProperty("user.dir")+"\\test-output\\"+result.getTestName()+".png";
+//                    test.addScreenCapture(fileName);
+                  //test.log(status, test.addScreenCapture("./img/"+result.getMethod().getMethodName()+".png"));
+                  test.log(status, test.addScreenCapture("../img/"+result.getTestName()+".png"));
+                  test.log(status, result.getThrowable());
 
                 }
                 else {
