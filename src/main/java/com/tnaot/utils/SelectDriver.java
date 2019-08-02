@@ -3,6 +3,7 @@ package com.tnaot.utils;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -60,7 +61,7 @@ public class SelectDriver {
         //通过testng的xml文件获取serverURL参数值，并赋给  serverURL变量
         serverURL = context.getCurrentXmlTest().getParameter("serverURL");
 //        //通过testng的xml文件获取automationName参数值，并赋给  automationName变量
-//        automationName = context.getCurrentXmlTest().getParameter("automationName");
+        automationName = context.getCurrentXmlTest().getParameter("automationName");
         //通过testng的xml文件获取platformName参数值，并赋给  platformName变量
         platformName = context.getCurrentXmlTest().getParameter("platformName");
         //通过testng的xml文件获取platformVersion参数值，并赋给  platformVersion变量
@@ -109,6 +110,7 @@ public class SelectDriver {
             //capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
             capabilities.setCapability("appPackage", appPackage);
             capabilities.setCapability("appActivity", appActivity);
+            capabilities.setCapability(MobileCapabilityType.NO_RESET, false); // 打开App清除本地数据
             appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities,platformName));
             testContext.setAttribute("APPIUM_DRIVER", appiumDriver.get());
 //            logger.info(PropertiesDataProvider.getTestData(appFilePath, appPackage)+"已经启动");这个地方刚才是这里出的错。这里的意思是获取你配置文件里面的值打印出来。也就是properties里面的。你里面没有写东西所以报错

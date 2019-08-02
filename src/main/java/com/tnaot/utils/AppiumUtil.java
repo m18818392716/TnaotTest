@@ -63,12 +63,14 @@ public class AppiumUtil {
     /**
      * ps：不要去定位toast，尽量不要用element去接收这个元素。我们取这个提示一般来说都是来做判断比对的，所以这里直接用assert
      */
-//    public void assertToast(AndroidDriver<AndroidElement> driver, String message) {
-////        final WebDriverWait wait = new AndroidDriverWait(driver, 10);
-////        AndroidDriverWait wait = new AndroidDriverWait(driver, 60);
-//        WebElement showClose = new AndroidDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[contains(@text,'" + message + "')]")));
-//        Assert.assertNotNull(showClose);
-//    }
+    public static void assertToast(AndroidDriver<AndroidElement> driver, String message) {
+//        final WebDriverWait wait = new AndroidDriverWait(driver, 10);
+//        AndroidDriverWait wait = new AndroidDriverWait(driver, 60);
+        WebElement showClose = new AndroidDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[contains(@text,'" + message + "')]")));
+        Assert.assertNotNull(showClose);
+    }
+
+
 
 //    /**
 //     * 获取toast

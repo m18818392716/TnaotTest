@@ -16,14 +16,15 @@ public class RunSuite {
         //testFieldList.add("testng_main.xml");
 
 //        方法二：
-        testFieldList.add("testng1.xml");
-        testFieldList.add("testng2.xml");
+        testFieldList.add("testng.xml");
+//        testFieldList.add("testng1.xml");
+//        testFieldList.add("testng2.xml");
 
         testng.setTestSuites(testFieldList);
 
         testng.addListener(tla);
 //        设置多线程
-        testng.setSuiteThreadPoolSize(2);
+        testng.setSuiteThreadPoolSize(1);
 
         testng.run();
         System.out.println("ConfigurationFailures: "+tla.getConfigurationFailures());

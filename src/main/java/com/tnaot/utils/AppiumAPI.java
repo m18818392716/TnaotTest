@@ -1,6 +1,8 @@
 package com.tnaot.utils;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 public interface AppiumAPI {
 
@@ -13,4 +15,6 @@ public interface AppiumAPI {
     public void scrollToElement(MobileElement e);
 
     public boolean isElementPresent(MobileElement e);
+
+    public void assertToast(AndroidDriver<AndroidElement> driver, String message);
 }

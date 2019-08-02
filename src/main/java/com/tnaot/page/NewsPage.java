@@ -14,7 +14,7 @@ public class NewsPage extends AppiumBaseExecutor {
     }
 
     /** 资讯tab键 */
-    @AndroidFindBy(id="com.tnaot.news:id/rlHome")
+    @AndroidFindBy(id="com.tnaot.news:id/iv_Home")
     MobileElement rlHome;
 
     /** 资讯详情-评论输入框 */
@@ -148,16 +148,22 @@ public class NewsPage extends AppiumBaseExecutor {
     MobileElement rlVideo;
 
     /** 首页tab键 */
-    @AndroidFindBy(id="com.tnaot.news:id/rlLife")
+    @AndroidFindBy(id="com.tnaot.news:id/iv_life")
     MobileElement rlLife;
 
     /** 动态tab键 */
-    @AndroidFindBy(id="com.tnaot.news:id/rlDynamic")
+    @AndroidFindBy(id="com.tnaot.news:id/iv_dynamic")
     MobileElement rlDynamic;
 
     /** 我的tab键 */
     @AndroidFindBy(id="com.tnaot.news:id/rlMine")
     MobileElement rlMine;
+
+
+
+    /** 热搜词输入框 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_search_hot_text")
+    MobileElement searchText;
 
 
 

@@ -5,7 +5,12 @@ import com.tnaot.utils.Locator;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 public abstract class AppiumBaseExecutor implements AppiumAPI {
 
@@ -182,5 +187,14 @@ public abstract class AppiumBaseExecutor implements AppiumAPI {
     @Override
     public boolean isElementPresent(MobileElement e) {
         return e.isDisplayed();
+    }
+
+
+
+    @Override
+    public void assertToast(AndroidDriver<AndroidElement> driver, String message) {
+
+        WebElement showClose = new AndroidDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[contains(@text,'" + message + "')]")));
+        Assert.assertNotNull(showClose);
     }
 }

@@ -6,12 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.testng.IReporter;
-import org.testng.IResultMap;
-import org.testng.ISuite;
-import org.testng.ISuiteResult;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
+import com.tnaot.demo.SampleTest;
+import com.tnaot.utils.entity.TestParameters;
+import org.testng.*;
 import org.testng.xml.XmlSuite;
 
 import com.relevantcodes.extentreports.ExtentReports;
@@ -20,7 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.relevantcodes.extentreports.NetworkMode;
 import com.relevantcodes.extentreports.ReporterType;
 
-public class ExtentReporterNGListener implements IReporter{
+public class ExtentReporterNGListener implements IReporter {
 
     private ExtentReports extent;
 
@@ -56,7 +53,9 @@ public class ExtentReporterNGListener implements IReporter{
 
         if (tests.size() > 0) {
             for (ITestResult result : tests.getAllResults()) {
+
                 test = extent.startTest(result.getMethod().getMethodName());
+//                test = extent.startTest(String.format("%s(%s)", result.getMethod().getMethodName(), "test"));
 
                 test.setStartedTime(getTime(result.getStartMillis()));
                 test.setEndedTime(getTime(result.getEndMillis()));

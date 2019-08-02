@@ -1,37 +1,84 @@
 package com.tnaot.step;
 
 import com.tnaot.page.LoginPage;
+import com.tnaot.page.NewsPage;
+import com.tnaot.page.TaskCenterPage;
 import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.SelectDriver;
 import com.tnaot.utils.listener.TestNGRetry;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import lombok.Data;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+@Data
 public class LoginStep {
 
-    /**失败用例重跑*/
-    @Test(retryAnalyzer= TestNGRetry.class)
-    public void login(ITestContext context) {
-
+    @BeforeSuite
+    public void initProject(ITestContext context) {
         AppiumUtil appiumUtil = new AppiumUtil();
         SelectDriver selectDriver = new SelectDriver();
         AppiumDriver appiumDriver = selectDriver.selectDriver(context, appiumUtil);
         System.out.println("--------------"+appiumDriver);
+    }
 
-        LoginPage loginPage = new LoginPage(appiumDriver);
+    /**失败用例重跑*/
+    @Test(retryAnalyzer= TestNGRetry.class)
+    public void login() throws InterruptedException {
+
+        LoginPage loginPage = new LoginPage(SelectDriver.getAppiumDriver());
+        NewsPage newsPage = new NewsPage(SelectDriver.getAppiumDriver());
+        TaskCenterPage taskCenterPage = new TaskCenterPage(SelectDriver.getAppiumDriver());
+
 //        PageFactory.initElements(new AppiumFieldDecorator(loginPage.getDriver()), loginPage);
 
         System.out.println("--------------"+loginPage);
-        loginPage.getTabMine().click();
+
+        if(loginPage.getDialogContainer().isDisplayed()) {
+
+            loginPage.getAllowButton().click();
+
+        }
+
+        Thread.sleep(35000);
+
+
+        loginPage.getRlMine().click();
         loginPage.getPhoneLoginType().click();
+        Thread.sleep(5000);
         loginPage.getAreaText().click();
+        Thread.sleep(3000);
+        loginPage.getAreaSelect().click();
         loginPage.getPhoneText().sendKeys("18818392716");
+        Thread.sleep(3000);
         loginPage.getPwdText().sendKeys("cq183158");
+        Thread.sleep(3000);
         loginPage.getLoginButton().click();
+        Thread.sleep(3000);
+
+        taskCenterPage.getBackButton().click();
+        Thread.sleep(3000);
+
+//        //点击“资讯”
+//        newsPage.getRlHome().click();
+        Thread.sleep(10000);
+
+        //点击“第一条资讯查看详情”
+//        loginPage.getNewsOne().click();
+
+        //点击“收藏”按钮
+        if(!loginPage.getIsCollect().isSelected()) {
+            AndroidDriver androidDriver = (AndroidDriver)SelectDriver.getAppiumDriver();
+            loginPage.getIsCollect().click();
+//            AppiumUtil.assertToast(androidDriver,"收藏成功");
+            AppiumUtil.assertToast(androidDriver,"取消收藏成功");
+        }
 
 
 
@@ -63,6 +110,14 @@ public class LoginStep {
             System.out.println("正在运行的方法是成功的方法："+result.getName());
         }
 
+    }
+
+
+    @AfterSuite
+    public void quitProject(){
+
+        System.out.println("项目完结！！！！");
+        SelectDriver.getAppiumDriver().quit();
     }
 
 
