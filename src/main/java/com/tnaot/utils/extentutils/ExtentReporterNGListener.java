@@ -15,6 +15,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.relevantcodes.extentreports.NetworkMode;
 import com.relevantcodes.extentreports.ReporterType;
 
+import javax.imageio.ImageIO;
+
 public class ExtentReporterNGListener implements IReporter {
 
     private ExtentReports extent;
@@ -61,8 +63,12 @@ public class ExtentReporterNGListener implements IReporter {
                     test.assignCategory(group);
 
                 if (result.getThrowable() != null) {
-                    test.log(status, test.addScreenCapture("../img/"+result.getMethod().getMethodName()+".png"));
-                    test.log(status, result.getThrowable());
+
+//                    String fileName=System.getProperty("user.dir")+"\\test-output\\"+result.getTestName()+".png";
+//                    test.addScreenCapture(fileName);
+                  //test.log(status, test.addScreenCapture("./img/"+result.getMethod().getMethodName()+".png"));
+                  test.log(status, test.addScreenCapture("../img/"+result.getTestName()+".png"));
+                  test.log(status, result.getThrowable());
 
                 }
                 else {
