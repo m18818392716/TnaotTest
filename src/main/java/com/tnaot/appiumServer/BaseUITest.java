@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.tnaot.core.AppiumBaseExecutor;
+import com.tnaot.utils.LogUtils;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -18,7 +19,7 @@ import io.appium.java_client.AppiumDriver;
 public class BaseUITest extends AppiumBaseExecutor {
 
     /** The logger. */
-    AppLogger logger = new AppLogger(BaseUITest.class);
+    LogUtils logger = new LogUtils(BaseUITest.class);
 
     /**
      * Instantiates a new base UI test.
