@@ -9,6 +9,8 @@ import io.appium.java_client.MobileElement;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.ITest;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Constructor;
@@ -32,9 +34,12 @@ public class RunTestCase implements ITest {
     @Test
     public void run() {
         System.out.println("Run Test Case ---->>>>> ["+ testCase+"]");
-        this.runCase(testCase.getId());
-        ExcelUtil.getResults().get(testCase.getId()).setResult(true);
-        SelectDriver.getAppiumDriver().resetApp();
+        try {
+            this.runCase(testCase.getId());
+            ExcelUtil.getResults().get(testCase.getId()).setResult(true);
+        } finally {
+            SelectDriver.getAppiumDriver().resetApp();
+        }
     }
 
     public void runCase(String caseId) {
@@ -99,5 +104,9 @@ public class RunTestCase implements ITest {
                 Assert.fail("预期以外的操作：Element["+mobileElement+ "] Action: [" + action + "]");
                 break;
         }
+    }
+
+    public TestCase getTestCase() {
+        return testCase;
     }
 }

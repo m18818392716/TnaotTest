@@ -10,7 +10,10 @@ import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.annotations.*;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +35,7 @@ public class TestCaseFactory{
         System.out.println("初始化项目结束！");
     }
 
+    // 使用Factory实现动态添加用例
     @Factory
     @Parameters({"excelPath"})
     public Object[] createInstances(ITestContext context, @Optional String excelPath) {

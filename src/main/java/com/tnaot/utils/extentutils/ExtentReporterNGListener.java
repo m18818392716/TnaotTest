@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.tnaot.demo.SampleTest;
-import com.tnaot.utils.entity.TestParameters;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
 
@@ -53,9 +51,8 @@ public class ExtentReporterNGListener implements IReporter {
 
         if (tests.size() > 0) {
             for (ITestResult result : tests.getAllResults()) {
-
-                test = extent.startTest(result.getMethod().getMethodName());
-//                test = extent.startTest(String.format("%s(%s)", result.getMethod().getMethodName(), "test"));
+//                test = extent.startTest(result.getMethod().getMethodName());
+                test = extent.startTest(result.getTestName());
 
                 test.setStartedTime(getTime(result.getStartMillis()));
                 test.setEndedTime(getTime(result.getEndMillis()));
