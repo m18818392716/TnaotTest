@@ -22,12 +22,16 @@ public class ExcelUtil {
 
     public static String excelPath;
     // 可配置多个sheet，以“,”分隔
-    private final static String TEST_CASE_SHEET_INDEX = "5";
-    private final static String CASE_STEP_SHEET_INDEX = "1";
+    public final static String TEST_CASE_SHEET_INDEX = "5";
+    public final static String CASE_STEP_SHEET_INDEX = "1";
 
-    private final static String DATA_NUM_NAME = "dataNum";
-    private final static String DATA_PREFIX = "data_";
-    private final static String RESULT_NAME = "result";
+    public final static String DATA_NUM_NAME = "dataNum";
+    public final static String DATA_PREFIX = "data_";
+    public final static String RESULT_NAME = "result";
+
+    public final static String RESULT_PASS = "PASS";
+    public final static String RESULT_FAIL = "FAIL";
+    public final static String RESULT_SKIP = "SKIP";
 
     private static Workbook workbook;
     private static ThreadLocal<Map<String, TestCase>> testCases = new ThreadLocal<>();
@@ -272,7 +276,7 @@ public class ExcelUtil {
     public static void writeResult(){
         try{
             InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(excelPath);
-            Workbook workbook = null;
+            Workbook workbook;
             if(excelPath.endsWith("xls")){
                 workbook = new HSSFWorkbook(in);
             } else {
@@ -280,17 +284,21 @@ public class ExcelUtil {
             }
             in.close();
 
+            // 遍历获取目标结果单元格，进行写入值
             for (String key : getResults().keySet()){
                 Result result = getResults().get(key);
-                Cell resultCell = workbook.getSheetAt(result.getSheetIndex()).getRow(result.getRowIndex()).getCell(result.getCellIndex());
-                if(result.getIsRun()){
-                    if(result.isResult()){
-                        resultCell.setCellValue("PASS");
-                    } else {
-                        resultCell.setCellValue("FAIL");
-                    }
+                Row resultRow = workbook.getSheetAt(result.getSheetIndex()).getRow(result.getRowIndex());
+                Cell resultCell = resultRow.getCell(result.getCellIndex());
+                // 单元格为空时，需要创建再赋值
+                if(resultCell == null){
+                    resultCell = resultRow.createCell(result.getCellIndex());
+                }
+                if(RESULT_PASS.equals(result.getResult())){
+                    resultCell.setCellValue(RESULT_PASS);
+                } else if(RESULT_FAIL.equals(result.getResult())){
+                    resultCell.setCellValue(RESULT_FAIL);
                 } else {
-                    resultCell.setCellValue("");
+                    resultCell.setCellValue(RESULT_SKIP);
                 }
             }
 
