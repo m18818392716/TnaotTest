@@ -1,12 +1,17 @@
 package com.tnaot.utils.listener;
 
+import com.tnaot.demo.RunTestCase;
 import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.AppiumUtils.ScreenScr;
+import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
+import com.tnaot.utils.entity.TestCase;
 import org.testng.*;
 
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 
 public class TestRunnerListener extends TestListenerAdapter {
@@ -22,6 +27,7 @@ public class TestRunnerListener extends TestListenerAdapter {
     @Override
     public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
+        ExcelUtil.getResults().get(getCaseId(tr)).setResult(ExcelUtil.RESULT_PASS);
         logger.info("【" + tr.getName() + " Success】");
 
 //        TestNGRetry retryAnalyzer = (TestNGRetry) tr.getMethod().getRetryAnalyzer();
@@ -29,10 +35,15 @@ public class TestRunnerListener extends TestListenerAdapter {
 //        finish(tr);由于版本问题，报错
     }
 
+    public String getCaseId(ITestResult tr) {
+        return tr.getName().substring(0, tr.getName().indexOf("("));
+    }
+
 
     @Override
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
+        ExcelUtil.getResults().get(getCaseId(tr)).setResult(ExcelUtil.RESULT_FAIL);
         //String picName =tr.getStartMillis()+""+tr.getTestName();
         String picName = tr.getTestName();
         ScreenScr.getScreen(SelectDriver.getAppiumDriver(),picName);
@@ -64,6 +75,7 @@ public class TestRunnerListener extends TestListenerAdapter {
     @Override
     public void onTestSkipped(ITestResult tr) {
         super.onTestSkipped(tr);
+        ExcelUtil.getResults().get(getCaseId(tr)).setResult(ExcelUtil.RESULT_SKIP);
         //String picName =tr.getStartMillis()+""+tr.getTestName();
         String picName = tr.getTestName();
         ScreenScr.getScreen(SelectDriver.getAppiumDriver(),picName);

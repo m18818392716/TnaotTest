@@ -37,7 +37,6 @@ public class RunTestCase implements ITest {
         System.out.println("Run Test Case ---->>>>> ["+ testCase+"]");
         try {
             this.runCase(testCase.getId());
-            ExcelUtil.getResults().get(testCase.getId()).setResult(true);
         } finally {
             SelectDriver.getAppiumDriver().resetApp();
         }
@@ -54,9 +53,13 @@ public class RunTestCase implements ITest {
         if (caseSteps == null) {
             Assert.fail("未定义用例步骤！用例ID：" + caseId);
         }
+
         // 遍历执行步骤
         for (CaseStep caseStep : caseSteps) {
-            MobileElement mobileElement = this.getMobileElement(caseStep.getElementPath());
+            MobileElement mobileElement = null;
+            if(StringUtils.isNotBlank(caseStep.getElementPath())){
+                mobileElement = this.getMobileElement(caseStep.getElementPath());
+            }
             this.executeAction(mobileElement, caseStep.getAction(), caseStep.getData());
         }
     }
@@ -79,12 +82,13 @@ public class RunTestCase implements ITest {
     }
 
     // 获取属性的get方法
-    public Method getGetMethod(Class targetClass, String fieldName) {
+    public static Method getGetMethod(Class targetClass, String fieldName) {
         String methodName = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
         try {
             return targetClass.getMethod(methodName);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
+            Assert.fail();
         }
         return null;
     }
