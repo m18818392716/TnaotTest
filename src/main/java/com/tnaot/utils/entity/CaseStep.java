@@ -7,6 +7,7 @@ public class CaseStep {
 
     private String caseId;
     private String stepNum;
+    private String description; // 描述
     private String elementPath; // 控件路径  对应page包下的 [类名].[属性名]
     private String action; // 对控件的操作
 

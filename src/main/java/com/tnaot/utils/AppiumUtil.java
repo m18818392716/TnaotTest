@@ -75,7 +75,48 @@ public class AppiumUtil {
     }
 
 
-    public void takescreen(String filename){
+    /** 等待 */
+    public static void sleep(Long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            logger.error(ex);
+        }
+    }
+
+    public static void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            logger.error(ex);
+        }
+    }
+
+    /** 判断元素是否存在 */
+    public static boolean isExist(WebElement webElement) {
+        try {
+            webElement.isDisplayed();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+
+    }
+
+    /** 判断元素是否可见 */
+    public static boolean isVisible(WebElement webElement) {
+        try {
+            return webElement.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+
+    }
+
+    /** 截屏操作 */
+    public static void takescreen(String filename){
         ScreenScr.getScreen(SelectDriver.getAppiumDriver(), filename);
     }
 
@@ -606,29 +647,29 @@ public class AppiumUtil {
 
     }
 
-    /**长按操作*/
-    public void longPress(){
-        //初始化
-        TouchAction action = new TouchAction(driver);
-        //按住等待5秒后释放
-        action.press(driver.findElement(By.name("按住说话"))).waitAction(5000);
-        action.perform();
-    }
-
-    /**硬件返回*/
-    public void goBack(AndroidDriver driver) {
-        //driver.press_keycode(4);
-        driver.sendKeyEvent(AndroidKeyCode.BACK);
-        driver.
-    }
-
-    public static void Clip(WebElement el) {
-        //获取焦点
-        el.click();
-        //ctrl+v的组合操作
-        driver.sendKeyEvent(50,AndroidKeyMetastate.META_CTRL_ON);
-
-    }
+//    /**长按操作*/
+//    public void longPress(){
+//        //初始化
+//        TouchAction action = new TouchAction(driver);
+//        //按住等待5秒后释放
+//        action.press(driver.findElement(By.name("按住说话"))).waitAction(5000);
+//        action.perform();
+//    }
+//
+//    /**硬件返回*/
+//    public void goBack(AndroidDriver driver) {
+//        //driver.press_keycode(4);
+//        driver.sendKeyEvent(AndroidKeyCode.BACK);
+//        driver.
+//    }
+//
+//    public static void Clip(WebElement el) {
+//        //获取焦点
+//        el.click();
+//        //ctrl+v的组合操作
+//        driver.sendKeyEvent(50,AndroidKeyMetastate.META_CTRL_ON);
+//
+//    }
 
     /**滑动*/
     /*public void swipe(int beginX,int beginY,int endX,int endY){

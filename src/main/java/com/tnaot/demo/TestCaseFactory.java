@@ -5,6 +5,9 @@ import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
 import com.tnaot.utils.entity.TestCase;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.testng.ITest;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
@@ -33,6 +36,18 @@ public class TestCaseFactory{
 //            System.out.println(key+" : "+ ExcelUtil.getCaseSteps().get(key));
 //        }
         System.out.println("初始化项目结束！");
+
+        AppiumUtil.sleep(5000L);
+        try{
+            WebElement allowButton = appiumDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button"));
+            if(allowButton.isDisplayed()){
+                allowButton.click();
+            }
+        } catch (NoSuchElementException e){
+            System.out.println("不存在该控件");
+        }
+
+
     }
 
     // 使用Factory实现动态添加用例
