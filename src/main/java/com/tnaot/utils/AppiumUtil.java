@@ -607,10 +607,28 @@ public class AppiumUtil {
     }
 
     /**长按操作*/
-//    public void longPress(By by){
-//        TouchAction tAction=new TouchAction(driver);
-//        tAction.longPress(findElement(by)).perform();
-//    }
+    public void longPress(){
+        //初始化
+        TouchAction action = new TouchAction(driver);
+        //按住等待5秒后释放
+        action.press(driver.findElement(By.name("按住说话"))).waitAction(5000);
+        action.perform();
+    }
+
+    /**硬件返回*/
+    public void goBack(AndroidDriver driver) {
+        //driver.press_keycode(4);
+        driver.sendKeyEvent(AndroidKeyCode.BACK);
+        driver.
+    }
+
+    public static void Clip(WebElement el) {
+        //获取焦点
+        el.click();
+        //ctrl+v的组合操作
+        driver.sendKeyEvent(50,AndroidKeyMetastate.META_CTRL_ON);
+
+    }
 
     /**滑动*/
     /*public void swipe(int beginX,int beginY,int endX,int endY){

@@ -43,7 +43,7 @@ public class SlideScreen {
         // 获取手机屏幕的高度
         int height = driver.manage().window().getSize().height;
         // /*new一个TouchAction对象，调用其按压press()方法，输入坐标点,moveTo移动到下一个坐标点，之后调用release()和perform()方法执行，注意，宽乘以或者除以的数字自己来定义计算的，主要是呈现一个公共的方式，兼容所有的手机*/
-        new TouchAction(driver).press(PointOption.point(width * 3 / 4, height / 2)).moveTo(PointOption.point(width / 10, height / 2)).release().perform().perform();
+        new TouchAction(driver).press(PointOption.point(width * 3 / 4, height / 2)).moveTo(PointOption.point(width / 10, height / 2)).release().perform();
     }
 
     /**

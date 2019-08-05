@@ -143,6 +143,42 @@ public class NewsPage extends AppiumBaseExecutor {
 
 
 
+    /** 资讯详情-评论列表-热门 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_hot_comments")
+    MobileElement hotComments;
+
+    /** 资讯详情-评论列表-最新 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_newest_comments")
+    MobileElement newestComments;
+
+    /** 资讯详情-评论列表-评论第一条 */
+    @AndroidFindBy(id="com.tnaot.news:id/ll_parent")
+    MobileElement llParent;
+
+    /** 资讯详情-评论列表-评论点赞 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_like_count")
+    MobileElement likeCount;
+
+    /** 资讯详情-评论列表-评论删除 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_delete_comment")
+    MobileElement deleteComment;
+
+//    /** 资讯详情-评论列表-评论第一条-详情-下方的回复评论输入框 */
+//    @AndroidFindBy(id="com.tnaot.news:id/et_comment_input")
+//    MobileElement commentInput;
+//
+//    /** 资讯详情-评论列表-评论第一条-详情-下方的发布按钮 */
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_comment_push")
+//    MobileElement commentPush;
+
+    /** 资讯详情-返回按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/ivBack")
+    MobileElement backButton;
+
+
+
+
+
     /** 视频tab键 */
     @AndroidFindBy(id="com.tnaot.news:id/rlVideo")
     MobileElement rlVideo;
