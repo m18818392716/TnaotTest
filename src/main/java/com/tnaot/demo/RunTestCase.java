@@ -1,6 +1,7 @@
 package com.tnaot.demo;
 
 import com.tnaot.core.AndroidDriverWait;
+import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.AppiumUtils.SwipeUtils;
 import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
@@ -27,6 +28,7 @@ import java.util.List;
 public class RunTestCase implements ITest {
 
     public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
+    public static final int SLEEP_WAIT_TIME = 2 * 1000;
 
     private TestCase testCase;
 
@@ -44,6 +46,9 @@ public class RunTestCase implements ITest {
         System.out.println("Run Test Case ---->>>>> ["+ testCase+"]");
         try {
             this.runCase(testCase.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.fail("Case Fail 【"+testCase.getId()+"】");
         } finally {
             SelectDriver.getAppiumDriver().resetApp();
         }
@@ -63,6 +68,8 @@ public class RunTestCase implements ITest {
 
         // 遍历执行步骤
         for (CaseStep caseStep : caseSteps) {
+            System.out.println("Run case step: " + caseStep);
+            AppiumUtil.sleep(SLEEP_WAIT_TIME);
             MobileElement mobileElement = null;
             if(StringUtils.isNotBlank(caseStep.getElementPath())){
                 mobileElement = this.getMobileElement(caseStep.getElementPath());
@@ -101,7 +108,7 @@ public class RunTestCase implements ITest {
     }
 
     public static final String ACTION_CLICK = "click";
-    public static final String ACTION_SEND_KEY = "sendKey";
+    public static final String ACTION_SEND_KEY = "sendkeys";
     public static final String COMPARE_TEXT = "compare";
     public static final String IS_SELECTED = "isSelected";
     public static final String SLIDE_UP = "swipeUp";//向上滑动

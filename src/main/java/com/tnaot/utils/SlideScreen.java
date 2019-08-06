@@ -27,8 +27,8 @@ public class SlideScreen {
      * @param driver
      */
     public static void slideDown(AppiumDriver<WebElement> driver) {
-        int width = driver.manage().window().getSize().width;
-        int height = driver.manage().window().getSize().height;
+        int width = driver.manage().window().getSize().width;//获取屏幕宽度
+        int height = driver.manage().window().getSize().height;//获取屏幕高度
         new TouchAction(driver).press(PointOption.point(width / 2, height / 10)).moveTo(PointOption.point(width / 2, height * 3 / 4)).release().perform();
 
     }
