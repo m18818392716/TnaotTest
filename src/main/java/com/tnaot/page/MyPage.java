@@ -115,6 +115,20 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tvLanguage")
     MobileElement tvLanguage;
 
+    /** Language-中文 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_zh")
+    MobileElement tvLanguageZH;
+
+    /** Language-英文 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_en")
+    MobileElement tvLanguageEN;
+
+    /** Language-柬文 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_km")
+    MobileElement tvLanguageKM;
+
+
+
 
 
 
@@ -133,11 +147,92 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的资料 */
     @AndroidFindBy(id="com.tnaot.news:id/tvMain")
     MobileElement myInfo;
+    /** 我的资料-用户名 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_userName")
+    MobileElement myInfoUserName;
+    /** 我的资料-简介 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_prefect")
+    MobileElement myInfoIntroduction;
+
+    /** 我的资料-简介 */
+    @AndroidFindBy(id="com.tnaot.news:id/et_content")
+    MobileElement myInfoIntroductionText;
+    /** 我的资料-简介-取消 */
+    @AndroidFindBy(id="com.tnaot.news:id/bt_cancel")
+    MobileElement myInfoIntroductionAccept;
+    /** 我的资料-简介-确定*/
+    @AndroidFindBy(id="com.tnaot.news:id/bt_confirm")
+    MobileElement myInfoIntroductionDismiss;
+
+    /** 我的资料-性别 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_gender")
+    MobileElement myInfoSex;
+    /** 我的资料-性别-男 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
+    MobileElement myInfoSexMan;
+    /** 我的资料-性别-女 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]")
+    MobileElement myInfoSexWoman;
+    /** 我的资料-性别-保密 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[3]")
+    MobileElement myInfoSexSecret;
+    /** 我的资料-性别-取消 */
+    @AndroidFindBy(id="android:id/button2")
+    MobileElement myInfoSexDismissButton;
+
+
+
+    /** 我的资料-生日 750-1300 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_birthday")
+    MobileElement myInfoBirthday;
+
+    /** 我的资料-地区   [0,1276][1440,1456]   700,1276~700,1456  */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_area")
+    MobileElement myInfoArea;
+    /** 我的资料-地区-选择地区-取消 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_cancel")
+    MobileElement myInfoAreaAccept;
+    /** 我的资料-地区-选择地区-确认 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_confirm")
+    MobileElement myInfoAreaDismiss;
+
+
+    /** 我的资料-兴趣标签 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_user_tag")
+    MobileElement myInfoHobby;
+    /** 我的资料-兴趣标签-返回按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/ib_back")
+    MobileElement myInfoHobbyBackButton;
+    /** 我的资料-兴趣标签-确定按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/ib_user_tag_select")
+    MobileElement myInfoHobbyAcceptButton;
+
+
 
     /** 账号设置 */
     @AndroidFindBy(id="com.tnaot.news:id/tvMain")
     MobileElement accountSetting;
+    /** 账号设置-手机号 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_phoneNumber")
+    MobileElement accountSettingPhone;
+    /** 账号设置-修改密码 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_changePassword")
+    MobileElement accountSettingUpdatePwd;
+    /** 账号设置-修改密码-发送验证码 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_getVerifyCode")
+    MobileElement getVerifyCode;
+    /** 账号设置-修改密码-输入验证码 */
+    @AndroidFindBy(id="com.tnaot.news:id/et_verification")
+    MobileElement inputVerifyCode;
+    /** 账号设置-修改密码-输入密码 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_changePassword")
+    MobileElement inputPwd;
+    /** 账号设置-修改密码-提交按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/btn_submit")
+    MobileElement submitButton;
 
+
+    
     /** 热门活动 */
     @AndroidFindBy(id="com.tnaot.news:id/tvMain")
     MobileElement hotActivity;

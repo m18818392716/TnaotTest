@@ -295,7 +295,7 @@ public class ExcelUtil {
                 if(resultCell == null){
                     resultCell = resultRow.createCell(result.getCellIndex());
                 }
-                if(StringUtils.isBlank(result.getResult())){
+                if(!result.getIsRun()){
                     resultCell.setCellValue(RESULT_SKIP);
                 } else {
                     resultCell.setCellValue(result.getResult());

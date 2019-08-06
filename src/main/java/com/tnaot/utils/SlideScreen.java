@@ -123,5 +123,16 @@ public class SlideScreen {
     }
 
 
+    /** 点击具体的坐标点  [590,1209][910,1401]    [750,1401][750,1209]  */
+    public static void tapPointMoveToPoint(AppiumDriver<WebElement> driver, String data) {
+        String point[] = data.split(",");
+        int x = Integer.parseInt(point[0]);
+        int y = Integer.parseInt(point[1]);
+        int x1 = Integer.parseInt(point[2]);
+        int y1 = Integer.parseInt(point[3]);
+        new TouchAction(driver).press(PointOption.point(x, y)).moveTo(PointOption.point(x1, y1)).release().perform();
+    }
+
+
 
 }
