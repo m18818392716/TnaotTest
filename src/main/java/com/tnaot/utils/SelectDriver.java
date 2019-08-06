@@ -97,6 +97,14 @@ public class SelectDriver {
         capabilities.setCapability("platformVersion",platformVersion);
         capabilities.setCapability("deviceName",deviceName);
         capabilities.setCapability("sessionOverride", sessionOverride);
+
+        logger.info("--------初始化Driver开始--------");
+        logger.info("ServerURL: "+serverURL);
+        logger.info("AutomationName: "+automationName);
+        logger.info("PlatformName: "+platformName);
+        logger.info("PlatformVersion: "+platformVersion);
+        logger.info("DeviceName: "+deviceName);
+
         //如果测试平台是android的话，执行下面这个if语句内容
         if(platformName.equalsIgnoreCase("android")){
             /**
@@ -114,9 +122,7 @@ public class SelectDriver {
             appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities,platformName));
             testContext.setAttribute("APPIUM_DRIVER", appiumDriver.get());
 //            logger.info(PropertiesDataProvider.getTestData(appFilePath, appPackage)+"已经启动");这个地方刚才是这里出的错。这里的意思是获取你配置文件里面的值打印出来。也就是properties里面的。你里面没有写东西所以报错
-            System.out.println("-----------启动成功----------");
             appiumDriver.get().manage().timeouts().implicitlyWait(elementTimeOut, TimeUnit.SECONDS);
-            return appiumDriver.get();
 
             //如果测试平台是ios的话，执行下面这个if语句内容
         }else if(platformName.equalsIgnoreCase("ios")){
@@ -132,9 +138,11 @@ public class SelectDriver {
             appiumDriver.get().manage().timeouts().implicitlyWait(elementTimeOut,TimeUnit.SECONDS);
 
         }else{
-            logger.error("初始化driver失败");
-            Assert.fail("初始化driver失败");
+            logger.error("--------初始化Driver失败--------");
+            Assert.fail("初始化Driver失败");
         }
+
+        logger.info("--------初始化Driver成功--------");
 
         //最后返回dirver对象
         return appiumDriver.get();

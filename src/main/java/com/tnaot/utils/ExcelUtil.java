@@ -295,7 +295,11 @@ public class ExcelUtil {
                 if(resultCell == null){
                     resultCell = resultRow.createCell(result.getCellIndex());
                 }
-                resultCell.setCellValue(result.getResult());
+                if(StringUtils.isBlank(result.getResult())){
+                    resultCell.setCellValue(RESULT_SKIP);
+                } else {
+                    resultCell.setCellValue(result.getResult());
+                }
             }
 
             FileOutputStream excelFileOutPutStream = new FileOutputStream("src/main/resources/" + excelPath);//写数据到这个路径上

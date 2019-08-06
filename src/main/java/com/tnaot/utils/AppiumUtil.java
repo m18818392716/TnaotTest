@@ -495,11 +495,11 @@ public class AppiumUtil {
     /**
      * 在给定的时间内去查找元素，如果没找到则超时，抛出异常
      */
-    public void waitForElementToLoad(AndroidDriver<AndroidElement> driver, int elementTimeOut, final By By) {
+    public WebElement waitForElementToLoad(AndroidDriver<AndroidElement> driver, int elementTimeOut, final By By) {
         logger.info("开始查找元素[" + By + "]");
         try {
 
-            WebElement wait = new AndroidDriverWait(driver, 60)
+            WebElement element = new AndroidDriverWait(driver, 60)
                     .until((ExpectedCondition<WebElement>) androidDriver -> androidDriver.findElement(By));
 //                    .until(new ExpectedCondition<WebElement>() {
 //                        public WebElement apply(AndroidDriver driver) {
@@ -507,12 +507,13 @@ public class AppiumUtil {
 //                            return element;
 //                        }
 //                    });
+            logger.info("找到了元素 [" + By + "]");
+            return element;
         } catch (TimeoutException e) {
             logger.error("超时!! " + elementTimeOut + " 秒之后还没找到元素 [" + By + "]");
             Assert.fail("超时!! " + elementTimeOut + " 秒之后还没找到元素 [" + By + "]");
-
         }
-        logger.info("找到了元素 [" + By + "]");
+        return null;
     }
 
     /**
