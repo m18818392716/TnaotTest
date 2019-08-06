@@ -25,11 +25,11 @@ public abstract class AppiumBaseExecutor implements AppiumAPI {
      */
     public AppiumBaseExecutor(AppiumDriver<?> driver) {
         this.driver = driver;
-        if (driver instanceof AndroidDriver) {
-            System.out.println("Android driver");
-        } else if (driver instanceof IOSDriver) {
-            System.out.println("IOS driver");
-        }
+//        if (driver instanceof AndroidDriver) {
+//            System.out.println("Android driver");
+//        } else if (driver instanceof IOSDriver) {
+//            System.out.println("IOS driver");
+//        }
     }
 
     /**

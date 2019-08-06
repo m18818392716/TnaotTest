@@ -295,9 +295,19 @@ public class ExcelUtil {
                 if(resultCell == null){
                     resultCell = resultRow.createCell(result.getCellIndex());
                 }
-                if(StringUtils.isBlank(result.getResult())){
+                CellStyle cellStyle = workbook.createCellStyle();
+                Font font = workbook.createFont();
+                cellStyle.setFont(font);
+                resultCell.setCellStyle(cellStyle);
+                if(!result.getIsRun()){
+                    font.setColor((short)22);
                     resultCell.setCellValue(RESULT_SKIP);
                 } else {
+                    if(RESULT_PASS.equals(result.getResult())){
+                        font.setColor((short)50);
+                    } else {
+                        font.setColor(Font.COLOR_RED);
+                    }
                     resultCell.setCellValue(result.getResult());
                 }
             }
