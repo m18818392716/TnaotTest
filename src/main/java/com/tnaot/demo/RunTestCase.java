@@ -28,7 +28,7 @@ import java.util.List;
 public class RunTestCase implements ITest {
 
     public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
-    public static final int SLEEP_WAIT_TIME = 2 * 1000;
+    public static final int SLEEP_WAIT_TIME = 5 * 1000;
 
     private TestCase testCase;
 
@@ -115,6 +115,9 @@ public class RunTestCase implements ITest {
     public static final String SLIDE_DOWN = "swipeDown";//向下滑动
     public static final String SLIDE_LEFT = "swipeLeft";//向左滑动
     public static final String SLIDE_RIGHT = "swipeRight";//向右滑动
+    public static final String SLIDE_TO_TARGET = "swipeToTarget";//滑动到目标元素
+    public static final String SLIDE_TO_End = "swipeToEnd";//向下滑动到目标元素
+    public static final String TAP_POINT = "tapPoint";//向下滑动到目标元素
     public static final String ASSERT_TOAST = "assertToast";//断言toast弹框消息
 
     // 对控件执行操作
@@ -133,7 +136,7 @@ public class RunTestCase implements ITest {
                 mobileElement.isSelected();
                 break;
             case SLIDE_UP:
-                SlideScreen.slideUp(SelectDriver.getAppiumDriver());
+                SlideScreen.slideUp(SelectDriver.getAppiumDriver(),Integer.parseInt(data));
                 break;
             case SLIDE_DOWN:
                 SlideScreen.slideDown(SelectDriver.getAppiumDriver());
@@ -143,6 +146,15 @@ public class RunTestCase implements ITest {
                 break;
             case SLIDE_RIGHT:
                 SlideScreen.slideRight(SelectDriver.getAppiumDriver());
+                break;
+            case SLIDE_TO_TARGET:
+                SlideScreen.slideToTarget(mobileElement);
+                break;
+            case SLIDE_TO_End:
+                SlideScreen.swipeToEnd(SelectDriver.getAppiumDriver(),data);
+                break;
+            case TAP_POINT:
+                SlideScreen.tapPoint(SelectDriver.getAppiumDriver(),data);
                 break;
             case ASSERT_TOAST:
                 WebElement showClose = new AndroidDriverWait((AndroidDriver)SelectDriver.getAppiumDriver(), 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[contains(@text,'" + data + "')]")));

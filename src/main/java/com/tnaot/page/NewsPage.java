@@ -4,13 +4,16 @@ import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Data;
+import org.openqa.selenium.support.PageFactory;
 
 @Data
 public class NewsPage extends AppiumBaseExecutor {
 
     public NewsPage(AppiumDriver<?> driver) {
         super(driver);
+        PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
     }
 
     /** 资讯tab键 */
