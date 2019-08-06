@@ -69,7 +69,9 @@ public class RunTestCase implements ITest {
         // 遍历执行步骤
         for (CaseStep caseStep : caseSteps) {
             System.out.println("Run case step: " + caseStep);
-            AppiumUtil.sleep(SLEEP_WAIT_TIME);
+            if(!caseStep.getAction().equals("assertToast")){
+                AppiumUtil.sleep(SLEEP_WAIT_TIME);
+            }
             MobileElement mobileElement = null;
             if(StringUtils.isNotBlank(caseStep.getElementPath())){
                 mobileElement = this.getMobileElement(caseStep.getElementPath());
