@@ -4,13 +4,17 @@ import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Data;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 @Data
 public class MyPage extends AppiumBaseExecutor {
 
     public MyPage(AppiumDriver<?> driver) {
         super(driver);
+        PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
     }
 
     /** 我的 */
@@ -147,15 +151,19 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement userDynamic;
 
     /** 在线客服 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @FindBy(linkText="在线客服")
     MobileElement lineService;
 
     /** 自媒体申请 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @FindBy(linkText="自媒体申请")
     MobileElement mediaApplication;
 
+//    /** 系统设置 */
+//    @FindBy(linkText="系统设置")
+//    MobileElement sysSetting;
+
     /** 系统设置 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.RelativeLayout[4]/android.widget.RelativeLayout")
     MobileElement sysSetting;
 
     /** 系统设置-清除缓存 */

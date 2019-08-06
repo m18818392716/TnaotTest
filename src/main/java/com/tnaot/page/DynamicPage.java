@@ -4,37 +4,81 @@ import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Data;
+import org.openqa.selenium.support.PageFactory;
 
 @Data
 public class DynamicPage extends AppiumBaseExecutor {
 
     public DynamicPage(AppiumDriver<?> driver) {
         super(driver);
+        PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
     }
 
-    /** 我的 */
-    @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_home")
-    MobileElement tabMine;
+    /** 发布-摄像机按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_top_release")
+    MobileElement releaseButton;
 
-    /** 手机号登录 */
+    /** 发布-发布动态 */
     @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
-    MobileElement phoneLoginType;
+    MobileElement releaseDynamic;
 
-    /** 区域 */
+    /** 发布-发布交易 */
     @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
-    MobileElement areaText;
+    MobileElement releaseTrade;
 
-    /** 手机号 */
+    /** 发布-发布求职招聘 */
     @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
-    MobileElement phoneText;
+    MobileElement releaseJob;
 
-    /** 密码 */
+    /** 发布-发布优惠 */
     @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
-    MobileElement pwdText;
+    MobileElement releasePreferential;
 
-    /** 登录按钮 */
+    /** 发布-发布房地产 */
     @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
-    MobileElement loginButton;
+    MobileElement releaseRealEstate;
+
+    /** 发布-商家入驻 */
+    @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
+    MobileElement releaseBusiness;
+
+    /** 发布-寻人求助 */
+    @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
+    MobileElement releaseHelp;
+
+    /** 发布-我要爆料 */
+    @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
+    MobileElement releaseFact;
+
+    /** 发布-商家互助 */
+    @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
+    MobileElement releaseBusinessHelp;
+
+    /** 发布-退出按钮 */
+    @AndroidFindBy(id="cn.dbyl.young.tianqi:id/tab_personal")
+    MobileElement exitButton;
+
+
+    /** 发布页面-动态 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_send")
+    MobileElement sendButton;
+
+    /** 发布页面-发布内容 */
+    @AndroidFindBy(id="com.tnaot.news:id/edit_content")
+    MobileElement editContent;
+
+    /** 发布页面-上传图片按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_add_photo")
+    MobileElement addPhotoButton;
+
+    /** 发布页面-上传图片按钮-拍摄（照片和视频） */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_add_photo")
+    MobileElement addPhotoButton1;
+
+    /** 发布页面-上传图片按钮-从手机相册中获取 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_add_photo")
+    MobileElement addPhotoButton2;
 
 }
