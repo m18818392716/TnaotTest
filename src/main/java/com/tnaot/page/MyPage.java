@@ -232,7 +232,7 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement submitButton;
 
 
-    
+
     /** 热门活动 */
     @AndroidFindBy(id="com.tnaot.news:id/tvMain")
     MobileElement hotActivity;
