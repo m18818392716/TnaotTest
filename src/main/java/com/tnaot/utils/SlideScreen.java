@@ -26,12 +26,12 @@ public class SlideScreen {
         int height = driver.manage().window().getSize().height;
         for (int i = 0; i <= times; i++) {
 
-            new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height * 1 / 4)).release().perform();
+            //new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height * 1 / 4)).release().perform();
 
-//            new TouchAction(driver)
-//                    .press(PointOption.point(width / 2, height - 100))
-//                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
-//                    .moveTo(PointOption.point(width / 2, 100)).release().perform();
+            new TouchAction(driver)
+                    .press(PointOption.point(width / 2, height - 500))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
+                    .moveTo(PointOption.point(width / 2, 100)).release().perform();
         }
     }
 
@@ -44,8 +44,8 @@ public class SlideScreen {
             //new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height / 10)).release().perform();
 
             new TouchAction(driver).longPress(PointOption.point(width / 2, 100))
-                    .moveTo(PointOption.point(width / 2, height - 100)).release()
-                    .perform();
+                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
+                    .moveTo(PointOption.point(width / 2, height - 500)).release().perform();
         }
     }
 
@@ -55,8 +55,8 @@ public class SlideScreen {
         //new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height / 10)).release().perform();
 
         new TouchAction(driver).longPress(PointOption.point(width / 2, 100))
-                .moveTo(PointOption.point(width / 2, height - 100)).release()
-                .perform();
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
+                .moveTo(PointOption.point(width / 2, height - 500)).release().perform();
     }
 
 
@@ -70,7 +70,8 @@ public class SlideScreen {
         //new TouchAction(driver).press(PointOption.point(width / 2, height / 10)).moveTo(PointOption.point(width / 2, height * 3 / 4)).release().perform();
 
         new TouchAction(driver)
-                .longPress(PointOption.point(width / 2, height - 100))
+                .longPress(PointOption.point(width / 2, height - 500))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
                 .moveTo(PointOption.point(width / 2, 100)).release().perform();
     }
 
@@ -151,7 +152,7 @@ public class SlideScreen {
         int y = Integer.parseInt(point[1]);
         int x1 = Integer.parseInt(point[2]);
         int y1 = Integer.parseInt(point[3]);
-        new TouchAction(driver).press(PointOption.point(x, y)).moveTo(PointOption.point(x1, y1)).release().perform();
+        new TouchAction(driver).press(PointOption.point(x, y)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5)))).moveTo(PointOption.point(x1, y1)).release().perform();
     }
 
 

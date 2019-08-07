@@ -36,6 +36,7 @@ public class TestRunnerListener extends TestListenerAdapter {
     }
 
     private void setExcelResult(ITestResult tr, String resultPass) {
+        // 如果testName包含"(", 那么就截取"("前的字符, 作为caseId
         if(tr.getName().contains("(")){
             String caseId = tr.getName().substring(0, tr.getName().indexOf("("));
             ExcelUtil.getResults().get(caseId).setResult(resultPass);

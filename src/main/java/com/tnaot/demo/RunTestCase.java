@@ -1,5 +1,6 @@
 package com.tnaot.demo;
 
+import com.sun.deploy.security.WIExplorerSigningCertStore;
 import com.tnaot.core.AndroidDriverWait;
 import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.AppiumUtils.SwipeUtils;
@@ -131,8 +132,10 @@ public class RunTestCase implements ITest {
     public static final String SLIDE_RIGHT = "swipeRight";//向右滑动
     public static final String SLIDE_TO_TARGET = "swipeToTarget";//滑动到目标元素
     public static final String SLIDE_TO_End = "swipeToEnd";//向下滑动到目标元素
-    public static final String TAP_POINT = "tapPoint";//向下滑动到目标元素
+    public static final String TAP_POINT = "tapPoint";//点击某一个坐标
+    public static final String TAP_POINT_MOVE_TO_POINT = "tapPointMoveToPoint";//两个坐标点之间的滑动
     public static final String ASSERT_TOAST = "assertToast";//断言toast弹框消息
+    public static final String IS_EXSIST = "isExsist";//断言toast弹框消息
 
     // 对控件执行操作
     private void executeAction(MobileElement mobileElement, String action, String data) {
@@ -173,6 +176,14 @@ public class RunTestCase implements ITest {
             case ASSERT_TOAST:
                 WebElement showClose = new AndroidDriverWait((AndroidDriver) SelectDriver.getAppiumDriver(), 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[contains(@text,'" + data + "')]")));
                 Assert.assertNotNull(showClose);
+                break;
+            case TAP_POINT_MOVE_TO_POINT:
+                SlideScreen.tapPointMoveToPoint(SelectDriver.getAppiumDriver(), data);
+                break;
+            case IS_EXSIST:
+                //判断元素是否存在后续需要自己封装方法
+                //mobileElement.isDisplayed();
+                Assert.assertTrue(mobileElement.isDisplayed(),"Element[" + mobileElement + "] not exsist!");
                 break;
             default:
                 Assert.fail("预期以外的操作：Element[" + mobileElement + "] Action: [" + action + "]");

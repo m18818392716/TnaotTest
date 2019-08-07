@@ -20,6 +20,13 @@ public class NewsPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/iv_Home")
     MobileElement rlHome;
 
+
+    /** 资讯列表刷新-提示刷新**条 */
+    @AndroidFindBy(id="com.tnaot.news:id/tip_view")
+    MobileElement tipView;
+
+
+
     /** 资讯详情-评论输入框 */
     @AndroidFindBy(id="com.tnaot.news:id/tvComment")
     MobileElement tvComment;

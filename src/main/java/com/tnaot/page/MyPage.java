@@ -21,6 +21,16 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
     MobileElement rlMine;
 
+    /** 我的头像 */
+    @AndroidFindBy(id="com.tnaot.news:id/ivUser")
+    MobileElement myPhone;
+
+    /** 我的头像-编辑资料 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_editinfo")
+    MobileElement editInfo;
+
+
+
     /** 手机号登录 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_phone")
     MobileElement phoneLoginType;
