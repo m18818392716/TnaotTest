@@ -115,6 +115,10 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tvLanguage")
     MobileElement tvLanguage;
 
+    /** Language-弹窗关闭 */
+    @AndroidFindBy(id="com.tnaot.news:id/ivClose")
+    MobileElement closeButton;
+
     /** Language-中文 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_zh")
     MobileElement tvLanguageZH;

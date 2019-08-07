@@ -37,16 +37,13 @@ public class SendEmail {
 //    static String HOST = "pop.qq.com"; // POP3服务器-端口995
     static String FROM = "2240607006@qq.com"; // 发件人地址
     static String USER = "2240607006@qq.com"; // 用户名
-    static String PWD = "uslrjkepjnkldjfi"; // 163的授权码
+    static String PWD = "uslrjkepjnkldjfi"; // QQ的授权码
     static String SUBJECT = "Allure Report 自动化测试报告2019-07-30"; // 邮件标题
     static String[] TOS = new String[]{"394941528@qq.com"};//uslrjkepjnkldjfi
 
 
     /**
      * 发送邮件
-     * @param host
-     * @param user
-     * @param pwd
      */
     public static void send(String context, String srcPath) {
         Properties props = new Properties();
@@ -79,18 +76,18 @@ public class SendEmail {
 
             //附件一的操作
             //方式1：通过右上角绿色的运行按钮执行XML文件
-            //FileDataSource fds1 = new FileDataSource(new File("D:\\software\\idea-workspace\\test-output\\Extent.html"));//构造附件一的数据源
+            //FileDataSource fds1 = new FileDataSource(new File("D:\\software\\githubRespository\\TnaotTest\\test-output\\Extent.html"));//构造附件一的数据源
             //方式2：通过java调用cmd命令模式执行maven命令
-            FileDataSource fds1 = new FileDataSource(new File("D:\\software\\idea-workspace\\target\\surefire-reports\\Extent.html"));//构造附件一的数据源
+            FileDataSource fds1 = new FileDataSource(new File("D:\\software\\githubRespository\\TnaotTest\\target\\surefire-reports\\Extent.html"));//构造附件一的数据源
             DataHandler dh1 = new DataHandler(fds1);//数据处理
             attach1.setDataHandler(dh1);//设置附件一的数据源
             attach1.setFileName("AutomationReport.html");//设置附件一的文件名
 
             //附件二的操作与附件一类似，这里就不一一注释了
-            FileDataSource fds2 = new FileDataSource(new File("D:\\software\\idea-workspace\\src\\res\\frontPage\\UILibrary.xlsx"));
+            FileDataSource fds2 = new FileDataSource(new File("D:\\software\\githubRespository\\TnaotTest\\src\\res\\frontPage\\UILibrary.xls"));
             DataHandler dh2 = new DataHandler(fds2);
             attach2.setDataHandler(dh2);
-            attach2.setFileName(MimeUtility.encodeText("UILibrary.xlsx"));//设置文件名时，如果有中文，可以通过MimeUtility类中的encodeText方法进行编码，避免乱码
+            attach2.setFileName(MimeUtility.encodeText("UILibrary.xls"));//设置文件名时，如果有中文，可以通过MimeUtility类中的encodeText方法进行编码，避免乱码
 
 
             //附件三-》对文件进行压缩-》添加到压缩文件（压缩后的命名）--方法1
@@ -100,7 +97,7 @@ public class SendEmail {
 
             //附件三-》对文件夹下面的所有文件进行压缩-》添加到压缩文件（压缩后的命名）--方法2
             //String srcPath = "D:/software/idea-workspace/test-output";
-            String desPath = "D:/software/idea-workspace/report.zip";
+            String desPath = "D:/software/githubRespository/TnaotTest/report.zip";
             FileOutputStream fos1 = new FileOutputStream(new File(desPath));
             ZipUtils.toZip(srcPath, fos1, true);
 
@@ -125,7 +122,7 @@ public class SendEmail {
      * 压缩单个文件并加密
      * @param srcFile      待压缩的文件
      * @param desFile  生成的目标文件
-     * @param passWord     压缩文件加密密码
+     //* @param passWord     压缩文件加密密码
      * @throws IOException
      */
     public static void zipFile(String srcFile,String desFile) throws IOException {

@@ -15,6 +15,8 @@ import java.util.concurrent.TimeUnit;
 @Feature("前线突击测试")
 public class AllureTest {
 
+    public static final String PROJECT_PATH = "D:/software/githubRespository/TnaotTest/";
+
     @Test(description = "侯征测试")
     @Story("测试发券")
     @Description("主要测试四种券发送")
@@ -36,11 +38,12 @@ public class AllureTest {
     public void senEmail() {
 
         try {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(15);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        SendEmail.send("D:/software/idea-workspace/test-output/allure-report");
+        //SendEmail.send("D:/software/idea-workspace/test-output/allure-report");
+        SendEmail.send(PROJECT_PATH + "test-output");
     }
 
 

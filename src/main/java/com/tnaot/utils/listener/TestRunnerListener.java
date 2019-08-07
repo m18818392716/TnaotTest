@@ -27,7 +27,7 @@ public class TestRunnerListener extends TestListenerAdapter {
     @Override
     public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
-        ExcelUtil.getResults().get(getCaseId(tr)).setResult(ExcelUtil.RESULT_PASS);
+        setExcelResult(tr, ExcelUtil.RESULT_PASS);
         logger.info("【" + tr.getName() + " Success】");
 
 //        TestNGRetry retryAnalyzer = (TestNGRetry) tr.getMethod().getRetryAnalyzer();
@@ -35,15 +35,18 @@ public class TestRunnerListener extends TestListenerAdapter {
 //        finish(tr);由于版本问题，报错
     }
 
-    public String getCaseId(ITestResult tr) {
-        return tr.getName().substring(0, tr.getName().indexOf("("));
+    private void setExcelResult(ITestResult tr, String resultPass) {
+        if(tr.getName().contains("(")){
+            String caseId = tr.getName().substring(0, tr.getName().indexOf("("));
+            ExcelUtil.getResults().get(caseId).setResult(resultPass);
+        }
     }
 
 
     @Override
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
-        ExcelUtil.getResults().get(getCaseId(tr)).setResult(ExcelUtil.RESULT_FAIL);
+        setExcelResult(tr, ExcelUtil.RESULT_FAIL);
         //String picName =tr.getStartMillis()+""+tr.getTestName();
         String picName = tr.getTestName();
         ScreenScr.getScreen(SelectDriver.getAppiumDriver(),picName);
@@ -75,7 +78,7 @@ public class TestRunnerListener extends TestListenerAdapter {
     @Override
     public void onTestSkipped(ITestResult tr) {
         super.onTestSkipped(tr);
-        ExcelUtil.getResults().get(getCaseId(tr)).setResult(ExcelUtil.RESULT_SKIP);
+        setExcelResult(tr, ExcelUtil.RESULT_SKIP);
         //String picName =tr.getStartMillis()+""+tr.getTestName();
         String picName = tr.getTestName();
         ScreenScr.getScreen(SelectDriver.getAppiumDriver(),picName);

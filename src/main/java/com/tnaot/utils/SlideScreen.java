@@ -2,6 +2,7 @@ package com.tnaot.utils;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -24,7 +25,27 @@ public class SlideScreen {
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
         for (int i = 0; i <= times; i++) {
-            new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height / 10)).release().perform();
+
+            new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height * 1 / 4)).release().perform();
+
+//            new TouchAction(driver)
+//                    .press(PointOption.point(width / 2, height - 100))
+//                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
+//                    .moveTo(PointOption.point(width / 2, 100)).release().perform();
+        }
+    }
+
+
+    public static void slideDown(AppiumDriver<WebElement> driver,int times) {
+        int width = driver.manage().window().getSize().width;
+        int height = driver.manage().window().getSize().height;
+        for (int i = 0; i <= times; i++) {
+
+            //new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height / 10)).release().perform();
+
+            new TouchAction(driver).longPress(PointOption.point(width / 2, 100))
+                    .moveTo(PointOption.point(width / 2, height - 100)).release()
+                    .perform();
         }
     }
 

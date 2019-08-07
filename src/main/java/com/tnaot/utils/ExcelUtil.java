@@ -265,7 +265,7 @@ public class ExcelUtil {
     public static Workbook getWorkbook(){
         try {
             if(workbook == null){
-                InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(excelPath);
+                InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(excelPath);//这种获取的方式就是获取当前项目resource下的文件，所以直接写那个xls，就可以读到它
                 workbook = WorkbookFactory.create(in);
                 in.close();
             }
