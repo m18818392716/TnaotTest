@@ -37,15 +37,15 @@ public class TestCaseFactory{
 //        }
         System.out.println("初始化项目结束！");
 
-        AppiumUtil.sleep(5000L);
-        try{
-            WebElement allowButton = appiumDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button"));
-            if(allowButton.isDisplayed()){
-                allowButton.click();
-            }
-        } catch (NoSuchElementException e){
-            System.out.println("不存在该控件");
-        }
+//        AppiumUtil.sleep(5000L);
+//        try{
+//            WebElement allowButton = appiumDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button"));
+//            if(allowButton.isDisplayed()){
+//                allowButton.click();
+//            }
+//        } catch (NoSuchElementException e){
+//            System.out.println("不存在该控件");
+//        }
 
 
     }

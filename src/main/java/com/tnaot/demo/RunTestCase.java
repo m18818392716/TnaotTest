@@ -28,7 +28,7 @@ import java.util.List;
 public class RunTestCase implements ITest {
 
     public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
-    public static final int SLEEP_WAIT_TIME = 5 * 1000;
+    public static ThreadLocal<String> lastCaseId = new ThreadLocal<>();
 
     private TestCase testCase;
 
@@ -43,21 +43,25 @@ public class RunTestCase implements ITest {
 
     @Test
     public void run() {
-        System.out.println("Run Test Case ---->>>>> ["+ testCase+"]");
+        System.out.println("Run Test Case ---->>>>> [" + testCase + "]");
+        // 当上一个用例是空的(即第一个用例) 以及 上一个用例是成功的且为当前依赖的用例时，不resetApp
+        if (StringUtils.isNotBlank(getLastCaseId()) && !isLastPassForDepend()) {
+            SelectDriver.getAppiumDriver().resetApp();
+        }
         try {
             this.runCase(testCase.getId());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("Case Fail 【"+testCase.getId()+"】");
+            Assert.fail("Case Fail 【" + testCase.getId() + "】");
         } finally {
-            SelectDriver.getAppiumDriver().resetApp();
+            setLastCaseId(testCase.getId());
         }
     }
 
     public void runCase(String caseId) {
         TestCase testCase = ExcelUtil.getTestCases().get(caseId);
-        // 如果有依赖的用例，则先执行依赖的用例
-        if (StringUtils.isNotBlank(testCase.getDependId())) {
+        // 如果依赖的用例不为上一个且执行成功的用例，则执行依赖的用例
+        if (StringUtils.isNotBlank(testCase.getDependId()) && !isLastPassForDepend()) {
             runCase(testCase.getDependId());
         }
         // 获取用例步骤
@@ -69,14 +73,22 @@ public class RunTestCase implements ITest {
         // 遍历执行步骤
         for (CaseStep caseStep : caseSteps) {
             System.out.println("Run case step: " + caseStep);
-            if(!caseStep.getAction().equals("assertToast")){
-                AppiumUtil.sleep(SLEEP_WAIT_TIME);
-            }
             MobileElement mobileElement = null;
-            if(StringUtils.isNotBlank(caseStep.getElementPath())){
+            if (StringUtils.isNotBlank(caseStep.getElementPath())) {
                 mobileElement = this.getMobileElement(caseStep.getElementPath());
             }
             this.executeAction(mobileElement, caseStep.getAction(), caseStep.getData());
+        }
+    }
+
+    // 判断上一个用例是否为pass、并且为当前用例依赖的用例
+    private boolean isLastPassForDepend() {
+        String lastCaseResult = ExcelUtil.getResults().get(getLastCaseId()).getResult();
+        // 当上一个执行的用例为当前依赖的用例，并且上一个执行的用例成功时，返回true
+        if (getLastCaseId().equals(testCase.getDependId()) && ExcelUtil.RESULT_PASS.equals(lastCaseResult)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -132,13 +144,13 @@ public class RunTestCase implements ITest {
                 mobileElement.sendKeys(data);
                 break;
             case COMPARE_TEXT:
-                Assert.assertEquals(mobileElement.getText(),data);
+                Assert.assertEquals(mobileElement.getText(), data);
                 break;
             case IS_SELECTED:
                 mobileElement.isSelected();
                 break;
             case SLIDE_UP:
-                SlideScreen.slideUp(SelectDriver.getAppiumDriver(),Integer.parseInt(data));
+                SlideScreen.slideUp(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
                 break;
             case SLIDE_DOWN:
                 SlideScreen.slideDown(SelectDriver.getAppiumDriver());
@@ -153,13 +165,13 @@ public class RunTestCase implements ITest {
                 SlideScreen.slideToTarget(mobileElement);
                 break;
             case SLIDE_TO_End:
-                SlideScreen.swipeToEnd(SelectDriver.getAppiumDriver(),data);
+                SlideScreen.swipeToEnd(SelectDriver.getAppiumDriver(), data);
                 break;
             case TAP_POINT:
-                SlideScreen.tapPoint(SelectDriver.getAppiumDriver(),data);
+                SlideScreen.tapPoint(SelectDriver.getAppiumDriver(), data);
                 break;
             case ASSERT_TOAST:
-                WebElement showClose = new AndroidDriverWait((AndroidDriver)SelectDriver.getAppiumDriver(), 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[contains(@text,'" + data + "')]")));
+                WebElement showClose = new AndroidDriverWait((AndroidDriver) SelectDriver.getAppiumDriver(), 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[contains(@text,'" + data + "')]")));
                 Assert.assertNotNull(showClose);
                 break;
             default:
@@ -170,5 +182,13 @@ public class RunTestCase implements ITest {
 
     public TestCase getTestCase() {
         return testCase;
+    }
+
+    public String getLastCaseId() {
+        return lastCaseId.get();
+    }
+
+    public void setLastCaseId(String caseId) {
+        lastCaseId.set(caseId);
     }
 }

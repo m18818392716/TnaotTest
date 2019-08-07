@@ -57,7 +57,7 @@ public class SelectDriver {
     //实例化本类的日志输出对象
     public static Logger logger = Logger.getLogger(SelectDriver.class);
 
-    public  AppiumDriver<WebElement> selectDriver(ITestContext context,AppiumUtil appiumUtil){
+    public AppiumDriver<WebElement> selectDriver(ITestContext context, AppiumUtil appiumUtil) {
         //通过testng的xml文件获取serverURL参数值，并赋给  serverURL变量
         serverURL = context.getCurrentXmlTest().getParameter("serverURL");
 //        //通过testng的xml文件获取automationName参数值，并赋给  automationName变量
@@ -84,8 +84,8 @@ public class SelectDriver {
 //        sessionOverride = Boolean.parseBoolean(context.getCurrentXmlTest().getParameter("sessionOverride"));
 //        //通过testng的xml文件获取sleepTime参数值，并赋给  sleepTime变量
 //        sleepTime = Integer.valueOf(context.getCurrentXmlTest().getParameter("sleepTime"));
-//        //通过testng的xml文件获取elementTimeOut参数值，并赋给  elementTimeOut变量
-//        elementTimeOut = Integer.valueOf(context.getCurrentXmlTest().getParameter("elementTimeOut"));
+        //通过testng的xml文件获取elementTimeOut参数值，并赋给  elementTimeOut变量
+        elementTimeOut = Integer.valueOf(context.getCurrentXmlTest().getParameter("elementTimeOut"));
         //通过testng的xml文件获取appFilePath参数值，并赋给  appFilePath变量
         appFilePath = context.getCurrentXmlTest().getParameter("appFilePath");
         this.testContext = context;
@@ -93,63 +93,65 @@ public class SelectDriver {
         //告诉测试程序，当前项目目录在哪里
         File classpathRoot = new File(System.getProperty("user.dir"));
         //设置capability，以便和appium创建session
-        capabilities.setCapability("platformName",platformName);
-        capabilities.setCapability("platformVersion",platformVersion);
-        capabilities.setCapability("deviceName",deviceName);
+        capabilities.setCapability("platformName", platformName);
+        capabilities.setCapability("platformVersion", platformVersion);
+        capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("sessionOverride", sessionOverride);
 
         logger.info("--------初始化Driver开始--------");
-        logger.info("ServerURL: "+serverURL);
-        logger.info("AutomationName: "+automationName);
-        logger.info("PlatformName: "+platformName);
-        logger.info("PlatformVersion: "+platformVersion);
-        logger.info("DeviceName: "+deviceName);
+        logger.info("ServerURL: " + serverURL);
+        logger.info("AutomationName: " + automationName);
+        logger.info("PlatformName: " + platformName);
+        logger.info("PlatformVersion: " + platformVersion);
+        logger.info("DeviceName: " + deviceName);
+        logger.info("ElementTimeOut: " + elementTimeOut + "s");
 
         //如果测试平台是android的话，执行下面这个if语句内容
-        if(platformName.equalsIgnoreCase("android")){
+        if (platformName.equalsIgnoreCase("android")) {
             /**
              * 设置和android  测试相关的capability并实例化driver对象
              * */
             File app = new File(classpathRoot, androidAppPath);
+            logger.info("App: " + app.getAbsolutePath());
             capabilities.setCapability("app", app.getAbsolutePath());
             capabilities.setCapability("unicodeKeyboard", unicodeKeyboard);
             capabilities.setCapability("resetKeyboard", resetKeyboard);
-            capabilities.setCapability("automationName",automationName);
+            capabilities.setCapability("automationName", automationName);
             //capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
             capabilities.setCapability("appPackage", appPackage);
             capabilities.setCapability("appActivity", appActivity);
             capabilities.setCapability(MobileCapabilityType.NO_RESET, false); // 打开App清除本地数据
-            appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities,platformName));
+            appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities, platformName));
             testContext.setAttribute("APPIUM_DRIVER", appiumDriver.get());
 //            logger.info(PropertiesDataProvider.getTestData(appFilePath, appPackage)+"已经启动");这个地方刚才是这里出的错。这里的意思是获取你配置文件里面的值打印出来。也就是properties里面的。你里面没有写东西所以报错
-            appiumDriver.get().manage().timeouts().implicitlyWait(elementTimeOut, TimeUnit.SECONDS);
+
 
             //如果测试平台是ios的话，执行下面这个if语句内容
-        }else if(platformName.equalsIgnoreCase("ios")){
+        } else if (platformName.equalsIgnoreCase("ios")) {
             /**
              * 设置和ios  测试相关的capability并实例化driver对象
              * */
             File app = new File(classpathRoot, iosAppPath);
+            logger.info("App: " + app.getAbsolutePath());
             capabilities.setCapability("app", app.getAbsolutePath());
             //ios设置自动接收系统alert，注意IOS弹出的alert，APPIUM可以自动处理掉，支持ios8以上系统
             capabilities.setCapability("autoAcceptAlerts", true);
-            appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities,platformName));
+            appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities, platformName));
             testContext.setAttribute("APPIUM_DRIVER", appiumDriver.get());
-            appiumDriver.get().manage().timeouts().implicitlyWait(elementTimeOut,TimeUnit.SECONDS);
-
-        }else{
+        } else {
             logger.error("--------初始化Driver失败--------");
             Assert.fail("初始化Driver失败");
         }
+        getAppiumDriver().manage().timeouts().implicitlyWait(elementTimeOut, TimeUnit.SECONDS);
 
         logger.info("--------初始化Driver成功--------");
 
         //最后返回dirver对象
-        return appiumDriver.get();
+        return getAppiumDriver();
 
     }
 
-    public static AppiumDriver getAppiumDriver(){
+    public static AppiumDriver getAppiumDriver() {
         return appiumDriver.get();
     }
 }
