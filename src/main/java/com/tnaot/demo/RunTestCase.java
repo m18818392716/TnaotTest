@@ -46,7 +46,7 @@ public class RunTestCase implements ITest {
     public void run() {
         System.out.println("Run Test Case ---->>>>> [" + testCase + "]");
         // 当上一个用例是空的(即第一个用例) 以及 上一个用例是成功的且为当前依赖的用例时，不resetApp
-        if (StringUtils.isNotBlank(getLastCaseId()) && !isLastPassForDepend()) {
+        if (!isLastPassForDepend()) {
             SelectDriver.getAppiumDriver().resetApp();
         }
         try {
@@ -84,13 +84,14 @@ public class RunTestCase implements ITest {
 
     // 判断上一个用例是否为pass、并且为当前用例依赖的用例
     private boolean isLastPassForDepend() {
-        String lastCaseResult = ExcelUtil.getResults().get(getLastCaseId()).getResult();
-        // 当上一个执行的用例为当前依赖的用例，并且上一个执行的用例成功时，返回true
-        if (getLastCaseId().equals(testCase.getDependId()) && ExcelUtil.RESULT_PASS.equals(lastCaseResult)) {
-            return true;
-        } else {
-            return false;
+        if(StringUtils.isNotBlank(getLastCaseId())){
+            String lastCaseResult = ExcelUtil.getResults().get(getLastCaseId()).getResult();
+            // 当上一个执行的用例为当前依赖的用例，并且上一个执行的用例成功时，返回true
+            if (getLastCaseId().equals(testCase.getDependId()) && ExcelUtil.RESULT_PASS.equals(lastCaseResult)) {
+                return true;
+            }
         }
+        return false;
     }
 
     // 根据elementPath获取MobileElement
