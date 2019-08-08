@@ -142,24 +142,26 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement tvLanguageKM;
 
 
-
+    /** 任务中心赚取更多金币 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_task_center")
+    MobileElement taskCenterForCoin;
 
 
 
     /** 邀请好友 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='邀请好友']")
     MobileElement inviteFriends;
 
     /** 任务中心 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='任务中心']")
     MobileElement taskCenter;
 
     /** 手机充值 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='手机充值']")
     MobileElement phonePaid;
 
     /** 我的资料 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='我的资料']")
     MobileElement myInfo;
     /** 我的资料-用户名 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_userName")
@@ -224,7 +226,7 @@ public class MyPage extends AppiumBaseExecutor {
 
 
     /** 账号设置 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='账号设置']")
     MobileElement accountSetting;
     /** 账号设置-手机号 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_phoneNumber")
@@ -248,23 +250,23 @@ public class MyPage extends AppiumBaseExecutor {
 
 
     /** 热门活动 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='热门活动']")
     MobileElement hotActivity;
 
     /** 消息通知 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='消息通知']")
     MobileElement infoNotice;
 
     /** 用户动态 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='用户动态']")
     MobileElement userDynamic;
 
     /** 在线客服 */
-    @FindBy(linkText="在线客服")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='在线客服']")
     MobileElement lineService;
 
     /** 自媒体申请 */
-    @FindBy(linkText="自媒体申请")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='自媒体申请']")
     MobileElement mediaApplication;
 
 //    /** 系统设置 */
@@ -272,7 +274,7 @@ public class MyPage extends AppiumBaseExecutor {
 //    MobileElement sysSetting;
 
     /** 系统设置 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.RelativeLayout[4]/android.widget.RelativeLayout")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='系统设置']")
     MobileElement sysSetting;
 
     /** 系统设置-清除缓存 */
@@ -314,7 +316,7 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tv_no_wifi_play_mode")
     MobileElement playMode;
     /** 系统设置-非WiFi播放提醒-提醒一次 */
-    @AndroidFindBy(id="\tcom.tnaot.news:id/tv_tips_one_time")
+    @AndroidFindBy(id="com.tnaot.news:id/tv_tips_one_time")
     MobileElement playModeOneTime;
     /** 系统设置-非WiFi播放提醒-总是提醒 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_tips_always")
@@ -340,7 +342,7 @@ public class MyPage extends AppiumBaseExecutor {
 
 
     /** 版本更新 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvMain")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvMain'][@text='版本更新']")
     MobileElement versionUpdate;
     /** 版本更新-检查版本 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_version")

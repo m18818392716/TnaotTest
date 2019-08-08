@@ -132,7 +132,12 @@ public class RunTestCase implements ITest {
     public static final String SLIDE_LEFT = "swipeLeft";//向左滑动
     public static final String SLIDE_RIGHT = "swipeRight";//向右滑动
     public static final String SLIDE_TO_TARGET = "swipeToTarget";//滑动到目标元素
-    public static final String SLIDE_TO_End = "swipeToEnd";//向下滑动到目标元素
+
+    public static final String SLIDE_UP_TO_End = "swipeUpToEnd";//向上滑动到目标元素
+    public static final String SLIDE_DOWN_TO_End = "swipeDownToEnd";//向下滑动到目标元素
+    public static final String SLIDE_LEFT_TO_End = "swipeLeftToEnd";//向左滑动到目标元素
+    public static final String SLIDE_RIGHT_TO_End = "swipeRightToEnd";//向右滑动到目标元素
+
     public static final String TAP_POINT = "tapPoint";//点击某一个坐标
     public static final String TAP_POINT_MOVE_TO_POINT = "tapPointMoveToPoint";//两个坐标点之间的滑动
     public static final String ASSERT_TOAST = "assertToast";//断言toast弹框消息
@@ -168,8 +173,17 @@ public class RunTestCase implements ITest {
             case SLIDE_TO_TARGET:
                 SlideScreen.slideToTarget(mobileElement);
                 break;
-            case SLIDE_TO_End:
-                SlideScreen.swipeToEnd(SelectDriver.getAppiumDriver(), data);
+            case SLIDE_UP_TO_End:
+                SlideScreen.swipeUpToEnd(SelectDriver.getAppiumDriver(), data);
+                break;
+            case SLIDE_DOWN_TO_End:
+                SlideScreen.swipeDownToEnd(SelectDriver.getAppiumDriver(), data);
+                break;
+            case SLIDE_LEFT_TO_End:
+                SlideScreen.swipeLeftToEnd(SelectDriver.getAppiumDriver(), data);
+                break;
+            case SLIDE_RIGHT_TO_End:
+                SlideScreen.swipeRightToEnd(SelectDriver.getAppiumDriver(), data);
                 break;
             case TAP_POINT:
                 SlideScreen.tapPoint(SelectDriver.getAppiumDriver(), data);
@@ -185,6 +199,9 @@ public class RunTestCase implements ITest {
                 //判断元素是否存在后续需要自己封装方法
                 //mobileElement.isDisplayed();
                 Assert.assertTrue(mobileElement.isDisplayed(),"Element[" + mobileElement + "] not exsist!");
+
+//                driver.findElement(By.Xpath("//android.view.View[@content-desc='业务说明']");
+//                SelectDriver.getAppiumDriver().findElementByAccessibilityId("content-desc的值");
                 break;
             default:
                 Assert.fail("预期以外的操作：Element[" + mobileElement + "] Action: [" + action + "]");

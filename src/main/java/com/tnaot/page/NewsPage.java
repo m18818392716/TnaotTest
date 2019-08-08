@@ -25,6 +25,42 @@ public class NewsPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tip_view")
     MobileElement tipView;
 
+    /** 资讯-本地 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='本地']")
+    MobileElement localChannel;
+
+    /** 资讯-推荐 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='推荐']")
+    MobileElement recommendedChannel;
+
+    /** 资讯-娱乐 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='娱乐']")
+    MobileElement entertainmentChannel;
+
+    /** 资讯-社会 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='社会']")
+    MobileElement socialChannel;
+
+    /** 资讯-科技 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='科技']")
+    MobileElement scienceChannel;
+
+    /** 资讯-健康 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='健康']")
+    MobileElement healthChannel;
+
+    /** 资讯-体育 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='体育']")
+    MobileElement sportsChannel;
+
+    /** 资讯-美食 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='美食']")
+    MobileElement foodChannel;
+
+    /** 资讯-生活 */
+    @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='生活']")
+    MobileElement lifeChannel;
+
 
 
     /** 资讯详情-评论输入框 */
@@ -194,7 +230,7 @@ public class NewsPage extends AppiumBaseExecutor {
     MobileElement rlVideo;
 
     /** 首页tab键 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_life")
+    @AndroidFindBy(id="com.tnaot.news:id/rlLife")
     MobileElement rlLife;
 
     /** 动态tab键 */
@@ -206,10 +242,36 @@ public class NewsPage extends AppiumBaseExecutor {
     MobileElement rlMine;
 
 
-
     /** 热搜词输入框 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_search_hot_text")
     MobileElement searchText;
+    /** 热搜词编辑框-输入内容 */
+    @AndroidFindBy(id="com.tnaot.news:id/et_search_keywords")
+    MobileElement searchKeywords;
+    /** 热搜词编辑框-搜索按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_search")
+    MobileElement searchButton;
+    /** 热搜词编辑框-搜索按钮-搜索结果-图片 */
+    @AndroidFindBy(xpath="//*[contains(@text, '图片')]")
+    //@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '图片')]")
+    MobileElement imageTab;
+    /** 热搜词编辑框-搜索按钮-搜索结果-视频 */
+    @AndroidFindBy(xpath="//*[contains(@text, '视频')]")
+    //@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '视频')]")
+    MobileElement videoTab;
+    /** 热搜词编辑框-搜索按钮-搜索结果-生活 */
+    @AndroidFindBy(xpath="//*[contains(@text, '生活')]")
+    //@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '生活')]")
+    MobileElement lifeTab;
+    /** 热搜词编辑框-搜索按钮-搜索结果-综合 */
+    //@AndroidFindBy(xpath="//*[contains(@text, '综合')]")
+    @AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '综合')]")
+    MobileElement comprehensiveTab;
+
+
+
+
+
 
 
 

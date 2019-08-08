@@ -30,7 +30,7 @@ public class SlideScreen {
 
             new TouchAction(driver)
                     .press(PointOption.point(width / 2, height - 500))
-                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))//采用java-client6.0并且加上这一句才可以滑动
                     .moveTo(PointOption.point(width / 2, 100)).release().perform();
         }
     }
@@ -113,11 +113,11 @@ public class SlideScreen {
     }
 
     //页面不断上滑，滑动到出现 THE END为止
-    public static void swipeToEnd(AppiumDriver<WebElement> driver, String endString){
+    public static void swipeUpToEnd(AppiumDriver<WebElement> driver, String endString){
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
         boolean isSwipe = true;
-//        String endString = "THE END";
+        //String endString = "THE END";
         while (isSwipe) {
             slideUp(driver);//向上滑动屏幕
             String temp =driver.getPageSource();
@@ -125,6 +125,49 @@ public class SlideScreen {
                 isSwipe = false;
         }
     }
+
+    //页面不断下滑，滑动到出现 THE END为止
+    public static void swipeDownToEnd(AppiumDriver<WebElement> driver, String endString){
+//        int width = driver.manage().window().getSize().width;
+//        int height = driver.manage().window().getSize().height;
+//        boolean isSwipe = true;
+//        //String endString = "THE END";
+//        while (isSwipe) {
+//            slideDown(driver);//向上滑动屏幕
+//            String temp =driver.getPageSource();
+//            if(temp.contains(endString))
+//                isSwipe = false;
+//        }
+    }
+
+    //页面不断左滑，滑动到出现 THE END为止
+    public static void swipeLeftToEnd(AppiumDriver<WebElement> driver, String endString){
+//        int width = driver.manage().window().getSize().width;
+//        int height = driver.manage().window().getSize().height;
+//        boolean isSwipe = true;
+//        //String endString = "THE END";
+//        while (isSwipe) {
+//            slideDown(driver);//向上滑动屏幕
+//            String temp =driver.getPageSource();
+//            if(temp.contains(endString))
+//                isSwipe = false;
+//        }
+    }
+
+    //页面不断右滑，滑动到出现 THE END为止
+    public static void swipeRightToEnd(AppiumDriver<WebElement> driver, String endString){
+//        int width = driver.manage().window().getSize().width;
+//        int height = driver.manage().window().getSize().height;
+//        boolean isSwipe = true;
+//        //String endString = "THE END";
+//        while (isSwipe) {
+//            slideDown(driver);//向上滑动屏幕
+//            String temp =driver.getPageSource();
+//            if(temp.contains(endString))
+//                isSwipe = false;
+//        }
+    }
+
 
 //    protected static void swipe(AppiumDriver<WebElement> driver, String id){
 //        List<WebElement> jokes = new ArrayList<WebElement>();
@@ -153,6 +196,28 @@ public class SlideScreen {
         int x1 = Integer.parseInt(point[2]);
         int y1 = Integer.parseInt(point[3]);
         new TouchAction(driver).press(PointOption.point(x, y)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5)))).moveTo(PointOption.point(x1, y1)).release().perform();
+    }
+
+    /** 滑动到目标元素-向左 */
+    public static void swipeToTarget(AppiumDriver<WebElement> driver, String endString) {
+        String old = "";
+        String temp = driver.getPageSource();//获取当前页面页数
+        while (true) {
+            if (old == temp) {
+                break;
+            } else {
+                if (driver.getPageSource().contains(endString)) {
+                    System.out.println("找到了元素/滑动到了指定元素的当前页面");
+                    break;
+                } else {
+                    new TouchAction(driver).press(PointOption.point(1300, 300)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5)))).moveTo(PointOption.point(0, 300)).release().perform();
+                    old = temp;
+                    temp = driver.getPageSource();
+                }
+            }
+        }
+
+
     }
 
 
