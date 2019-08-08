@@ -71,7 +71,6 @@ public class ExcelUtil {
                     result.setCellIndex(resutlIndex);
 
                     TestCase testCase = new TestCase();
-                    testCase.setSheetIndex(Integer.parseInt(sheetIndex));
 //                System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
                     for(Cell cell : row){
                         if(cell != null){
@@ -136,7 +135,6 @@ public class ExcelUtil {
                 for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                     Row row = sheet.getRow(i);
                     CaseStep caseStep = new CaseStep();
-                    caseStep.setSheetIndex(Integer.parseInt(sheetIndex));
 //                System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
 
                     for(Cell cell : row){

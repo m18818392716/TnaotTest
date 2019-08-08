@@ -38,7 +38,7 @@ public class MainPage extends AppiumBaseExecutor {
     MobileElement sendDynamic;
 
     /** 发布交易 */
-    @AndroidFindBy(xpath="//android.widget.TextView[@text='发布交易']")
+    @AndroidFindBy(xpath="//*[@text='发布交易']")
     MobileElement sendTransaction;
     /** 发布交易-返回 */
     @AndroidFindBy(id="com.tnaot.news:id/ivBack")
@@ -100,7 +100,7 @@ public class MainPage extends AppiumBaseExecutor {
     MobileElement proviceText8;
 
     /** 发布交易-交易买卖地址-请选择省份-省份选择-保存 */
-    @AndroidFindBy(xpath="com.tnaot.news:id/tv_save")
+    @AndroidFindBy(id="com.tnaot.news:id/tv_save")
     MobileElement saveButton;
 
     /** 发布交易-类型 */
@@ -146,11 +146,17 @@ public class MainPage extends AppiumBaseExecutor {
     /** 发布交易-价格 */
     @AndroidFindBy(id="com.tnaot.news:id/edit_release_price_content")
     MobileElement priceText;
+    /** 发布交易-输入价格 */
+    @AndroidFindBy(id="com.tnaot.news:id/edit_price_custom")
+    MobileElement inputPrice;
+    /** 发布交易-保存价格 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_save")
+    MobileElement savePrice;
     /** 联系方式-电话 */
     @AndroidFindBy(id="com.tnaot.news:id/etPhone")
     MobileElement telephoneText;
     /** 联系方式-微信 */
-    @AndroidFindBy(xpath="com.tnaot.news:id/etWeChat")
+    @AndroidFindBy(id="com.tnaot.news:id/etWeChat")
     MobileElement wechatText;
     /** 联系方式-邮箱 */
     @AndroidFindBy(id="com.tnaot.news:id/etEmail")

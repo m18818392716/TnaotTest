@@ -13,6 +13,4 @@ public class CaseStep {
 
     private String dataNum; // 数据位置
     private String data; // 对应的数据
-
-    private Integer sheetIndex; // sheet索引
 }

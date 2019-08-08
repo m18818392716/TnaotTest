@@ -45,7 +45,7 @@ public class RunTestCase implements ITest {
     @Test
     public void run() {
         System.out.println("Run Test Case ---->>>>> [" + testCase + "]");
-        // 当上一个用例是空的(即第一个用例) 以及 上一个用例是成功的且为当前依赖的用例时，不resetApp
+        // 当上一个用例是成功的且为当前依赖的用例时，不resetApp
         if (!isLastPassForDepend()) {
             SelectDriver.getAppiumDriver().resetApp();
         }
@@ -141,7 +141,8 @@ public class RunTestCase implements ITest {
     public static final String TAP_POINT = "tapPoint";//点击某一个坐标
     public static final String TAP_POINT_MOVE_TO_POINT = "tapPointMoveToPoint";//两个坐标点之间的滑动
     public static final String ASSERT_TOAST = "assertToast";//断言toast弹框消息
-    public static final String IS_EXSIST = "isExsist";//断言toast弹框消息
+    public static final String IS_EXIST = "isExist";//元素是否存在
+    public static final String ASSET_CONTEXT = "asset";//断言元素内容是否与预期一致
 
     // 对控件执行操作
     private void executeAction(MobileElement mobileElement, String action, String data) {
@@ -195,13 +196,16 @@ public class RunTestCase implements ITest {
             case TAP_POINT_MOVE_TO_POINT:
                 SlideScreen.tapPointMoveToPoint(SelectDriver.getAppiumDriver(), data);
                 break;
-            case IS_EXSIST:
+            case IS_EXIST:
                 //判断元素是否存在后续需要自己封装方法
                 //mobileElement.isDisplayed();
                 Assert.assertTrue(mobileElement.isDisplayed(),"Element[" + mobileElement + "] not exsist!");
 
 //                driver.findElement(By.Xpath("//android.view.View[@content-desc='业务说明']");
 //                SelectDriver.getAppiumDriver().findElementByAccessibilityId("content-desc的值");
+                break;
+            case ASSET_CONTEXT:
+                Assert.assertEquals(mobileElement.getText(), data);
                 break;
             default:
                 Assert.fail("预期以外的操作：Element[" + mobileElement + "] Action: [" + action + "]");
