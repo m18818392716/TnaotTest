@@ -37,6 +37,52 @@ public class TaskCenterPage extends AppiumBaseExecutor {
     MobileElement closeSignButton;
 
 
+    /** 任务中心-新手任务-输入邀请码 */
+    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '输入邀请码')]")
+    MobileElement inputInviteCode;
+    /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码 */
+    @AndroidFindBy(id="com.tnaot.news:id/editText")
+    MobileElement editText;
+    /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码-立即领取 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvConfirm")
+    MobileElement tvConfirm;
+
+
+    /** 任务中心-日常任务-阅读资讯 */
+    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '阅读资讯')]")
+    MobileElement readNews;
+    /** 任务中心-日常任务--阅读资讯-去完成 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
+    MobileElement toReadNews;
+    /** 阅读资讯30秒-获取金币 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvCoins")
+    MobileElement getCoins;
+
+    /** 任务中心-日常任务-邀请好友 */
+    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '邀请好友')]")
+    MobileElement inviteFriends;
+
+    /** 任务中心-日常任务-阅读推送文章 */
+    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '阅读推送文章')]")
+    MobileElement inviteFriends;
+
+    /** 任务中心-日常任务-分享被阅读 */
+    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '分享被阅读')]")
+    MobileElement inviteFriends;
+
+    /** 任务中心-日常任务-评论被点赞 */
+    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '评论被点赞')]")
+    MobileElement inviteFriends;
+
+    /** 任务中心-日常任务-动态被点赞 */
+    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '动态被点赞')]")
+    MobileElement inviteFriends;
+
+    /** 任务中心-日常任务-转盘抽奖 */
+    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '转盘抽奖')]")
+    MobileElement inviteFriends;
+
+
 
 
 //    /** 输入邀请码-展开 */
