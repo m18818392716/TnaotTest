@@ -29,9 +29,197 @@ public class MainPage extends AppiumBaseExecutor {
     MobileElement denyButton;
 
 
+    /** 首页-房地产 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='房地产']")
+    MobileElement discountType1;
+    /** 首页-房地产-二手房 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='二手房']")
+    MobileElement discountType1;
+    /** 首页-房地产-二手房 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='新房']")
+    MobileElement discountType1;
+    /** 首页-房地产-二手房 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='租房']")
+    MobileElement discountType1;
+    /** 首页-房地产-二手房 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='写字楼']")
+    MobileElement discountType1;
+    /** 首页-房地产-二手房 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='厂房']")
+    MobileElement discountType1;
+    /** 首页-房地产-二手房 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='仓库']")
+    MobileElement discountType1;
+    /** 首页-房地产-二手房 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='商铺']")
+    MobileElement discountType1;
+    /** 首页-房地产-二手房 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='土地']")
+    MobileElement discountType1;
+
+    /** 首页-周边商家 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='周边商家']")
+    MobileElement discountType1;
+    /** 首页-周边商家-美食 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='美食']")
+    MobileElement discountType1;
+    /** 首页-周边商家-娱乐 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='娱乐']")
+    MobileElement discountType1;
+    /** 首页-周边商家-旅行 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='旅行']")
+    MobileElement discountType1;
+    /** 首页-周边商家-购物 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='购物']")
+    MobileElement discountType1;
+    /** 首页-周边商家-健身 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='健身']")
+    MobileElement discountType1;
+    /** 首页-周边商家-医疗 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='医疗']")
+    MobileElement discountType1;
+    /** 首页-周边商家-教育 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='教育']")
+    MobileElement discountType1;
+    /** 首页-周边商家-服务 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='服务']")
+    MobileElement discountType1;
+
+
+    /** 首页-交易买卖 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='交易买卖']")
+    MobileElement discountType1;
+    /** 首页-交易买卖-手机/平板 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='手机/平板']")
+    MobileElement discountType1;
+    /** 首页-交易买卖-电子数码 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='电子数码']")
+    MobileElement discountType1;
+    /** 首页-交易买卖-家电 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='家电']")
+    MobileElement discountType1;
+    /** 首页-交易买卖-汽车 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='汽车']")
+    MobileElement discountType1;
+    /** 首页-交易买卖-摩托车 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='摩托车']")
+    MobileElement discountType1;
+    /** 首页-交易买卖-服装 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='服装']")
+    MobileElement discountType1;
+    /** 首页-交易买卖-家居 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='家居']")
+    MobileElement discountType1;
+    /** 首页-交易买卖-更多分类 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='更多分类']")
+    MobileElement discountType1;
+
+
+    /** 首页-折扣优惠 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='折扣优惠']")
+    MobileElement discountType1;
+    /** 首页-折扣优惠-美食餐饮 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='美食餐饮']")
+    MobileElement discountType1;
+    /** 首页-折扣优惠-休闲娱乐 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='休闲娱乐']")
+    MobileElement discountType1;
+    /** 首页-折扣优惠-购物卖场 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='购物卖场']")
+    MobileElement discountType1;
+    /** 首页-折扣优惠-时尚女性 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='时尚女性']")
+    MobileElement discountType1;
+    /** 首页-折扣优惠-汽车服务 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='汽车服务']")
+    MobileElement discountType1;
+    /** 首页-折扣优惠-家居装饰 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='家居装饰']")
+    MobileElement discountType1;
+    /** 首页-折扣优惠-培训机构 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='培训机构']")
+    MobileElement discountType1;
+    /** 首页-折扣优惠-更多优惠 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='更多优惠']")
+    MobileElement discountType1;
+
+    /** 首页-便民服务 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='便民服务']")
+    MobileElement discountType1;
+    /** 首页-便民服务-手机充值 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='手机充值']")
+    MobileElement discountType1;
+    /** 首页-便民服务-本地黄页 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='本地黄页']")
+    MobileElement discountType1;
+    /** 首页-便民服务-柬文翻译 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='柬文翻译']")
+    MobileElement discountType1;
+    /** 首页-便民服务-本地汇率 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='本地汇率']")
+    MobileElement discountType1;
+    /** 首页-便民服务-出入境指南 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='出入境指南']")
+    MobileElement discountType1;
+    /** 首页-便民服务-柬文学习 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='柬文学习']")
+    MobileElement discountType1;
+    /** 首页-便民服务-一键报警 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='一键报警']")
+    MobileElement discountType1;
+    /** 首页-便民服务-寻人求助 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='寻人求助']")
+    MobileElement discountType1;
+
+
+    /** 首页-求职招聘 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='求职招聘']")
+    MobileElement discountType1;
+
+    /** 首页-寻人求职 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='寻人求职']")
+    MobileElement discountType1;
+
+    /** 首页-手机充值 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='手机充值']")
+    MobileElement discountType1;
+
+
+    /** 首页-二手房 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='二手房']")
+    MobileElement discountType1;
+    /** 首页-租房 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='租房']")
+    MobileElement discountType1;
+    /** 首页-美食 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='美食']")
+    MobileElement discountType1;
+    /** 首页-娱乐 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='娱乐']")
+    MobileElement discountType1;
+    /** 首页-购物 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='购物']")
+    MobileElement discountType1;
+    /** 首页-翻译 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='翻译']")
+    MobileElement discountType1;
+    /** 首页-学柬语 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='学柬语']")
+    MobileElement discountType1;
+    /** 首页-服务 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='服务']")
+    MobileElement discountType1;
+    /** 首页-活动 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='活动']")
+    MobileElement discountType1;
+    /** 首页-客服 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='客服']")
+    MobileElement discountType1;
+
+
     /** 发布按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_top_release")
-    MobileElement tabMine;
+    MobileElement topRelease;
 
     /** 发布动态 */
     @AndroidFindBy(xpath="//android.widget.TextView[@text='发布动态']")
@@ -57,14 +245,30 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/rl_add_photo")
     MobileElement uploadPhoto;
     /** 发布交易-上传图片-拍照 */
-    @AndroidFindBy(id="com.tnaot.news:id/rl_add_photo")
+    @AndroidFindBy(id="com.tnaot.news:id/ll_camera")
     MobileElement takePhoto;
     /** 发布交易-上传图片-从手机相册中选取 */
-    @AndroidFindBy(id="com.tnaot.news:id/rl_add_photo")
+    @AndroidFindBy(id="com.tnaot.news:id/tv_type_pick_photo")
     MobileElement photoAlbum;
     /** 发布交易-上传图片-取消 */
-    @AndroidFindBy(id="com.tnaot.news:id/rl_add_photo")
+    @AndroidFindBy(id="com.tnaot.news:id/tv_cancel")
     MobileElement dismissPhoto;
+    /** 发布交易-上传图片-选择即将要上传的图片 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[1]")
+    MobileElement uploadAlbumPhoto1;
+    /** 发布交易-上传图片-选择即将要上传的图片 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[2]")
+    MobileElement uploadAlbumPhoto2;
+    /** 发布交易-上传图片-选择即将要上传的图片 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[3]")
+    MobileElement uploadAlbumPhoto3;
+    /** 发布交易-上传图片-选择即将要上传的图片 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[4]")
+    MobileElement uploadAlbumPhoto4;
+    /** 发布交易-上传图片-选取图片-完成 */
+    @AndroidFindBy(id="com.tnaot.news:id/done")
+    MobileElement donePhoto;
+
 
 
     /** 发布交易-交易买卖地址 */
@@ -169,6 +373,30 @@ public class MainPage extends AppiumBaseExecutor {
     /** 发布求职招聘 */
     @AndroidFindBy(xpath="//android.widget.TextView[@text='发布求职招聘']")
     MobileElement sendJob;
+    /** 发布求职招聘-求职者位置 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_location_content")
+    MobileElement locationContent;
+    /** 发布求职招聘-求职者位置-请选择省份 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_province")
+    MobileElement chooseProvince;
+//    /** 发布求职招聘-求职者位置-请选择省份-选择省份 */
+//    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tvName'][@text='金边']")
+//    MobileElement sendJob;
+    /** 发布求职招聘-求职者位置-详细地址 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_detail_location")
+    MobileElement detailLocation;
+    /** 发布求职招聘-求职者位置-详细地址-输入小区/写字楼/商品房 */
+    @AndroidFindBy(id="com.tnaot.news:id/etSearch")
+    MobileElement inputSearch;
+    /** 发布求职招聘-求职者位置-详细地址-输入小区/写字楼/商品房-查找 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvSearch")
+    MobileElement searchButton;
+    /** 发布求职招聘-求职者位置-详细地址-拖动地图定位 */
+    @AndroidFindBy(id="com.tnaot.news:id/btnGoMap")
+    MobileElement btnGoMap;
+
+
+
     /** 发布求职招聘-我要-求职 */
     @AndroidFindBy(id="com.tnaot.news:id/rb_job_wanted")
     MobileElement jobWanted;
@@ -316,6 +544,12 @@ public class MainPage extends AppiumBaseExecutor {
     /** 发布房地产-出售-上传照片 */
     @AndroidFindBy(id="com.tnaot.news:id/llUploadImage")
     MobileElement uploadImage;
+
+    /** 发布房地产-出售-上传照片-完成 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvComplete")
+    MobileElement tvComplete;
+
+
     /** 发布房地产-出售-标题 */
     @AndroidFindBy(id="com.tnaot.news:id/edit_title")
     MobileElement sellTitle;
@@ -400,12 +634,57 @@ public class MainPage extends AppiumBaseExecutor {
     /** 商家入驻 */
     @AndroidFindBy(xpath="//android.widget.TextView[@text='商家入驻']")
     MobileElement sendBusiness;
+    /** 商家入驻-类型 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_release_discount_content")
+    MobileElement businessType;
+    /** 商家入驻-类型-美食 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='美食']")
+    MobileElement businessType1;
+    /** 商家入驻-类型-娱乐 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='娱乐']")
+    MobileElement businessType2;
+    /** 商家入驻-类型-旅行 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='旅行']")
+    MobileElement businessType3;
+    /** 商家入驻-类型-购物 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='购物']")
+    MobileElement businessType4;
+    /** 商家入驻-类型-健身 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='健身']")
+    MobileElement businessType5;
+    /** 商家入驻-类型-医疗 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='医疗']")
+    MobileElement businessType6;
+    /** 商家入驻-类型-教育 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='教育']")
+    MobileElement businessType7;
+    /** 商家入驻-类型-服务 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='服务']")
+    MobileElement businessType8;
+
+    /** 商家入驻-参考价格 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_province_content")
+    MobileElement referencePrice;
+
+
 
 
 
     /** 寻人求助 */
     @AndroidFindBy(xpath="//android.widget.TextView[@text='寻人求助']")
     MobileElement sendHelp;
+    /** 寻人求助-类型 */
+    @AndroidFindBy(id="com.tnaot.news:id/rl_type")
+    MobileElement helpType;
+    /** 寻人求助-类型-寻人 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='寻人']")
+    MobileElement helpType1;
+    /** 寻人求助-类型-寻物 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='寻物']")
+    MobileElement helpType2;
+    /** 寻人求助-类型-求助 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_content'][@text='求助']")
+    MobileElement helpType3;
 
     /** 我要爆料 */
     @AndroidFindBy(xpath="//android.widget.TextView[@text='我要爆料']")

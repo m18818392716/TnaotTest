@@ -21,6 +21,10 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
     MobileElement rlMine;
 
+    /** 我的-用户名 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvUsername")
+    MobileElement userName;
+
     /** 我的头像 */
     @AndroidFindBy(id="com.tnaot.news:id/ivUser")
     MobileElement myPhone;
@@ -166,6 +170,19 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的资料-用户名 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_userName")
     MobileElement myInfoUserName;
+    /** 我的资料-用户名-请输入用户名 */
+    @AndroidFindBy(id="com.tnaot.news:id/et_content")
+    MobileElement updateUserName;
+    /** 我的资料-用户名-请输入用户名-确定 */
+    @AndroidFindBy(id="com.tnaot.news:id/bt_confirm")
+    MobileElement btConfirm;
+    /** 我的资料-用户名-请输入用户名-取消 */
+    @AndroidFindBy(id="com.tnaot.news:id/bt_cancel")
+    MobileElement btCancel;
+
+
+
+
     /** 我的资料-简介 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_prefect")
     MobileElement myInfoIntroduction;

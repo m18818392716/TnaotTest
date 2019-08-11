@@ -62,6 +62,14 @@ public class NewsPage extends AppiumBaseExecutor {
     MobileElement lifeChannel;
 
 
+    /** 资讯-频道控件header */
+    @AndroidFindBy(xpath="com.tnaot.news:id/tabLayout")
+    MobileElement channelHeader;
+
+
+
+
+
 
     /** 资讯详情-评论输入框 */
     @AndroidFindBy(id="com.tnaot.news:id/tvComment")

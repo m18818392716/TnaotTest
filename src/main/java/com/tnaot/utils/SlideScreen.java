@@ -179,6 +179,7 @@ public class SlideScreen {
 //        System.out.println("滑动页面");
 //    }
 
+
     /** 点击具体的坐标点 */
     public static void tapPoint(AppiumDriver<WebElement> driver, String data) {
         String point[] = data.split(",");
@@ -195,7 +196,7 @@ public class SlideScreen {
         int y = Integer.parseInt(point[1]);
         int x1 = Integer.parseInt(point[2]);
         int y1 = Integer.parseInt(point[3]);
-        new TouchAction(driver).press(PointOption.point(x, y)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5)))).moveTo(PointOption.point(x1, y1)).release().perform();
+        new TouchAction(driver).press(PointOption.point(x, y)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5))) ).moveTo(PointOption.point(x1, y1)).release().perform();
     }
 
     /** 滑动到目标元素-向左 */

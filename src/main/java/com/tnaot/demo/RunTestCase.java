@@ -12,7 +12,10 @@ import com.tnaot.utils.entity.GlobalStep;
 import com.tnaot.utils.entity.TestCase;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -26,6 +29,7 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.List;
 
 public class RunTestCase implements ITest {
@@ -138,6 +142,7 @@ public class RunTestCase implements ITest {
     public static final String ACTION_SEND_KEY = "sendkeys";
     public static final String COMPARE_TEXT = "compare";
     public static final String IS_SELECTED = "isSelected";
+
     public static final String SLIDE_UP = "swipeUp";//向上滑动
     public static final String SLIDE_DOWN = "swipeDown";//向下滑动
     public static final String SLIDE_LEFT = "swipeLeft";//向左滑动
@@ -148,6 +153,9 @@ public class RunTestCase implements ITest {
     public static final String SLIDE_DOWN_TO_End = "swipeDownToEnd";//向下滑动到目标元素
     public static final String SLIDE_LEFT_TO_End = "swipeLeftToEnd";//向左滑动到目标元素
     public static final String SLIDE_RIGHT_TO_End = "swipeRightToEnd";//向右滑动到目标元素
+
+    public static final String SLIDE_LEFT_ELEMENT = "swipeLeftElement";//向左滑动控件
+    public static final String SLIDE_RIGHT_ELEMENT = "swipeRightElement";//向右滑动控件
 
     public static final String TAP_POINT = "tapPoint";//点击某一个坐标
     public static final String TAP_POINT_MOVE_TO_POINT = "tapPointMoveToPoint";//两个坐标点之间的滑动
@@ -207,6 +215,16 @@ public class RunTestCase implements ITest {
                 break;
             case SLIDE_RIGHT_TO_End:
                 SlideScreen.swipeRightToEnd(SelectDriver.getAppiumDriver(), data);
+                break;
+            case SLIDE_LEFT_ELEMENT:
+                int h = mobileElement.getSize().getHeight();
+                int w = mobileElement.getSize().getWidth();
+                new TouchAction(SelectDriver.getAppiumDriver()).press(PointOption.point(w, h / 2)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5))) ).moveTo(PointOption.point(0, h / 2)).release().perform();
+                break;
+            case SLIDE_RIGHT_ELEMENT:
+                int h1 = mobileElement.getSize().getHeight();
+                int w1 = mobileElement.getSize().getWidth();
+                new TouchAction(SelectDriver.getAppiumDriver()).press(PointOption.point(0, h1 / 2)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5))) ).moveTo(PointOption.point(w1, h1 / 2)).release().perform();
                 break;
             case TAP_POINT:
                 SlideScreen.tapPoint(SelectDriver.getAppiumDriver(), data);
