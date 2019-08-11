@@ -8,12 +8,14 @@ import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
 import com.tnaot.utils.SlideScreen;
 import com.tnaot.utils.entity.CaseStep;
+import com.tnaot.utils.entity.GlobalStep;
 import com.tnaot.utils.entity.TestCase;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -51,6 +53,8 @@ public class RunTestCase implements ITest {
         }
         try {
             this.runCase(testCase.getId());
+        } catch (NoSuchElementException e){
+            Assert.fail("元素找不到：" + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Case Fail 【" + testCase.getId() + "】");
@@ -74,11 +78,18 @@ public class RunTestCase implements ITest {
         // 遍历执行步骤
         for (CaseStep caseStep : caseSteps) {
             System.out.println("Run case step: " + caseStep);
-            MobileElement mobileElement = null;
-            if (StringUtils.isNotBlank(caseStep.getElementPath())) {
-                mobileElement = this.getMobileElement(caseStep.getElementPath());
+            executeAction(caseStep.getElementPath(), caseStep.getAction(), caseStep.getData());
+            // 如果Global Step表有对应的操作，则继续执行该操作
+            List<GlobalStep> globalStepList = ExcelUtil.getGlobalSteps().get(caseStep.getElementPath());
+            if(globalStepList != null && globalStepList.size() > 0){
+                for (GlobalStep globalStep : globalStepList){
+                    // 该步骤尚未执行过或者type不为1，则执行
+                    if(globalStep.getIsExecute() == 0 || !"1".equals(globalStep.getType())){
+                        executeAction(globalStep.getTargetElementPath(), globalStep.getTargetAction(), globalStep.getData());
+                        globalStep.setIsExecute(globalStep.getIsExecute() + 1);
+                    }
+                }
             }
-            this.executeAction(mobileElement, caseStep.getAction(), caseStep.getData());
         }
     }
 
@@ -144,7 +155,18 @@ public class RunTestCase implements ITest {
     public static final String IS_EXIST = "isExist";//元素是否存在
     public static final String ASSET_CONTEXT = "asset";//断言元素内容是否与预期一致
 
-    // 对控件执行操作
+    public static final String CLICK_IF_EXIST = "clickIfExist";// 如果存在则点击
+
+    // 传入控件路径对控件执行操作
+    private void executeAction(String elementPath, String action, String data) {
+        MobileElement mobileElement = null;
+        if (StringUtils.isNotBlank(elementPath)) {
+            mobileElement = this.getMobileElement(elementPath);
+        }
+        this.executeAction(mobileElement, action, data);
+    }
+
+    // 传入控件对控件执行操作
     private void executeAction(MobileElement mobileElement, String action, String data) {
         switch (action) {
             case ACTION_CLICK:
@@ -206,6 +228,9 @@ public class RunTestCase implements ITest {
                 break;
             case ASSET_CONTEXT:
                 Assert.assertEquals(mobileElement.getText(), data);
+                break;
+            case CLICK_IF_EXIST:
+                AppiumUtil.clickElementIfExist(mobileElement);
                 break;
             default:
                 Assert.fail("预期以外的操作：Element[" + mobileElement + "] Action: [" + action + "]");

@@ -1,22 +1,12 @@
 package com.tnaot.demo;
 
+import com.tnaot.page.LoginPage;
 import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
 import com.tnaot.utils.entity.TestCase;
-import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.testng.ITest;
 import org.testng.ITestContext;
-import org.testng.ITestNGMethod;
 import org.testng.annotations.*;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,27 +17,10 @@ public class TestCaseFactory{
         System.out.println("初始化项目开始！");
         AppiumUtil appiumUtil = new AppiumUtil();
         SelectDriver selectDriver = new SelectDriver();
-        AppiumDriver appiumDriver = selectDriver.selectDriver(context, appiumUtil);
+        selectDriver.selectDriver(context, appiumUtil);
 
-        ExcelUtil.readCaseExcel();
-        ExcelUtil.readStepExcel();
-//        System.out.println("step信息：");
-//        for(String key : ExcelUtil.getCaseSteps().keySet()){
-//            System.out.println(key+" : "+ ExcelUtil.getCaseSteps().get(key));
-//        }
+        ExcelUtil.readAllExcel();
         System.out.println("初始化项目结束！");
-
-//        AppiumUtil.sleep(5000L);
-//        try{
-//            WebElement allowButton = appiumDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button"));
-//            if(allowButton.isDisplayed()){
-//                allowButton.click();
-//            }
-//        } catch (NoSuchElementException e){
-//            System.out.println("不存在该控件");
-//        }
-
-
     }
 
     // 使用Factory实现动态添加用例
@@ -57,7 +30,7 @@ public class TestCaseFactory{
         ExcelUtil.excelPath = excelPath;
         initProject(context);
         Map<String, TestCase> testCases = ExcelUtil.getTestCases();
-        // 遍历执行Case
+        // 遍历添加Excel用例数据，转化为即将要执行的测试用例
         List<Object> caseList = new ArrayList<>();
         for(String caseId : testCases.keySet()){
             if("YES".equalsIgnoreCase(testCases.get(caseId).getIsRun())){

@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 
@@ -113,6 +114,14 @@ public class AppiumUtil {
             return false;
         }
 
+    }
+
+    public static void clickElementIfExist(MobileElement mobileElement) {
+        try {
+            mobileElement.click();
+        } catch (NoSuchElementException e){
+            logger.info("该元素不存在："+mobileElement);
+        }
     }
 
     /** 截屏操作 */
