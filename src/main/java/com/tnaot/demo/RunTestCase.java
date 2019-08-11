@@ -31,6 +31,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
 
 public class RunTestCase implements ITest {
 
@@ -54,6 +55,7 @@ public class RunTestCase implements ITest {
         // 当上一个用例是成功的且为当前依赖的用例时，不resetApp
         if (!isLastPassForDepend()) {
             SelectDriver.getAppiumDriver().resetApp();
+            resetGlobalExecuteNum();
         }
         try {
             this.runCase(testCase.getId());
@@ -88,11 +90,21 @@ public class RunTestCase implements ITest {
             if(globalStepList != null && globalStepList.size() > 0){
                 for (GlobalStep globalStep : globalStepList){
                     // 该步骤尚未执行过或者type不为1，则执行
-                    if(globalStep.getIsExecute() == 0 || !"1".equals(globalStep.getType())){
+                    if(globalStep.getExecuteNum() == 0 || !"1".equals(globalStep.getType())){
                         executeAction(globalStep.getTargetElementPath(), globalStep.getTargetAction(), globalStep.getData());
-                        globalStep.setIsExecute(globalStep.getIsExecute() + 1);
+                        globalStep.setExecuteNum(globalStep.getExecuteNum() + 1);
                     }
                 }
+            }
+        }
+    }
+
+    // 每次resetApp重置执行次数
+    private void resetGlobalExecuteNum() {
+        Map<String, List<GlobalStep>> globalStepMap = ExcelUtil.getGlobalSteps();
+        for (String key : globalStepMap.keySet()){
+            for (GlobalStep globalStep : globalStepMap.get(key)){
+                globalStep.setExecuteNum(0);
             }
         }
     }
