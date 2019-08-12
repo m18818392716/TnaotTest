@@ -24,6 +24,9 @@ public class TaskCenterPage extends AppiumBaseExecutor {
     /** 开启宝箱 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_box_tip")
     MobileElement boxTip;
+    /** 开启宝箱-弹窗 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_title")
+    MobileElement boxOverlayText;
     /** 开启宝箱-关闭弹窗 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_box_close")
     MobileElement closeBoxTip;
@@ -32,6 +35,9 @@ public class TaskCenterPage extends AppiumBaseExecutor {
     /** 签到拿金币 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_sign")
     MobileElement signButton;
+    /** 签到拿金币-弹窗 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_value")
+    MobileElement signOverlayText;
     /** 签到拿金币-关闭弹窗 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_box_close")
     MobileElement closeSignButton;
@@ -40,6 +46,9 @@ public class TaskCenterPage extends AppiumBaseExecutor {
     /** 任务中心-新手任务-输入邀请码 */
     @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '输入邀请码')]")
     MobileElement inputInviteCode;
+    /** 去完成 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
+    MobileElement toFinished;
     /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码 */
     @AndroidFindBy(id="com.tnaot.news:id/editText")
     MobileElement editText;
@@ -64,80 +73,80 @@ public class TaskCenterPage extends AppiumBaseExecutor {
 
     /** 任务中心-日常任务-阅读推送文章 */
     @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '阅读推送文章')]")
-    MobileElement inviteFriends;
+    MobileElement readPushAticles;
 
     /** 任务中心-日常任务-分享被阅读 */
     @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '分享被阅读')]")
-    MobileElement inviteFriends;
+    MobileElement shareToBeRead;
 
     /** 任务中心-日常任务-评论被点赞 */
     @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '评论被点赞')]")
-    MobileElement inviteFriends;
+    MobileElement commentsByThumbUp;
 
     /** 任务中心-日常任务-动态被点赞 */
     @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '动态被点赞')]")
-    MobileElement inviteFriends;
+    MobileElement dynamicByThumbUp;
 
     /** 任务中心-日常任务-转盘抽奖 */
     @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '转盘抽奖')]")
-    MobileElement inviteFriends;
+    MobileElement rotaryDraw;
 
 
 
 
 //    /** 输入邀请码-展开 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '输入邀请码')]")
 //    MobileElement rlMine;
 //    /** 去完成 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
 //    MobileElement rlMine;
 //
 //
 //
 //    /** 邀请好友 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '邀请好友')]")
 //    MobileElement rlMine;
 //    /** 去完成 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
 //    MobileElement rlMine;
 //
 //
 //    /** 阅读资讯 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '阅读资讯')]")
 //    MobileElement rlMine;
 //    /** 去完成 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
 //    MobileElement rlMine;
 //
 //
 //    /** 阅读推送文章 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '阅读推送文章')]")
 //    MobileElement rlMine;
 //    /** 去完成 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
 //    MobileElement rlMine;
 //
 //
 //    /** 分享被阅读 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '分享被阅读')]")
 //    MobileElement rlMine;
 //    /** 去完成 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
 //    MobileElement rlMine;
 //
 //
 //    /** 评论被点赞 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//   @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '评论被点赞')]")
 //    MobileElement rlMine;
 //    /** 去完成 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
 //    MobileElement rlMine;
 //
 //
 //    /** 动态被点赞 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//   @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '动态被点赞')]")
 //    MobileElement rlMine;
 //    /** 去完成 */
-//    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
 //    MobileElement rlMine;
 }

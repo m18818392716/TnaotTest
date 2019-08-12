@@ -169,8 +169,17 @@ public class RunTestCase implements ITest {
     public static final String SLIDE_LEFT_ELEMENT = "swipeLeftElement";//向左滑动控件
     public static final String SLIDE_RIGHT_ELEMENT = "swipeRightElement";//向右滑动控件
 
+
+    public static final String SLIDE_ELEMENT = "slideElement";//滑动控件
+
+
+
     public static final String TAP_POINT = "tapPoint";//点击某一个坐标
     public static final String TAP_POINT_MOVE_TO_POINT = "tapPointMoveToPoint";//两个坐标点之间的滑动
+    public static final String LONG_PRESS_ELEMENT = "longPressElement";//长按某一个控件
+    public static final String LONG_PRESS_POINT = "longPressPoint";//长按某一个坐标点
+
+
     public static final String ASSERT_TOAST = "assertToast";//断言toast弹框消息
     public static final String IS_EXIST = "isExist";//元素是否存在
     public static final String ASSET_CONTEXT = "asset";//断言元素内容是否与预期一致
@@ -196,7 +205,7 @@ public class RunTestCase implements ITest {
                 mobileElement.sendKeys(data);
                 break;
             case COMPARE_TEXT:
-                Assert.assertEquals(mobileElement.getText(), data);
+                Assert.assertTrue(mobileElement.getText().contains(data), "Element[" + mobileElement + "] not exsist!");
                 break;
             case IS_SELECTED:
                 mobileElement.isSelected();
@@ -219,15 +228,15 @@ public class RunTestCase implements ITest {
             case SLIDE_UP_TO_End:
                 SlideScreen.swipeUpToEnd(SelectDriver.getAppiumDriver(), data);
                 break;
-            case SLIDE_DOWN_TO_End:
-                SlideScreen.swipeDownToEnd(SelectDriver.getAppiumDriver(), data);
-                break;
-            case SLIDE_LEFT_TO_End:
-                SlideScreen.swipeLeftToEnd(SelectDriver.getAppiumDriver(), data);
-                break;
-            case SLIDE_RIGHT_TO_End:
-                SlideScreen.swipeRightToEnd(SelectDriver.getAppiumDriver(), data);
-                break;
+//            case SLIDE_DOWN_TO_End:
+//                SlideScreen.swipeDownToEnd(SelectDriver.getAppiumDriver(), data);
+//                break;
+//            case SLIDE_LEFT_TO_End:
+//                SlideScreen.swipeLeftToEnd(SelectDriver.getAppiumDriver(), data);
+//                break;
+//            case SLIDE_RIGHT_TO_End:
+//                SlideScreen.swipeRightToEnd(SelectDriver.getAppiumDriver(), data);
+//                break;
             case SLIDE_LEFT_ELEMENT:
                 int h = mobileElement.getSize().getHeight();
                 int w = mobileElement.getSize().getWidth();
@@ -238,6 +247,9 @@ public class RunTestCase implements ITest {
                 int w1 = mobileElement.getSize().getWidth();
                 new TouchAction(SelectDriver.getAppiumDriver()).press(PointOption.point(0, h1 / 2)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5))) ).moveTo(PointOption.point(w1, h1 / 2)).release().perform();
                 break;
+            case SLIDE_ELEMENT:
+                SlideScreen.slideElement(mobileElement, SlideScreen.Heading.valueOf(data));
+                break;
             case TAP_POINT:
                 SlideScreen.tapPoint(SelectDriver.getAppiumDriver(), data);
                 break;
@@ -247,6 +259,12 @@ public class RunTestCase implements ITest {
                 break;
             case TAP_POINT_MOVE_TO_POINT:
                 SlideScreen.tapPointMoveToPoint(SelectDriver.getAppiumDriver(), data);
+                break;
+            case LONG_PRESS_ELEMENT:
+                SlideScreen.longPressElement(mobileElement);
+                break;
+            case LONG_PRESS_POINT:
+                SlideScreen.longPressPoint(SelectDriver.getAppiumDriver(), data);
                 break;
             case IS_EXIST:
                 //判断元素是否存在后续需要自己封装方法

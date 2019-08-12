@@ -49,6 +49,8 @@ public class ExtentReporterNGListener implements IReporter {
     }
 
     private void buildTestNodes(IResultMap tests, LogStatus status) {
+
+
         ExtentTest test;
 
         if (tests.size() > 0) {

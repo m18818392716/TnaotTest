@@ -21,6 +21,15 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
     MobileElement rlMine;
 
+    /** 我的-金币 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvCoin")
+    MobileElement tvCoin;
+    /** 我的-零钱 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvMoney")
+    MobileElement tvMoney;
+
+
+
     /** 我的-用户名 */
     @AndroidFindBy(id="com.tnaot.news:id/tvUsername")
     MobileElement userName;
@@ -182,7 +191,6 @@ public class MyPage extends AppiumBaseExecutor {
 
 
 
-
     /** 我的资料-简介 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_prefect")
     MobileElement myInfoIntroduction;
@@ -192,10 +200,10 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement myInfoIntroductionText;
     /** 我的资料-简介-取消 */
     @AndroidFindBy(id="com.tnaot.news:id/bt_cancel")
-    MobileElement myInfoIntroductionAccept;
+    MobileElement myInfoIntroductionDismiss;
     /** 我的资料-简介-确定*/
     @AndroidFindBy(id="com.tnaot.news:id/bt_confirm")
-    MobileElement myInfoIntroductionDismiss;
+    MobileElement myInfoIntroductionAccept;
 
     /** 我的资料-性别 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_gender")
@@ -224,15 +232,81 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement myInfoArea;
     /** 我的资料-地区-选择地区-取消 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_cancel")
-    MobileElement myInfoAreaAccept;
+    MobileElement myInfoAreaDismiss;
     /** 我的资料-地区-选择地区-确认 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_confirm")
-    MobileElement myInfoAreaDismiss;
+    MobileElement myInfoAreaAccept;
 
 
     /** 我的资料-兴趣标签 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_user_tag")
     MobileElement myInfoHobby;
+    /** 我的资料-兴趣标签-科技-手机 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='手机']")
+    MobileElement hobbyScienceType1;
+    /** 我的资料-兴趣标签-科技-互联网 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='互联网']")
+    MobileElement hobbyScienceType2;
+    /** 我的资料-兴趣标签-科技-相机 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='相机']")
+    MobileElement hobbyScienceType3;
+    /** 我的资料-兴趣标签-科技-软件 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='软件']")
+    MobileElement hobbyScienceType4;
+    /** 我的资料-兴趣标签-科技-平板电脑 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='平板电脑']")
+    MobileElement hobbyScienceType5;
+
+    /** 我的资料-兴趣标签-体育-英超 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='英超']")
+    MobileElement hobbySportsType1;
+    /** 我的资料-兴趣标签-体育-拳击 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='拳击']")
+    MobileElement hobbySportsType2;
+    /** 我的资料-兴趣标签-体育-足球 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='足球']")
+    MobileElement hobbySportsType3;
+    /** 我的资料-兴趣标签-体育-户外 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='户外']")
+    MobileElement hobbySportsType4;
+    /** 我的资料-兴趣标签-体育-世界杯 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='世界杯']")
+    MobileElement hobbySportsType5;
+
+    /** 我的资料-兴趣标签-汽车-二手车 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='二手车']")
+    MobileElement hobbyCarType1;
+    /** 我的资料-兴趣标签-汽车-保养 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='保养']")
+    MobileElement hobbyCarType2;
+    /** 我的资料-兴趣标签-汽车-新车 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='新车']")
+    MobileElement hobbyCarType3;
+    /** 我的资料-兴趣标签-汽车-摩托 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='摩托']")
+    MobileElement hobbyCarType4;
+    /** 我的资料-兴趣标签-汽车-兰博基尼 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='兰博基尼']")
+    MobileElement hobbyCarType5;
+
+
+    /** 我的资料-兴趣标签-健康-养生 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='养生']")
+    MobileElement hobbyHealthType1;
+    /** 我的资料-兴趣标签-健康-减肥 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='减肥']")
+    MobileElement hobbyHealthType2;
+    /** 我的资料-兴趣标签-健康-健身 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='健身']")
+    MobileElement hobbyHealthType3;
+    /** 我的资料-兴趣标签-健康-药品 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='药品']")
+    MobileElement hobbyHealthType4;
+    /** 我的资料-兴趣标签-健康-疾病 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='疾病']")
+    MobileElement hobbyHealthType5;
+
+
     /** 我的资料-兴趣标签-返回按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/ib_back")
     MobileElement myInfoHobbyBackButton;
@@ -370,14 +444,33 @@ public class MyPage extends AppiumBaseExecutor {
     /** 版本更新-去评价 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_evaluate")
     MobileElement versionUpdateEvaluate;
+
     /** 版本更新-用户协议 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_userAgreement")
     MobileElement versionUpdateUserAgreement;
+    /** 版本更新-用户协议-文本 */
+    //@AndroidFindBy(xpath="//android.view.View[@content-desc='Tnaot用户协议']")
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='Tnaot用户协议']")
+    MobileElement userAgreementText;
+    /** 版本更新-用户协议-文本-返回按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/ib_back")
+    MobileElement backButton;
+
+
+
     /** 版本更新-隐私条款 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_privacy_clause")
     MobileElement versionUpdatePrivacyClause;
+    /** 版本更新-隐私条款-文本 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='隐私政策']")
+    MobileElement privacyClauseText;
+
     /** 版本更新-关于我们 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_about")
     MobileElement versionUpdateAboutUS;
+    /** 版本更新-关于我们-文本 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='邮箱：support@tnaot.com']")
+    MobileElement aboutUSText;
+
 
 }

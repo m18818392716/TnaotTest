@@ -25,6 +25,39 @@ public class NewsPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tip_view")
     MobileElement tipView;
 
+    /** 长按资讯-收藏 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_collect")
+    MobileElement collectButton;
+
+    /** 长按资讯-不感兴趣 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_dislike")
+    MobileElement dislikeButton;
+    /** 长按资讯-不感兴趣-不想看 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_1")
+    MobileElement dislikeReason1;
+    /** 长按资讯-不感兴趣-内容重复，看过了 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_2")
+    MobileElement dislikeReason2;
+    /** 长按资讯-不感兴趣-内容太水 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_3")
+    MobileElement dislikeReason3;
+    /** 长按资讯-不感兴趣-确定 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_complete")
+    MobileElement dislikeReasonAccept;
+
+    /** 长按资讯-分享到.. */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_share")
+    MobileElement shareButton;
+
+    /** 长按资讯-举报文章 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_report")
+    MobileElement reportButton;
+
+    /** 长按资讯-转发 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_forward")
+    MobileElement forwardButton;
+
+
     /** 资讯-本地 */
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='本地']")
     MobileElement localChannel;
@@ -63,7 +96,7 @@ public class NewsPage extends AppiumBaseExecutor {
 
 
     /** 资讯-频道控件header */
-    @AndroidFindBy(xpath="com.tnaot.news:id/tabLayout")
+    @AndroidFindBy(id="com.tnaot.news:id/tabLayout")
     MobileElement channelHeader;
 
 
@@ -71,11 +104,22 @@ public class NewsPage extends AppiumBaseExecutor {
 
 
 
+    /** 图文资讯详情-点赞图标 */
+    @AndroidFindBy(id="com.tnaot.news:id/ivPraise")
+    MobileElement praiseButton;
+    /** 图文资讯详情-点赞图标-点赞数 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvPraiseCount")
+    MobileElement praiseCount;
+    /** 图文资讯详情-延展阅读换一批 */
+    @AndroidFindBy(id="com.tnaot.news:id/ll_another")
+    MobileElement changeAnother;
+
+
     /** 资讯详情-评论输入框 */
     @AndroidFindBy(id="com.tnaot.news:id/tvComment")
     MobileElement tvComment;
 
-    /** 资讯详情-头像 */
+    /** 资讯详情-表情头像 */
     @AndroidFindBy(id="com.tnaot.news:id/ibtn_face")
     MobileElement faceButton;
 
