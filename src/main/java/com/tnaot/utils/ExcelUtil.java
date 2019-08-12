@@ -1,34 +1,31 @@
 package com.tnaot.utils;
 
-import com.tnaot.utils.entity.CaseStep;
-import com.tnaot.utils.entity.GlobalStep;
-import com.tnaot.utils.entity.Result;
-import com.tnaot.utils.entity.TestCase;
+import com.tnaot.utils.entity.*;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import org.testng.Assert;
-import sun.applet.Main;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ExcelUtil {
 
-    public static String excelPath;
+    public static String excelPath = "UILibrary.xls";
     // 可配置多个sheet，以“,”分隔
     //public final static String TEST_CASE_SHEET_INDEX = "5";
     //public final static String CASE_STEP_SHEET_INDEX = "1";
     public final static String TEST_CASE_SHEET_INDEX = "8";
     public final static String CASE_STEP_SHEET_INDEX = "9";
+    public final static String ASSET_STEP_SHEET_INDEX = "11";
     // 全局sheet
     public final static int GLOBAL_STEP_SHEET_INDEX = 10;
 
@@ -43,14 +40,80 @@ public class ExcelUtil {
     private static Workbook workbook;
     private static ThreadLocal<Map<String, TestCase>> testCases = new ThreadLocal<>();
     private static ThreadLocal<Map<String, List<CaseStep>>> caseSteps = new ThreadLocal<>();
+    private static ThreadLocal<Map<String, List<AssertStep>>> assertSteps = new ThreadLocal<>();
     private static ThreadLocal<Map<String, List<GlobalStep>>> globalSteps = new ThreadLocal<>();
     private static ThreadLocal<Map<String, Result>> results = new ThreadLocal<>();
     private final static LogUtils logger = new LogUtils(ExcelUtil.class);
 
+    @Test
+    public void test(){
+        readAllExcel();
+    }
+
     public static void readAllExcel() {
         readCaseExcel();
-        readStepExcel();
+        readCaseStepExcel();
+        readAssertStepExcel();
         readGlobalStepExcel();
+    }
+
+    public static void readAssertStepExcel() {
+        logger.info("Read Case Assert Step Excel Start!");
+        try {
+            Workbook wb = ExcelUtil.getWorkbook();
+            String[] sheet_array = ASSET_STEP_SHEET_INDEX.split(",");
+            for (String sheetIndex : sheet_array) {
+                Sheet sheet = wb.getSheetAt(Integer.parseInt(sheetIndex));
+                Row row0 = sheet.getRow(0);
+
+                // 将表头保存至集合
+                List<String> fieldNames = new ArrayList<>();
+                // 将 数据位置 (“data_”后面的数字） 与 列的索引 对应的关系保存到Map
+                Map<Integer, Integer> dataNumForCellIndex = new HashMap<>();
+                // 为集合赋值
+                setHeaderForHasData(row0, fieldNames, dataNumForCellIndex);
+
+                for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+                    Row row = sheet.getRow(i);
+                    if(row != null){
+                        AssertStep assertStep = new AssertStep();
+//                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
+
+                        for (Cell cell : row) {
+                            // 如果dataNum列不为空，则把将对应要使用的数据取出来，存放在data变量里面
+                            if (DATA_NUM_NAME.equalsIgnoreCase(fieldNames.get(cell.getColumnIndex()))) {
+                                if (StringUtils.isNotBlank(getCellValue(cell))) {
+                                    Integer dataNum = Integer.parseInt(getCellValue(cell));
+                                    Cell targetDataCell = row.getCell(dataNumForCellIndex.get(dataNum));
+                                    String data = getCellValue(targetDataCell);
+                                    assertStep.setData(data);
+                                }
+                            }
+                            // "data_" 开头的数据不进行赋值
+                            if (!fieldNames.get(cell.getColumnIndex()).startsWith(DATA_PREFIX)) {
+                                setCellToObject(cell, fieldNames, assertStep);
+                            }
+                        }
+
+                        // caseID为key，保存step集合
+                        List<AssertStep> assertStepList = ExcelUtil.getAssertSteps().get(assertStep.getCaseId());
+                        if (assertStepList == null) {
+                            assertStepList = new ArrayList<>();
+                            ExcelUtil.getAssertSteps().put(assertStep.getCaseId(), assertStepList);
+                        }
+                        assertStepList.add(assertStep);
+                    }
+                }
+            }
+            System.out.println("Case Assert Step excel数据：");
+            for (String key : ExcelUtil.getAssertSteps().keySet()) {
+                System.out.println(key + " : " + ExcelUtil.getAssertSteps().get(key));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Read Case Assert Step Excel Fail!");
+        }
+        logger.info("Read Case Assert Step Excel End!");
     }
 
     public static void readCaseExcel() {
@@ -75,24 +138,25 @@ public class ExcelUtil {
 
                 for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                     Row row = sheet.getRow(i);
+                    if(row != null){
+                        // 获取当前result单元格的地址
+                        Result result = new Result();
+                        result.setSheetIndex(Integer.parseInt(sheetIndex));
+                        result.setRowIndex(i);
+                        result.setCellIndex(resutlIndex);
 
-                    // 获取当前result单元格的地址
-                    Result result = new Result();
-                    result.setSheetIndex(Integer.parseInt(sheetIndex));
-                    result.setRowIndex(i);
-                    result.setCellIndex(resutlIndex);
+                        TestCase testCase = new TestCase();
+//                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
+                        for (Cell cell : row) {
+                            setCellToObject(cell, fieldNames, testCase);
+                        }
 
-                    TestCase testCase = new TestCase();
-//                System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
-                    for (Cell cell : row) {
-                        setCellToObject(cell, fieldNames, testCase);
+                        // 将ID作为Key对应结果地址保存
+                        result.setCaseId(testCase.getId());
+                        ExcelUtil.getResults().put(testCase.getId(), result);
+                        // 将ID作为Key，整行数据作为value保存
+                        ExcelUtil.getTestCases().put(testCase.getId(), testCase);
                     }
-
-                    // 将ID作为Key对应结果地址保存
-                    result.setCaseId(testCase.getId());
-                    ExcelUtil.getResults().put(testCase.getId(), result);
-                    // 将ID作为Key，整行数据作为value保存
-                    ExcelUtil.getTestCases().put(testCase.getId(), testCase);
                 }
             }
 
@@ -107,7 +171,7 @@ public class ExcelUtil {
         logger.info("Read Case Excel End!");
     }
 
-    public static void readStepExcel() {
+    public static void readCaseStepExcel() {
 
         logger.info("Read Step Excel Start!");
         try {
@@ -126,32 +190,34 @@ public class ExcelUtil {
 
                 for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                     Row row = sheet.getRow(i);
-                    CaseStep caseStep = new CaseStep();
-//                System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
+                    if(row != null){
+                        CaseStep caseStep = new CaseStep();
+//                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
 
-                    for (Cell cell : row) {
-                        // 如果dataNum列不为空，则把将对应要使用的数据取出来，存放在data变量里面
-                        if (DATA_NUM_NAME.equalsIgnoreCase(fieldNames.get(cell.getColumnIndex()))) {
-                            if (StringUtils.isNotBlank(getCellValue(cell))) {
-                                Integer dataNum = Integer.parseInt(getCellValue(cell));
-                                Cell targetDataCell = row.getCell(dataNumForCellIndex.get(dataNum));
-                                String data = getCellValue(targetDataCell);
-                                caseStep.setData(data);
+                        for (Cell cell : row) {
+                            // 如果dataNum列不为空，则把将对应要使用的数据取出来，存放在data变量里面
+                            if (DATA_NUM_NAME.equalsIgnoreCase(fieldNames.get(cell.getColumnIndex()))) {
+                                if (StringUtils.isNotBlank(getCellValue(cell))) {
+                                    Integer dataNum = Integer.parseInt(getCellValue(cell));
+                                    Cell targetDataCell = row.getCell(dataNumForCellIndex.get(dataNum));
+                                    String data = getCellValue(targetDataCell);
+                                    caseStep.setData(data);
+                                }
+                            }
+                            // "data_" 开头的数据不进行赋值
+                            if (!fieldNames.get(cell.getColumnIndex()).startsWith(DATA_PREFIX)) {
+                                setCellToObject(cell, fieldNames, caseStep);
                             }
                         }
-                        // "data_" 开头的数据不进行赋值
-                        if (!fieldNames.get(cell.getColumnIndex()).startsWith(DATA_PREFIX)) {
-                            setCellToObject(cell, fieldNames, caseStep);
-                        }
-                    }
 
-                    // caseID为key，保存step集合
-                    List<CaseStep> caseStepList = ExcelUtil.getCaseSteps().get(caseStep.getCaseId());
-                    if (caseStepList == null) {
-                        caseStepList = new ArrayList<>();
-                        ExcelUtil.getCaseSteps().put(caseStep.getCaseId(), caseStepList);
+                        // caseID为key，保存step集合
+                        List<CaseStep> caseStepList = ExcelUtil.getCaseSteps().get(caseStep.getCaseId());
+                        if (caseStepList == null) {
+                            caseStepList = new ArrayList<>();
+                            ExcelUtil.getCaseSteps().put(caseStep.getCaseId(), caseStepList);
+                        }
+                        caseStepList.add(caseStep);
                     }
-                    caseStepList.add(caseStep);
                 }
             }
             System.out.println("Step excel数据：");
@@ -181,31 +247,33 @@ public class ExcelUtil {
 
             for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                 Row row = sheet.getRow(i);
-                GlobalStep globalStep = new GlobalStep();
-//                System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
-                for (Cell cell : row) {
-                    // 如果dataNum列不为空，则把将对应要使用的数据取出来，存放在data变量里面
-                    if (DATA_NUM_NAME.equalsIgnoreCase(fieldNames.get(cell.getColumnIndex()))) {
-                        if (StringUtils.isNotBlank(getCellValue(cell))) {
-                            Integer dataNum = Integer.parseInt(getCellValue(cell));
-                            Cell targetDataCell = row.getCell(dataNumForCellIndex.get(dataNum));
-                            String data = getCellValue(targetDataCell);
-                            globalStep.setData(data);
+                if(row != null){
+                    GlobalStep globalStep = new GlobalStep();
+//                    System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
+                    for (Cell cell : row) {
+                        // 如果dataNum列不为空，则把将对应要使用的数据取出来，存放在data变量里面
+                        if (DATA_NUM_NAME.equalsIgnoreCase(fieldNames.get(cell.getColumnIndex()))) {
+                            if (StringUtils.isNotBlank(getCellValue(cell))) {
+                                Integer dataNum = Integer.parseInt(getCellValue(cell));
+                                Cell targetDataCell = row.getCell(dataNumForCellIndex.get(dataNum));
+                                String data = getCellValue(targetDataCell);
+                                globalStep.setData(data);
+                            }
+                        }
+                        // "data_" 开头的数据不进行赋值
+                        if (!fieldNames.get(cell.getColumnIndex()).startsWith(DATA_PREFIX)) {
+                            setCellToObject(cell, fieldNames, globalStep);
                         }
                     }
-                    // "data_" 开头的数据不进行赋值
-                    if (!fieldNames.get(cell.getColumnIndex()).startsWith(DATA_PREFIX)) {
-                        setCellToObject(cell, fieldNames, globalStep);
-                    }
-                }
 
-                // 触发的控件的path为key，step集合为value，保存map
-                List<GlobalStep> globalStepList = ExcelUtil.getGlobalSteps().get(globalStep.getTouchElementPath());
-                if (globalStepList == null) {
-                    globalStepList = new ArrayList<>();
-                    ExcelUtil.getGlobalSteps().put(globalStep.getTouchElementPath(), globalStepList);
+                    // 触发的控件的path为key，step集合为value，保存map
+                    List<GlobalStep> globalStepList = ExcelUtil.getGlobalSteps().get(globalStep.getTouchElementPath());
+                    if (globalStepList == null) {
+                        globalStepList = new ArrayList<>();
+                        ExcelUtil.getGlobalSteps().put(globalStep.getTouchElementPath(), globalStepList);
+                    }
+                    globalStepList.add(globalStep);
                 }
-                globalStepList.add(globalStep);
             }
 
             System.out.println("Global Step excel数据：");
@@ -235,13 +303,30 @@ public class ExcelUtil {
     public static void setCellToObject(Cell cell, List<String> fieldNames, Object object) throws Exception {
         if (cell != null) {
             Field cellField = object.getClass().getDeclaredField(fieldNames.get(cell.getColumnIndex()));
+            // 子类无该属性，则试着去父类查找
+            if(cellField == null){
+                Field[] fields = object.getClass().getSuperclass().getDeclaredFields();
+                for (Field field : fields){
+                    System.out.println("field: "+field.getName());
+                }
+
+                cellField = object.getClass().getSuperclass().getDeclaredField(fieldNames.get(cell.getColumnIndex()));
+            }
+            Method setMethod = getFieldSetMethod(object, cellField);
             cellField.setAccessible(true);
             // 获取单元格内容，String形式
             String cellValue = getCellValue(cell);
             // 将单元格内容的类型转为目标属性的类型
             Object result = ConvertUtils.convert(cellValue, cellField.getType());
-            cellField.set(object, result);
+            setMethod.invoke(object, result);
+//            cellField.set(object, result);
         }
+    }
+
+    public static Method getFieldSetMethod(Object object, Field cellField) throws Exception{
+        String setMethodName = "set" + cellField.getName().substring(0, 1).toUpperCase() + cellField.getName().substring(1);
+        Method setMethod = object.getClass().getMethod(setMethodName, cellField.getType());
+        return setMethod;
     }
 
     public static String getCellValue(Cell cell) {
@@ -354,6 +439,13 @@ public class ExcelUtil {
             caseSteps.set(new HashMap<>());
         }
         return caseSteps.get();
+    }
+
+    public static Map<String, List<AssertStep>> getAssertSteps() {
+        if (assertSteps.get() == null) {
+            assertSteps.set(new HashMap<>());
+        }
+        return assertSteps.get();
     }
 
     public static Map<String, Result> getResults() {

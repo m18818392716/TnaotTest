@@ -2,11 +2,9 @@ package com.tnaot.demo;
 
 import com.sun.deploy.security.WIExplorerSigningCertStore;
 import com.tnaot.core.AndroidDriverWait;
-import com.tnaot.utils.AppiumUtil;
+import com.tnaot.utils.*;
 import com.tnaot.utils.AppiumUtils.SwipeUtils;
-import com.tnaot.utils.ExcelUtil;
-import com.tnaot.utils.SelectDriver;
-import com.tnaot.utils.SlideScreen;
+import com.tnaot.utils.entity.AssertStep;
 import com.tnaot.utils.entity.CaseStep;
 import com.tnaot.utils.entity.GlobalStep;
 import com.tnaot.utils.entity.TestCase;
@@ -17,6 +15,8 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -30,6 +30,7 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,8 @@ public class RunTestCase implements ITest {
 
     public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
     public static ThreadLocal<String> lastCaseId = new ThreadLocal<>();
+    public static Map<String,String> elementContent = new HashMap<>();
+    private final static LogUtils logger = new LogUtils(ExcelUtil.class);
 
     private TestCase testCase;
 
@@ -54,6 +57,7 @@ public class RunTestCase implements ITest {
         System.out.println("Run Test Case ---->>>>> [" + testCase + "]");
         // 当上一个用例是成功的且为当前依赖的用例时，不resetApp
         if (!isLastPassForDepend()) {
+            logger.info("Reset App!");
             SelectDriver.getAppiumDriver().resetApp();
             resetGlobalExecuteNum();
         }
@@ -80,7 +84,6 @@ public class RunTestCase implements ITest {
         if (caseSteps == null) {
             Assert.fail("未定义用例步骤！用例ID：" + caseId);
         }
-
         // 遍历执行步骤
         for (CaseStep caseStep : caseSteps) {
             System.out.println("Run case step: " + caseStep);
@@ -91,7 +94,30 @@ public class RunTestCase implements ITest {
                 for (GlobalStep globalStep : globalStepList){
                     // 该步骤尚未执行过或者type不为1，则执行
                     if(globalStep.getExecuteNum() == 0 || !"1".equals(globalStep.getType())){
-                        executeAction(globalStep.getTargetElementPath(), globalStep.getTargetAction(), globalStep.getData());
+                        executeAction(globalStep.getElementPath(), globalStep.getAction(), globalStep.getData());
+                        globalStep.setExecuteNum(globalStep.getExecuteNum() + 1);
+                    }
+                }
+            }
+        }
+
+        // 获取用例断言
+        List<AssertStep> assertSteps = ExcelUtil.getAssertSteps().get(caseId);
+        if (assertSteps == null) {
+//            Assert.fail("未定义用例断言！用例ID：" + caseId);
+            return;
+        }
+        // 遍历执行断言步骤
+        for(AssertStep assertStep : assertSteps){
+            System.out.println("Run assert step: " + assertStep);
+            executeAction(assertStep.getElementPath(), assertStep.getAction(), assertStep.getData());
+            // 如果Global Step表有对应的操作，则继续执行该操作
+            List<GlobalStep> globalStepList = ExcelUtil.getGlobalSteps().get(assertStep.getElementPath());
+            if(globalStepList != null && globalStepList.size() > 0){
+                for (GlobalStep globalStep : globalStepList){
+                    // 该步骤尚未执行过或者type不为1，则执行
+                    if(globalStep.getExecuteNum() == 0 || !"1".equals(globalStep.getType())){
+                        executeAction(globalStep.getElementPath(), globalStep.getAction(), globalStep.getData());
                         globalStep.setExecuteNum(globalStep.getExecuteNum() + 1);
                     }
                 }
@@ -185,6 +211,10 @@ public class RunTestCase implements ITest {
     public static final String ASSET_CONTEXT = "asset";//断言元素内容是否与预期一致
 
     public static final String CLICK_IF_EXIST = "clickIfExist";// 如果存在则点击
+    public static final String SAVE_VALUE = "saveValue";// 保存控件值
+
+    public static final String ASSERT_EQUALS = "assertEquals";// 保存控件值
+    public static final String ASSERT_NOT_EQUALS = "assertNotEquals";// 保存控件值
 
     // 传入控件路径对控件执行操作
     private void executeAction(String elementPath, String action, String data) {
@@ -279,6 +309,17 @@ public class RunTestCase implements ITest {
                 break;
             case CLICK_IF_EXIST:
                 AppiumUtil.clickElementIfExist(mobileElement);
+                break;
+            case SAVE_VALUE:
+                System.out.println("Element text: "+mobileElement.getText());
+                elementContent.put(data, mobileElement.getText());
+                break;
+            case ASSERT_EQUALS:
+                Assert.assertEquals(mobileElement.getText(), elementContent.get(data), "Expected ["+ elementContent.get(data) +"],Actual ["+ mobileElement.getText()+"]!");
+                break;
+            case ASSERT_NOT_EQUALS:
+                System.out.println("Element text: "+mobileElement.getText()+" map data: "+elementContent.get(data));
+                Assert.assertNotEquals(mobileElement.getText(), elementContent.get(data), "Expected Not Equals ["+ elementContent.get(data) +"],But Actual ["+ mobileElement.getText()+"] Is Equals!");
                 break;
             default:
                 Assert.fail("预期以外的操作：Element[" + mobileElement + "] Action: [" + action + "]");

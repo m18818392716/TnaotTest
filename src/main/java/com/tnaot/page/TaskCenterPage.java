@@ -44,7 +44,7 @@ public class TaskCenterPage extends AppiumBaseExecutor {
 
 
     /** 任务中心-新手任务-输入邀请码 */
-    @AndroidFindBy(id="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '输入邀请码')]")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_task_title'][contains(@text, '输入邀请码')]")
     MobileElement inputInviteCode;
     /** 去完成 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_go2")

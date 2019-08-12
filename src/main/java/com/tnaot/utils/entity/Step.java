@@ -3,12 +3,7 @@ package com.tnaot.utils.entity;
 import lombok.Data;
 
 @Data
-public class GlobalStep{
-
-    private String touchElementPath; // 触发条件的元素
-    private String type; // 类型：只出现一次，或者每次都可能会出现
-
-    private int executeNum; // 已经执行过的次数,每次resetApp归零
+public class Step {
 
     String stepNum; // 步骤编号
     String description; // 描述
