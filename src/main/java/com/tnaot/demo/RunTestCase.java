@@ -56,7 +56,7 @@ public class RunTestCase implements ITest {
     public void run() {
         System.out.println("Run Test Case ---->>>>> [" + testCase + "]");
         // 当上一个用例是成功的且为当前依赖的用例时，不resetApp
-        if (!isLastPassForDepend()) {
+        if (StringUtils.isNotBlank(getLastCaseId()) && !isLastPassForDepend()) {
             logger.info("Reset App!");
             SelectDriver.getAppiumDriver().resetApp();
             resetGlobalExecuteNum();
@@ -179,6 +179,7 @@ public class RunTestCase implements ITest {
     public static final String ACTION_CLICK = "click";
     public static final String ACTION_SEND_KEY = "sendkeys";
     public static final String COMPARE_TEXT = "compare";
+    public static final String COMPARE_CONTENT_DESC_TEXT = "compareContentDesc";
     public static final String IS_SELECTED = "isSelected";
 
     public static final String SLIDE_UP = "swipeUp";//向上滑动
@@ -237,8 +238,11 @@ public class RunTestCase implements ITest {
             case COMPARE_TEXT:
                 Assert.assertTrue(mobileElement.getText().contains(data), "Element[" + mobileElement + "] not exsist!");
                 break;
+            case COMPARE_CONTENT_DESC_TEXT:
+                Assert.assertEquals(mobileElement.getAttribute("content-desc"), data, "Expected ["+ data +"],Actual ["+ mobileElement.getAttribute("content-desc")+"]!");
+                break;
             case IS_SELECTED:
-                mobileElement.isSelected();
+                Assert.assertTrue(mobileElement.isSelected());
                 break;
             case SLIDE_UP:
                 SlideScreen.slideUp(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
