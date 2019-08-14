@@ -56,7 +56,7 @@ public class RunTestCase implements ITest {
     public void run() {
         System.out.println("Run Test Case ---->>>>> [" + testCase + "]");
         // 当上一个用例是成功的且为当前依赖的用例时，不resetApp
-        if (!isLastPassForDepend()) {
+        if (StringUtils.isNotBlank(getLastCaseId()) && !isLastPassForDepend()) {
             logger.info("Reset App!");
             SelectDriver.getAppiumDriver().resetApp();
             resetGlobalExecuteNum();
@@ -89,16 +89,7 @@ public class RunTestCase implements ITest {
             System.out.println("Run case step: " + caseStep);
             executeAction(caseStep.getElementPath(), caseStep.getAction(), caseStep.getData());
             // 如果Global Step表有对应的操作，则继续执行该操作
-            List<GlobalStep> globalStepList = ExcelUtil.getGlobalSteps().get(caseStep.getElementPath());
-            if(globalStepList != null && globalStepList.size() > 0){
-                for (GlobalStep globalStep : globalStepList){
-                    // 该步骤尚未执行过或者type不为1，则执行
-                    if(globalStep.getExecuteNum() == 0 || !"1".equals(globalStep.getType())){
-                        executeAction(globalStep.getElementPath(), globalStep.getAction(), globalStep.getData());
-                        globalStep.setExecuteNum(globalStep.getExecuteNum() + 1);
-                    }
-                }
-            }
+            executeGlobalStep(caseStep.getElementPath());
         }
 
         // 获取用例断言
@@ -112,14 +103,18 @@ public class RunTestCase implements ITest {
             System.out.println("Run assert step: " + assertStep);
             executeAction(assertStep.getElementPath(), assertStep.getAction(), assertStep.getData());
             // 如果Global Step表有对应的操作，则继续执行该操作
-            List<GlobalStep> globalStepList = ExcelUtil.getGlobalSteps().get(assertStep.getElementPath());
-            if(globalStepList != null && globalStepList.size() > 0){
-                for (GlobalStep globalStep : globalStepList){
-                    // 该步骤尚未执行过或者type不为1，则执行
-                    if(globalStep.getExecuteNum() == 0 || !"1".equals(globalStep.getType())){
-                        executeAction(globalStep.getElementPath(), globalStep.getAction(), globalStep.getData());
-                        globalStep.setExecuteNum(globalStep.getExecuteNum() + 1);
-                    }
+            executeGlobalStep(assertStep.getElementPath());
+        }
+    }
+
+    private void executeGlobalStep(String elementPath){
+        List<GlobalStep> globalStepList = ExcelUtil.getGlobalSteps().get(elementPath);
+        if(globalStepList != null && globalStepList.size() > 0){
+            for (GlobalStep globalStep : globalStepList){
+                // 该步骤尚未执行过或者type不为1，则执行
+                if(globalStep.getExecuteNum() == 0 || !"1".equals(globalStep.getType())){
+                    executeAction(globalStep.getElementPath(), globalStep.getAction(), globalStep.getData());
+                    globalStep.setExecuteNum(globalStep.getExecuteNum() + 1);
                 }
             }
         }
@@ -195,10 +190,7 @@ public class RunTestCase implements ITest {
     public static final String SLIDE_LEFT_ELEMENT = "swipeLeftElement";//向左滑动控件
     public static final String SLIDE_RIGHT_ELEMENT = "swipeRightElement";//向右滑动控件
 
-
     public static final String SLIDE_ELEMENT = "slideElement";//滑动控件
-
-
 
     public static final String TAP_POINT = "tapPoint";//点击某一个坐标
     public static final String TAP_POINT_MOVE_TO_POINT = "tapPointMoveToPoint";//两个坐标点之间的滑动
@@ -222,11 +214,6 @@ public class RunTestCase implements ITest {
         if (StringUtils.isNotBlank(elementPath)) {
             mobileElement = this.getMobileElement(elementPath);
         }
-        this.executeAction(mobileElement, action, data);
-    }
-
-    // 传入控件对控件执行操作
-    private void executeAction(MobileElement mobileElement, String action, String data) {
         switch (action) {
             case ACTION_CLICK:
                 mobileElement.click();
@@ -312,13 +299,15 @@ public class RunTestCase implements ITest {
                 break;
             case SAVE_VALUE:
                 System.out.println("Element text: "+mobileElement.getText());
-                elementContent.put(data, mobileElement.getText());
+                // 以elementPath为key，控件内容为value进行保存
+                elementContent.put(elementPath, mobileElement.getText());
                 break;
             case ASSERT_EQUALS:
-                Assert.assertEquals(mobileElement.getText(), elementContent.get(data), "Expected ["+ elementContent.get(data) +"],Actual ["+ mobileElement.getText()+"]!");
+                System.out.println("Element text: "+mobileElement.getText()+" Map data: "+elementContent.get(data));
+                Assert.assertEquals(mobileElement.getText(), elementContent.get(data));
                 break;
             case ASSERT_NOT_EQUALS:
-                System.out.println("Element text: "+mobileElement.getText()+" map data: "+elementContent.get(data));
+                System.out.println("Element text: "+mobileElement.getText()+" Map data: "+elementContent.get(data));
                 Assert.assertNotEquals(mobileElement.getText(), elementContent.get(data), "Expected Not Equals ["+ elementContent.get(data) +"],But Actual ["+ mobileElement.getText()+"] Is Equals!");
                 break;
             default:
