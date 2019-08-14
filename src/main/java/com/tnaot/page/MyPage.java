@@ -6,7 +6,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Data;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Data
@@ -41,7 +40,6 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的头像-编辑资料 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_editinfo")
     MobileElement editInfo;
-
 
 
     /** 手机号登录 */
@@ -126,13 +124,66 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tvWallet")
     MobileElement tvWallet;
 
+
     /** 收藏 */
     @AndroidFindBy(id="com.tnaot.news:id/tvFavorite")
     MobileElement tvFavorite;
+    /** 收藏-资讯 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_tab_hisotyr_favoirte'][contains(@text, '资讯')]")
+    MobileElement collectNewsList;
+    /** 收藏-生活 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_tab_hisotyr_favoirte'][contains(@text, '生活')]")
+    MobileElement collectLifeList;
+    /** 收藏-编辑 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvEdit")
+    MobileElement editButton;
+//    /** 收藏-返回按钮 */
+//    @AndroidFindBy(id="com.tnaot.news:id/ib_back")
+//    MobileElement backButton;
+    /** 收藏-编辑-checkbox */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.view.View")
+    MobileElement selectedBox;
+
+
+    /** 收藏资讯列表-发布时间 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[3]")
+    MobileElement releaseTime;
+    /** 收藏资讯列表-作者 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]")
+    MobileElement releaseAuthor;
+    /** 收藏资讯列表-标题 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView")
+    MobileElement releaseTitle;
+
+
+
+
+
+
+
 
     /** 历史 */
     @AndroidFindBy(id="com.tnaot.news:id/tvHistory")
     MobileElement tvHistory;
+
+    /** 历史-资讯tab键 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_tab_hisotyr_favoirte'][contains(@text, '资讯')]")
+    MobileElement historyNewsList;
+    /** 历史-生活tab键 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_tab_hisotyr_favoirte'][contains(@text, '生活')]")
+    MobileElement historyLifeList;
+
+    /** 历史-资讯列表-标题 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView")
+    MobileElement historyTitle;
+    /** 历史-资讯列表-作者 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]")
+    MobileElement historyAuthor;
+    /** 历史-资讯列表-发布时间 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[3]")
+    MobileElement historyReleaseTime;
+
+
 
     /** Language */
     @AndroidFindBy(id="com.tnaot.news:id/tvLanguage")

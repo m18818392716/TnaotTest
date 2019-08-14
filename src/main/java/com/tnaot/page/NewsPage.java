@@ -116,7 +116,7 @@ public class NewsPage extends AppiumBaseExecutor {
 
 
     /** 资讯详情-评论输入框 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvComment")
+    @AndroidFindBy(id="com.tnaot.news:id/etComment")
     MobileElement tvComment;
 
     /** 资讯详情-表情头像 */
@@ -260,6 +260,37 @@ public class NewsPage extends AppiumBaseExecutor {
     /** 资讯详情-评论列表-评论删除 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_delete_comment")
     MobileElement deleteComment;
+    /** 资讯详情-评论列表-评论删除-确定 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_right")
+    MobileElement deleteCommentAccept;
+    /** 资讯详情-评论列表-评论删除-取消 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_left")
+    MobileElement deleteCommentDismiss;
+
+
+
+
+    /** 资讯详情-评论列表-长按评论复制 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_copy")
+    MobileElement commentCopy;
+
+    /** 资讯详情-评论列表-长按评论举报 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_report")
+    MobileElement commentReport;
+    /** 资讯详情-评论列表-长按评论举报-低俗色情 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_vulgar")
+    MobileElement comReportReason1;
+    /** 资讯详情-评论列表-长按评论举报-欺诈诱导 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_cheat")
+    MobileElement comReportReason2;
+    /** 资讯详情-评论列表-长按评论举报-营销广告 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_ad")
+    MobileElement comReportReason3;
+    /** 资讯详情-评论列表-长按评论举报-恶意攻击 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_attack")
+    MobileElement comReportReason4;
+
+
 
 //    /** 资讯详情-评论列表-评论第一条-详情-下方的回复评论输入框 */
 //    @AndroidFindBy(id="com.tnaot.news:id/et_comment_input")

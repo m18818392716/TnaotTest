@@ -52,9 +52,24 @@ public class TaskCenterPage extends AppiumBaseExecutor {
     /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码 */
     @AndroidFindBy(id="com.tnaot.news:id/editText")
     MobileElement editText;
-    /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码-立即领取 */
+    /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码-立即领取/完成 */
     @AndroidFindBy(id="com.tnaot.news:id/tvConfirm")
     MobileElement tvConfirm;
+    /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码-立即领取-文本（填写邀请码成功） */
+    @AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '填写邀请码成功')]")
+    MobileElement getConinsText1;
+    /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码-立即领取-文本（恭喜您获得） */
+    @AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '恭喜您获得')]")
+    MobileElement getConinsText2;
+    /** 任务中心-新手任务-输入邀请码-输入向推荐人索取的邀请码-立即领取-文本（200金币） */
+    @AndroidFindBy(id="com.tnaot.news:id/tvCoin")
+    MobileElement getCoinsValue;
+
+
+
+
+
+
 
 
     /** 任务中心-日常任务-阅读资讯 */
