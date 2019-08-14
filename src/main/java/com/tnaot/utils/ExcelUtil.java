@@ -45,11 +45,6 @@ public class ExcelUtil {
     private static ThreadLocal<Map<String, Result>> results = new ThreadLocal<>();
     private final static LogUtils logger = new LogUtils(ExcelUtil.class);
 
-    @Test
-    public void test(){
-        readAllExcel();
-    }
-
     public static void readAllExcel() {
         readCaseExcel();
         readCaseStepExcel();
@@ -380,6 +375,7 @@ public class ExcelUtil {
     }
 
     public static void writeResult() {
+        logger.info("Write Excel Result Start!");
         try {
             InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(excelPath);
             Workbook workbook;
@@ -404,13 +400,13 @@ public class ExcelUtil {
                 cellStyle.setFont(font);
                 resultCell.setCellStyle(cellStyle);
                 if (!result.getIsRun()) {
-                    font.setColor((short) 22);
+                    font.setColor((short) 19); // SKIP为浅黄色
                     resultCell.setCellValue(RESULT_SKIP);
                 } else {
                     if (RESULT_PASS.equals(result.getResult())) {
-                        font.setColor((short) 50);
+                        font.setColor((short) 17); // PASS为绿色
                     } else {
-                        font.setColor(Font.COLOR_RED);
+                        font.setColor(Font.COLOR_RED); // FAIL为红色
                     }
                     resultCell.setCellValue(result.getResult());
                 }
@@ -420,11 +416,11 @@ public class ExcelUtil {
             workbook.write(excelFileOutPutStream);
             excelFileOutPutStream.flush();
             excelFileOutPutStream.close();
-            System.out.println("done");
         } catch (Exception e) {
             e.printStackTrace();
+            logger.info("Write Excel Result Fail!");
         }
-
+        logger.info("Write Excel Result End!");
     }
 
     public static Map<String, TestCase> getTestCases() {
