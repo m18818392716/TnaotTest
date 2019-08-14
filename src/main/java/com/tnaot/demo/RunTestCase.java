@@ -173,6 +173,7 @@ public class RunTestCase implements ITest {
 
     public static final String ACTION_CLICK = "click";
     public static final String ACTION_SEND_KEY = "sendkeys";
+    public static final String ACTION_CLEAR = "clear";
     public static final String COMPARE_TEXT = "compare";
     public static final String COMPARE_CONTENT_DESC_TEXT = "compareContentDesc";
     public static final String IS_SELECTED = "isSelected";
@@ -209,6 +210,10 @@ public class RunTestCase implements ITest {
     public static final String ASSERT_EQUALS = "assertEquals";// 保存控件值
     public static final String ASSERT_NOT_EQUALS = "assertNotEquals";// 保存控件值
 
+
+    public static final String WAIT_SECONDS = "waitSeconds";// 等待多少秒
+    public static final String BACK_LAST_PAGE = "backLastPage";// 返回上一层页面
+
     // 传入控件路径对控件执行操作
     private void executeAction(String elementPath, String action, String data) {
         MobileElement mobileElement = null;
@@ -221,6 +226,9 @@ public class RunTestCase implements ITest {
                 break;
             case ACTION_SEND_KEY:
                 mobileElement.sendKeys(data);
+                break;
+            case ACTION_CLEAR:
+                mobileElement.clear();
                 break;
             case COMPARE_TEXT:
                 Assert.assertTrue(mobileElement.getText().contains(data), "Element[" + mobileElement + "] not exsist!");
@@ -313,6 +321,12 @@ public class RunTestCase implements ITest {
             case ASSERT_NOT_EQUALS:
                 System.out.println("Element text: "+mobileElement.getText()+" Map data: "+elementContent.get(data));
                 Assert.assertNotEquals(mobileElement.getText(), elementContent.get(data), "Expected Not Equals ["+ elementContent.get(data) +"],But Actual ["+ mobileElement.getText()+"] Is Equals!");
+                break;
+            case WAIT_SECONDS:
+                AppiumUtil.sleep(Long.valueOf(data)*1000);
+                break;
+            case BACK_LAST_PAGE:
+                SelectDriver.getAppiumDriver().navigate().back();
                 break;
             default:
                 Assert.fail("预期以外的操作：Element[" + mobileElement + "] Action: [" + action + "]");

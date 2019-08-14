@@ -35,11 +35,30 @@ public class MyPage extends AppiumBaseExecutor {
 
     /** 我的头像 */
     @AndroidFindBy(id="com.tnaot.news:id/ivUser")
-    MobileElement myPhone;
+    MobileElement myPhoto;
 
     /** 我的头像-编辑资料 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_editinfo")
     MobileElement editInfo;
+    /** 我的头像-发布动态 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_release_dynamic")
+    MobileElement releaseDynamic;
+
+    /** 我的头像-动态列表-第一个转发的资讯-标题 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.TextView")
+    MobileElement dynamicListNewsTitle;
+
+    /** 我的头像-动态列表-第一个发布的动态-内容 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.TextView")
+    MobileElement dynamicListDynamicTitle;
+
+
+
+
+
+
+
+
 
 
     /** 手机号登录 */
