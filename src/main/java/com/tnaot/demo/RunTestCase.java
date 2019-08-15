@@ -34,10 +34,6 @@ import java.util.Map;
 public class RunTestCase implements ITest {
 
     public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
-    public static final String LOGIN_CASE_ID = "case_002";
-    public static final String LOGIN_PHONE_NUMBER_ELEMENT = "LoginPage.phoneText";
-    public static final String LOGIN_PASSWORD_ELEMENT = "LoginPage.pwdText";
-    public static final String LOGIN_USER_NAME_ELEMENT = "MyPage.userName";
     public static ThreadLocal<String> lastCaseId = new ThreadLocal<>();
     public static Map<String,String> elementContent = new HashMap<>();
     private final static LogUtils logger = new LogUtils(RunTestCase.class);
@@ -112,6 +108,16 @@ public class RunTestCase implements ITest {
         }
     }
 
+    public static final String LOGIN_CASE_ID = "case_002";
+    public static final String LOGIN_PHONE_NUMBER_ELEMENT = "LoginPage.phoneText";
+    public static final String LOGIN_PASSWORD_ELEMENT = "LoginPage.pwdText";
+    public static final String LOGIN_USER_NAME_ELEMENT = "MyPage.userName";
+    public static final String LOGIN_AREA_OPTION_ELEMENT = "LoginPage.areaSelect"; // 区域选择步骤
+    public static final Map<String, String> AREA_ELEMENT_MAP = new HashMap(){{ // 国家与对应元素的路径
+        put("中国", "LoginPage.areaSelect");
+        put("柬埔寨", "LoginPage.areaSelectJP");
+    }};
+
     private void runLoginByUserId(String userId) {
         List<CaseStep> caseSteps = ExcelUtil.getCaseSteps().get(LOGIN_CASE_ID);
         User user = ExcelUtil.getUsers().get(testCase.getUserId());
@@ -124,6 +130,9 @@ public class RunTestCase implements ITest {
             }
             if(LOGIN_USER_NAME_ELEMENT.equals(caseStep.getElementPath())){
                 caseStep.setData(user.getUserName());
+            }
+            if(LOGIN_AREA_OPTION_ELEMENT.equals(caseStep.getElementPath())){
+                caseStep.setElementPath(AREA_ELEMENT_MAP.get(user.getCountry()));
             }
         }
         runCase(LOGIN_CASE_ID);

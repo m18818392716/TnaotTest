@@ -9,5 +9,6 @@ public class User {
     private String phoneNumber;
     private String password;
     private String userName;
+    private String country;
 
 }
