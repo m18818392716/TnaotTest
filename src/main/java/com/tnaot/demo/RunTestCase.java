@@ -4,10 +4,7 @@ import com.sun.deploy.security.WIExplorerSigningCertStore;
 import com.tnaot.core.AndroidDriverWait;
 import com.tnaot.utils.*;
 import com.tnaot.utils.AppiumUtils.SwipeUtils;
-import com.tnaot.utils.entity.AssertStep;
-import com.tnaot.utils.entity.CaseStep;
-import com.tnaot.utils.entity.GlobalStep;
-import com.tnaot.utils.entity.TestCase;
+import com.tnaot.utils.entity.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -37,9 +34,13 @@ import java.util.Map;
 public class RunTestCase implements ITest {
 
     public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
+    public static final String LOGIN_CASE_ID = "case_002";
+    public static final String LOGIN_PHONE_NUMBER_ELEMENT = "LoginPage.phoneText";
+    public static final String LOGIN_PASSWORD_ELEMENT = "LoginPage.pwdText";
+    public static final String LOGIN_USER_NAME_ELEMENT = "MyPage.userName";
     public static ThreadLocal<String> lastCaseId = new ThreadLocal<>();
     public static Map<String,String> elementContent = new HashMap<>();
-    private final static LogUtils logger = new LogUtils(ExcelUtil.class);
+    private final static LogUtils logger = new LogUtils(RunTestCase.class);
 
     private TestCase testCase;
 
@@ -64,10 +65,10 @@ public class RunTestCase implements ITest {
         try {
             this.runCase(testCase.getId());
         } catch (NoSuchElementException e){
-            Assert.fail("元素找不到：" + e.getMessage());
+            Assert.fail("元素找不到：" + e.getMessage().substring(e.getMessage().indexOf(": ") + 1));
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("Case Fail 【" + testCase.getId() + "】");
+            Assert.fail("Case Fail 【" + testCase.getId() + "】", e);
         } finally {
             setLastCaseId(testCase.getId());
         }
@@ -75,6 +76,10 @@ public class RunTestCase implements ITest {
 
     public void runCase(String caseId) {
         TestCase testCase = ExcelUtil.getTestCases().get(caseId);
+        // 获取用户进行登录操作
+        if(StringUtils.isNotBlank(testCase.getUserId())){
+            runLoginByUserId(testCase.getUserId());
+        }
         // 如果依赖的用例不为上一个且执行成功的用例，则执行依赖的用例
         if (StringUtils.isNotBlank(testCase.getDependId()) && !isLastPassForDepend()) {
             runCase(testCase.getDependId());
@@ -105,6 +110,23 @@ public class RunTestCase implements ITest {
             // 如果Global Step表有对应的操作，则继续执行该操作
             executeGlobalStep(assertStep.getElementPath());
         }
+    }
+
+    private void runLoginByUserId(String userId) {
+        List<CaseStep> caseSteps = ExcelUtil.getCaseSteps().get(LOGIN_CASE_ID);
+        User user = ExcelUtil.getUsers().get(testCase.getUserId());
+        for(CaseStep caseStep : caseSteps){
+            if(LOGIN_PHONE_NUMBER_ELEMENT.equals(caseStep.getElementPath())){
+                caseStep.setData(user.getPhoneNumber());
+            }
+            if(LOGIN_PASSWORD_ELEMENT.equals(caseStep.getElementPath())){
+                caseStep.setData(user.getPassword());
+            }
+            if(LOGIN_USER_NAME_ELEMENT.equals(caseStep.getElementPath())){
+                caseStep.setData(user.getUserName());
+            }
+        }
+        runCase(LOGIN_CASE_ID);
     }
 
     private void executeGlobalStep(String elementPath){
