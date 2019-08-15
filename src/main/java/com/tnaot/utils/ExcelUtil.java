@@ -23,12 +23,12 @@ public class ExcelUtil {
     // 可配置多个sheet，以“,”分隔
     //public final static String TEST_CASE_SHEET_INDEX = "5";
     //public final static String CASE_STEP_SHEET_INDEX = "1";
-    public final static String TEST_CASE_SHEET_INDEX = "8";
-    public final static String CASE_STEP_SHEET_INDEX = "9";
-    public final static String ASSET_STEP_SHEET_INDEX = "11";
+    public final static String TEST_CASE_SHEET_INDEX = "6";
+    public final static String CASE_STEP_SHEET_INDEX = "7";
+    public final static String ASSET_STEP_SHEET_INDEX = "9";
     // 全局sheet
-    public final static int GLOBAL_STEP_SHEET_INDEX = 10;
-    public final static int USER_SHEET_INDEX = 12;
+    public final static int GLOBAL_STEP_SHEET_INDEX = 8;
+    public final static int USER_SHEET_INDEX = 10;
 
     public final static String DATA_NUM_NAME = "dataNum";
     public final static String DATA_PREFIX = "data_";

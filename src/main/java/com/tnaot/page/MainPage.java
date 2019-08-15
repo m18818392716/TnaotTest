@@ -114,6 +114,14 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(xpath="//android.view.View[@content-desc='更多分类']")
     MobileElement tradeSubType8;
 
+    /** 首页-交易买卖-生活资讯列表第一条-标题 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/androidx.viewpager.widget.ViewPager/android.widget.FrameLayout/android.widget.LinearLayout[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView[2]/android.widget.RelativeLayout[1]/android.widget.LinearLayout/android.widget.TextView[1]")
+    MobileElement tradeLifeList1;
+
+
+
+
+
 
     /** 首页-折扣优惠 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='折扣优惠']")
@@ -697,6 +705,99 @@ public class MainPage extends AppiumBaseExecutor {
     /** 发布类型-取消按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/pop_rl_click")
     MobileElement dismissButton;
+
+
+    /** 资讯详情-分享-Facebook */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_facebook")
+    MobileElement moreFacebook;
+
+    /** 资讯详情-分享-Messager */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_messenger")
+    MobileElement moreMessenger;
+
+    /** 资讯详情-分享-微信 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_wechat")
+    MobileElement moreWechat;
+
+    /** 资讯详情-分享-朋友圈 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_moments")
+    MobileElement moreMoments;
+
+    /** 资讯详情-分享-Line */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_line")
+    MobileElement moreLine;
+
+    /** 资讯详情-分享-Twitter */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_twitter")
+    MobileElement moreTwitter;
+
+    /** 资讯详情-分享-QQ */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_qq")
+    MobileElement moreQq;
+
+    /** 资讯详情-分享-QQ空间 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_qqzone")
+    MobileElement moreQqZone;
+
+    /** 资讯详情-分享-复制链接 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_copy_link")
+    MobileElement copyLink;
+
+    /** 资讯详情-分享-收藏 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_favorite")
+    MobileElement moreFavorite;
+
+    /** 资讯详情-分享-举报文章 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_report_news")
+    MobileElement reportNews;
+
+    /** 资讯详情-分享-举报文章-理由-虚假广告 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='虚假广告']")
+    MobileElement vulgarContent;
+
+    /** 资讯详情-分享-举报文章-理由-低俗色情 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='低俗色情']")
+    MobileElement fakeTitle;
+
+    /** 资讯详情-分享-举报文章-理由-垃圾内容 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='低俗色情']")
+    MobileElement garbageContent;
+
+    /** 资讯详情-分享-举报文章-理由-确定 */
+    @AndroidFindBy(xpath="//android.view.View[@content-desc='举报理由确定']")
+    MobileElement reportReasonAccept;
+
+
+
+
+    /** 资讯详情-分享-转发 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_republish")
+    MobileElement moreRepublish;
+
+    /** 资讯详情-分享-转发页面-取消 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvCancel")
+    MobileElement tvCancel;
+
+    /** 资讯详情-分享-转发页面-发布 */
+    @AndroidFindBy(id="com.tnaot.news:id/tvRelease")
+    MobileElement tvRelease;
+
+    /** 资讯详情-分享-转发页面-文本编辑框 */
+    @AndroidFindBy(id="com.tnaot.news:id/editText")
+    MobileElement editText;
+
+
+    /** 资讯详情-分享-系统分享 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_share_to_system")
+    MobileElement sysShare;
+
+    /** 资讯详情-分享-取消按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_more_cancel")
+    MobileElement cancelButton;
+
+
+
+
 
 
 
