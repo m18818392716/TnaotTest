@@ -78,7 +78,7 @@ public class TaskCenterPage extends AppiumBaseExecutor {
     /** 任务中心-日常任务--阅读资讯-去完成 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_go2")
     MobileElement toReadNews;
-    /** 阅读资讯30秒-获取金币 */
+    /** 阅读资讯30秒-获取金币-80金币 */
     @AndroidFindBy(id="com.tnaot.news:id/tvCoins")
     MobileElement getCoins;
 

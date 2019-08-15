@@ -312,6 +312,12 @@ public class NewsPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/ivBack")
     MobileElement backButton;
 
+    /** 资讯详情-阅读资讯30秒-获取金币弹窗 */
+    @AndroidFindBy(id="com.tnaot.news:id/ivBackground")
+    MobileElement getCoinsOverlay;
+
+
+
 
 
 

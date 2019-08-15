@@ -43,6 +43,15 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的头像-发布动态 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_release_dynamic")
     MobileElement releaseDynamic;
+    /** 我的头像-动态 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_dynamic_option")
+    MobileElement dynamicOption;
+    /** 我的头像-生活 */
+    @AndroidFindBy(id="com.tnaot.news:id/tv_life_option")
+    MobileElement lifeOption;
+
+
+
 
     /** 我的头像-动态列表-第一个转发的资讯-标题 */
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.TextView")
@@ -51,6 +60,14 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的头像-动态列表-第一个发布的动态-内容 */
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.TextView")
     MobileElement dynamicListDynamicTitle;
+
+
+    /** 我的头像-动态列表-第一个生活的动态-内容 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.TextView")
+    MobileElement dynamicListLifeTitle;
+
+
+
 
 
 
