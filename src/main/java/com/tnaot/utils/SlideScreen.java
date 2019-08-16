@@ -74,9 +74,9 @@ public class SlideScreen {
         //new TouchAction(driver).press(PointOption.point(width / 2, height / 10)).moveTo(PointOption.point(width / 2, height * 3 / 4)).release().perform();
 
         new TouchAction(driver)
-                .longPress(PointOption.point(width / 2, height - 500))
+                .press(PointOption.point(width / 2, 600))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
-                .moveTo(PointOption.point(width / 2, 100)).release().perform();
+                .moveTo(PointOption.point(width / 2, height - 500)).release().perform();
     }
 
     /**

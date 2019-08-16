@@ -57,12 +57,14 @@ public class CmdUtils {
     public static void main(String[] args) {
 
         String srcPath = PROJECT_PATH + "target/surefire-reports";
-        generateReport("testng.xml","UILibrary.xls");
+        //String srcPath = PROJECT_PATH + "test-output";
+
+        //generateReport("testng.xml","UILibrary.xls");
         try {
             TimeUnit.SECONDS.sleep(10);//秒
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //SendEmail.send(srcPath);
+        SendEmail.send(srcPath);
     }
 }
