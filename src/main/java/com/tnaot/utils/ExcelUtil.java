@@ -19,16 +19,17 @@ import java.util.*;
 
 public class ExcelUtil {
 
-    public static String excelPath = "UILibrary.xls";
+    public static String excelPath;
     // 可配置多个sheet，以“,”分隔
     //public final static String TEST_CASE_SHEET_INDEX = "5";
     //public final static String CASE_STEP_SHEET_INDEX = "1";
     public final static String TEST_CASE_SHEET_INDEX = "6";
     public final static String CASE_STEP_SHEET_INDEX = "7";
     public final static String ASSET_STEP_SHEET_INDEX = "9";
+    public final static String CONSTANT_STEP_SHEET_INDEX = "10";
     // 全局sheet
     public final static int GLOBAL_STEP_SHEET_INDEX = 8;
-    public final static int USER_SHEET_INDEX = 10;
+    public final static int USER_SHEET_INDEX = 11;
 
     public final static String DATA_NUM_NAME = "dataNum";
     public final static String DATA_PREFIX = "data_";
@@ -44,6 +45,7 @@ public class ExcelUtil {
     private static ThreadLocal<Map<String, List<CaseStep>>> caseSteps = new ThreadLocal<>(); // caseId为key，保存对应的CaseStep集合
     private static ThreadLocal<Map<String, List<AssertStep>>> assertSteps = new ThreadLocal<>(); // caseId为key，保存对应的AssertStep集合
     private static ThreadLocal<Map<String, List<GlobalStep>>> globalSteps = new ThreadLocal<>(); // elementPath为key，保存对应的GlobalStep集合
+    private static ThreadLocal<Map<String, List<ConstantStep>>> constantSteps = new ThreadLocal<>(); // constantId为key，保存对应的ConstantStep集合
     private static ThreadLocal<Map<String, Result>> results = new ThreadLocal<>(); // caseId为key，保存对应Result
     private final static LogUtils logger = new LogUtils(ExcelUtil.class);
 
@@ -53,44 +55,7 @@ public class ExcelUtil {
         readAssertStepExcel();
         readGlobalStepExcel();
         readUserExcel();
-    }
-
-    public static void readUserExcel() {
-        logger.info("Read User Excel Start!");
-        try {
-            Workbook wb = ExcelUtil.getWorkbook();
-            Sheet sheet = wb.getSheetAt(USER_SHEET_INDEX);
-            Row row0 = sheet.getRow(0);
-
-            // get table header
-            List<String> fieldNames = new ArrayList<>();
-            for (int i = 0; i < row0.getLastCellNum(); i++) {
-                String fieldName = row0.getCell(i).getStringCellValue();
-                fieldNames.add(fieldName);
-            }
-
-            for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
-                Row row = sheet.getRow(i);
-                if (row != null) {
-                    User user = new User();
-//                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
-                    for (Cell cell : row) {
-                        setCellToObject(cell, fieldNames, user);
-                    }
-                    // 将ID作为Key，整行数据作为value保存
-                    ExcelUtil.getUsers().put(user.getId(), user);
-                }
-            }
-
-            System.out.println("User excel数据：");
-            for (String key : ExcelUtil.getUsers().keySet()) {
-                System.out.println(key + " : " + ExcelUtil.getUsers().get(key));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail("Read User Excel Fail!");
-        }
-        logger.info("Read User Excel End!");
+        readConstantStepExcel();
     }
 
     public static void readCaseExcel() {
@@ -115,7 +80,7 @@ public class ExcelUtil {
 
                 for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                     Row row = sheet.getRow(i);
-                    if (row != null) {
+                    if (row != null && row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
                         // 获取当前result单元格的地址
                         Result result = new Result();
                         result.setSheetIndex(Integer.parseInt(sheetIndex));
@@ -167,7 +132,7 @@ public class ExcelUtil {
 
                 for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                     Row row = sheet.getRow(i);
-                    if (row != null) {
+                    if (row != null && row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
                         CaseStep caseStep = new CaseStep();
 //                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
 
@@ -226,7 +191,7 @@ public class ExcelUtil {
 
                 for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                     Row row = sheet.getRow(i);
-                    if (row != null) {
+                    if (row != null && row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
                         AssertStep assertStep = new AssertStep();
 //                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
 
@@ -283,7 +248,7 @@ public class ExcelUtil {
 
             for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
                 Row row = sheet.getRow(i);
-                if (row != null) {
+                if (row != null && row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
                     GlobalStep globalStep = new GlobalStep();
 //                    System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
                     for (Cell cell : row) {
@@ -322,6 +287,105 @@ public class ExcelUtil {
         }
         logger.info("Read Global Step Excel End!");
     }
+
+    public static void readConstantStepExcel() {
+
+        logger.info("Constant Read Step Excel Start!");
+        try {
+            Workbook wb = ExcelUtil.getWorkbook();
+            String[] sheet_array = CONSTANT_STEP_SHEET_INDEX.split(",");
+            for (String sheetIndex : sheet_array) {
+                Sheet sheet = wb.getSheetAt(Integer.parseInt(sheetIndex));
+                Row row0 = sheet.getRow(0);
+
+                // 将表头保存至集合
+                List<String> fieldNames = new ArrayList<>();
+                // 将 数据位置 (“data_”后面的数字） 与 列的索引 对应的关系保存到Map
+                Map<Integer, Integer> dataNumForCellIndex = new HashMap<>();
+                // 为集合赋值
+                setHeaderForHasData(row0, fieldNames, dataNumForCellIndex);
+
+                for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+                    Row row = sheet.getRow(i);
+                    if (row != null && row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
+                        ConstantStep constantStep = new ConstantStep();
+//                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
+
+                        for (Cell cell : row) {
+                            // 如果dataNum列不为空，则把将对应要使用的数据取出来，存放在data变量里面
+                            if (DATA_NUM_NAME.equalsIgnoreCase(fieldNames.get(cell.getColumnIndex()))) {
+                                if (StringUtils.isNotBlank(getCellValue(cell))) {
+                                    Integer dataNum = Integer.parseInt(getCellValue(cell));
+                                    Cell targetDataCell = row.getCell(dataNumForCellIndex.get(dataNum));
+                                    String data = getCellValue(targetDataCell);
+                                    constantStep.setData(data);
+                                }
+                            }
+                            // "data_" 开头的数据不进行赋值
+                            if (!fieldNames.get(cell.getColumnIndex()).startsWith(DATA_PREFIX)) {
+                                setCellToObject(cell, fieldNames, constantStep);
+                            }
+                        }
+
+                        // caseID为key，保存step集合
+                        List<ConstantStep> constantStepList = ExcelUtil.getConstantSteps().get(constantStep.getConstantId());
+                        if (constantStepList == null) {
+                            constantStepList = new ArrayList<>();
+                            ExcelUtil.getConstantSteps().put(constantStep.getConstantId(), constantStepList);
+                        }
+                        constantStepList.add(constantStep);
+                    }
+                }
+            }
+            System.out.println("Constant Step excel数据：");
+            for (String key : ExcelUtil.getConstantSteps().keySet()) {
+                System.out.println(key + " : " + ExcelUtil.getConstantSteps().get(key));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Constant Read Step Excel Fail!");
+        }
+        logger.info("Constant Read Step Excel End!");
+    }
+
+    public static void readUserExcel() {
+        logger.info("Read User Excel Start!");
+        try {
+            Workbook wb = ExcelUtil.getWorkbook();
+            Sheet sheet = wb.getSheetAt(USER_SHEET_INDEX);
+            Row row0 = sheet.getRow(0);
+
+            // get table header
+            List<String> fieldNames = new ArrayList<>();
+            for (int i = 0; i < row0.getLastCellNum(); i++) {
+                String fieldName = row0.getCell(i).getStringCellValue();
+                fieldNames.add(fieldName);
+            }
+
+            for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+                Row row = sheet.getRow(i);
+                if (row != null && row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
+                    User user = new User();
+//                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
+                    for (Cell cell : row) {
+                        setCellToObject(cell, fieldNames, user);
+                    }
+                    // 将ID作为Key，整行数据作为value保存
+                    ExcelUtil.getUsers().put(user.getId(), user);
+                }
+            }
+
+            System.out.println("User excel数据：");
+            for (String key : ExcelUtil.getUsers().keySet()) {
+                System.out.println(key + " : " + ExcelUtil.getUsers().get(key));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Read User Excel Fail!");
+        }
+        logger.info("Read User Excel End!");
+    }
+
 
     // 为含有“dataNum”的数据表头集合赋值，
     private static void setHeaderForHasData(Row row, List<String> fieldNames, Map<Integer, Integer> dataNumForCellIndex) {
@@ -458,7 +522,7 @@ public class ExcelUtil {
             excelFileOutPutStream.close();
         } catch (Exception e) {
             e.printStackTrace();
-            logger.info("Write Excel Result Fail!");
+            logger.error("Write Excel Result Fail!");
         }
         logger.info("Write Excel Result End!");
     }
@@ -505,7 +569,17 @@ public class ExcelUtil {
         return globalSteps.get();
     }
 
+    public static Map<String, List<ConstantStep>> getConstantSteps() {
+        if (constantSteps.get() == null) {
+            constantSteps.set(new HashMap<>());
+        }
+        return constantSteps.get();
+    }
+
     public static Workbook getWorkbook() {
+        if(excelPath == null){
+            excelPath = "UILibrary.xls"; // 默认值
+        }
         try {
             if (workbook == null) {
                 InputStream in = ExcelUtil.class.getClassLoader().getResourceAsStream(excelPath);//这种获取的方式就是获取当前项目resource下的文件，所以直接写那个xls，就可以读到它

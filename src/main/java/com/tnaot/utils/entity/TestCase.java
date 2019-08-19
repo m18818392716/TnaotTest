@@ -11,4 +11,5 @@ public class TestCase {
     private String result; // 运行结果 PASS/FAIL/空
     private String dependId; // 依赖的caseID
     private String userId; // 对应用户的ID
+    private String constantId; // 对应constant的ID
 }

@@ -34,7 +34,7 @@ import java.util.Map;
 public class RunTestCase implements ITest {
 
     public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
-    public static ThreadLocal<String> lastCaseId = new ThreadLocal<>();
+    public static ThreadLocal<TestCase> lastTestCase = new ThreadLocal<>();
     public static Map<String,String> elementContent = new HashMap<>();
     private final static LogUtils logger = new LogUtils(RunTestCase.class);
 
@@ -52,11 +52,15 @@ public class RunTestCase implements ITest {
     @Test
     public void run() {
         System.out.println("Run Test Case ---->>>>> [" + testCase + "]");
-        // 当上一个用例是成功的且为当前依赖的用例时，不resetApp
-        if (StringUtils.isNotBlank(getLastCaseId()) && !isLastPassForDepend()) {
-            logger.info("Reset App!");
-            SelectDriver.getAppiumDriver().resetApp();
-            resetGlobalExecuteNum();
+        // 判断是否resetApp
+        if (getLastTestCase() != null){
+            String lastCaseResult = ExcelUtil.getResults().get(getLastTestCase().getId()).getResult();
+            // 【上一个用例失败】 或 【上一个用例不是依赖的用例并且没有constantID】 的情况就resetApp
+            if(!ExcelUtil.RESULT_PASS.equals(lastCaseResult) || !getLastTestCase().getId().equals(testCase.getDependId()) && getLastTestCase().getConstantId() == null){
+                logger.info("Reset App!");
+                SelectDriver.getAppiumDriver().resetApp();
+                resetGlobalExecuteNum();
+            }
         }
         try {
             this.runCase(testCase.getId());
@@ -66,7 +70,7 @@ public class RunTestCase implements ITest {
             e.printStackTrace();
             Assert.fail("Case Fail 【" + testCase.getId() + "】", e);
         } finally {
-            setLastCaseId(testCase.getId());
+            setLastTestCase(testCase);
         }
     }
 
@@ -95,17 +99,41 @@ public class RunTestCase implements ITest {
 
         // 获取用例断言
         List<AssertStep> assertSteps = ExcelUtil.getAssertSteps().get(caseId);
-        if (assertSteps == null) {
+        if (assertSteps != null) {
+            // 遍历执行断言步骤
+            for(AssertStep assertStep : assertSteps){
+                System.out.println("Run assert step: " + assertStep);
+                executeAction(assertStep.getElementPath(), assertStep.getAction(), assertStep.getData());
+                // 如果Global Step表有对应的操作，则继续执行该操作
+                executeGlobalStep(assertStep.getElementPath());
+            }
+        } else {
 //            Assert.fail("未定义用例断言！用例ID：" + caseId);
-            return;
         }
-        // 遍历执行断言步骤
-        for(AssertStep assertStep : assertSteps){
-            System.out.println("Run assert step: " + assertStep);
-            executeAction(assertStep.getElementPath(), assertStep.getAction(), assertStep.getData());
-            // 如果Global Step表有对应的操作，则继续执行该操作
-            executeGlobalStep(assertStep.getElementPath());
+
+
+        // 若有constantID，则运行constant步骤
+        if (testCase.getConstantId() != null){
+            List<ConstantStep> constantSteps = ExcelUtil.getConstantSteps().get(testCase.getConstantId());
+            for (ConstantStep constantStep : constantSteps){
+                System.out.println("Run constant step: " + constantStep);
+                executeAction(constantStep.getElementPath(), constantStep.getAction(), constantStep.getData());
+                // 如果Global Step表有对应的操作，则继续执行该操作
+                executeGlobalStep(constantStep.getElementPath());
+            }
         }
+    }
+
+    // 判断上一个用例是否为pass、并且为当前用例依赖的用例
+    private boolean isLastPassForDepend() {
+        if(getLastTestCase() != null){
+            String lastCaseResult = ExcelUtil.getResults().get(getLastTestCase().getId()).getResult();
+            // 当上一个执行的用例为当前依赖的用例，并且上一个执行的用例成功时，返回true
+            if (getLastTestCase().getId().equals(testCase.getDependId()) && ExcelUtil.RESULT_PASS.equals(lastCaseResult)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static final String LOGIN_CASE_ID = "case_002";
@@ -159,18 +187,6 @@ public class RunTestCase implements ITest {
                 globalStep.setExecuteNum(0);
             }
         }
-    }
-
-    // 判断上一个用例是否为pass、并且为当前用例依赖的用例
-    private boolean isLastPassForDepend() {
-        if(StringUtils.isNotBlank(getLastCaseId())){
-            String lastCaseResult = ExcelUtil.getResults().get(getLastCaseId()).getResult();
-            // 当上一个执行的用例为当前依赖的用例，并且上一个执行的用例成功时，返回true
-            if (getLastCaseId().equals(testCase.getDependId()) && ExcelUtil.RESULT_PASS.equals(lastCaseResult)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     // 根据elementPath获取MobileElement
@@ -369,11 +385,11 @@ public class RunTestCase implements ITest {
         return testCase;
     }
 
-    public String getLastCaseId() {
-        return lastCaseId.get();
+    public TestCase getLastTestCase() {
+        return lastTestCase.get();
     }
 
-    public void setLastCaseId(String caseId) {
-        lastCaseId.set(caseId);
+    public void setLastTestCase(TestCase testCase) {
+        lastTestCase.set(testCase);
     }
 }
