@@ -24,7 +24,7 @@ public class ExtentReporterNGListener implements IReporter {
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory){
         // true为覆盖已经生成的报告
-        extent = new ExtentReports(outputDirectory + File.separator + "AutomationReport.html", true  // true为覆盖已经生成的报告，false 在已有的报告上面生成，不会覆盖旧的结果
+        extent = new ExtentReports(outputDirectory + File.separator + "AutomationReport.html", false  // true为覆盖已经生成的报告，false 在已有的报告上面生成，不会覆盖旧的结果
                 , NetworkMode.OFFLINE // 最新运行的用例结果在第一个
         );
         extent.startReporter(ReporterType.DB, outputDirectory + File.separator + "AutomationReport.html"); //生成本地的DB数据文件
@@ -60,9 +60,13 @@ public class ExtentReporterNGListener implements IReporter {
 
                 test.setStartedTime(getTime(result.getStartMillis()));
                 test.setEndedTime(getTime(result.getEndMillis()));
+                String[] name = result.getName().split("_");
+                test.assignCategory(name[0]);
 
                 for (String group : result.getMethod().getGroups())
                     test.assignCategory(group);
+
+                List<String> outputList = Reporter.getOutput(result);
 
                 if (result.getThrowable() != null) {
 

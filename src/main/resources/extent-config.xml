@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Professinal Version -->
+<extentreports>
+    <configuration>
+        <!-- report theme -->
+        <!-- standard, dark -->
+        <theme>standard</theme>
+
+        <!-- document encoding -->
+        <!-- defaults to UTF-8 -->
+        <encoding>UTF-8</encoding>
+
+        <!-- protocol for script and stylesheets -->
+        <!-- defaults to https -->
+        <protocol>https</protocol>
+
+        <!-- title of the document -->
+        <documentTitle>Extent</documentTitle>
+
+        <!-- report name - displayed at top-nav -->
+        <reportName>Automation Report</reportName>
+
+        <!-- location of charts in the test view -->
+        <!-- top, bottom -->
+        <testViewChartLocation>bottom</testViewChartLocation>
+
+        <!-- settings to enable/disable views -->
+        <!-- professional version only -->
+        <enableCategoryView>true</enableCategoryView>
+        <enableAuthorView>false</enableAuthorView>
+        <enableExceptionView>true</enableExceptionView>
+        <enableTestRunnerLogsView>true</enableTestRunnerLogsView>
+
+        <!-- custom javascript -->
+        <scripts>
+            <![CDATA[
+                $(document).ready(function() {
+
+                });
+            ]]>
+        </scripts>
+
+        <!-- custom styles -->
+        <styles>
+            <![CDATA[
+
+            ]]>
+        </styles>
+    </configuration>
+</extentreports>
+
+<!--&lt;!&ndash; Community Version &ndash;&gt;-->
+<!--<extentreports>-->
+    <!--<configuration>-->
+        <!--&lt;!&ndash; report theme &ndash;&gt;-->
+        <!--&lt;!&ndash; standard, dark &ndash;&gt;-->
+        <!--<theme>standard</theme>-->
+
+        <!--&lt;!&ndash; document encoding &ndash;&gt;-->
+        <!--&lt;!&ndash; defaults to UTF-8 &ndash;&gt;-->
+        <!--<encoding>UTF-8</encoding>-->
+
+        <!--&lt;!&ndash; protocol for script and stylesheets &ndash;&gt;-->
+        <!--&lt;!&ndash; defaults to https &ndash;&gt;-->
+        <!--<protocol>https</protocol>-->
+
+        <!--&lt;!&ndash; title of the document &ndash;&gt;-->
+        <!--<documentTitle>Extent</documentTitle>-->
+
+        <!--&lt;!&ndash; report name - displayed at top-nav &ndash;&gt;-->
+        <!--<reportName>Automation Report</reportName>-->
+
+        <!--&lt;!&ndash; location of charts in the test view &ndash;&gt;-->
+        <!--&lt;!&ndash; top, bottom &ndash;&gt;-->
+        <!--<testViewChartLocation>bottom</testViewChartLocation>-->
+
+        <!--&lt;!&ndash; custom javascript &ndash;&gt;-->
+        <!--<scripts>-->
+            <!--<![CDATA[-->
+                    <!--$(document).ready(function() {-->
+
+                    <!--});-->
+                <!--]]>-->
+        <!--</scripts>-->
+
+        <!--&lt;!&ndash; custom styles &ndash;&gt;-->
+        <!--<styles>-->
+            <!--<![CDATA[-->
+
+                <!--]]>-->
+        <!--</styles>-->
+    <!--</configuration>-->
+<!--</extentreports>-->
