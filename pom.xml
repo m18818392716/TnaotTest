@@ -9,6 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <aspectj.version>1.8.10</aspectj.version>
+        <!-- 解决mvn编译乱码问题 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -49,6 +52,8 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>2.7.0</version>
+            <!--<scope>test</scope>-->
+            <!--<version>2.0-BETA14</version>-->
             <!--<scope>test</scope>-->
         </dependency>
 
@@ -224,9 +229,7 @@
                     <systemPropertyVariables>
                         <!--是否忽略html，解释见下图。与之后在reportNg报告上显示截图相关。当前已经使用allure了，这里可以直接去掉啦-->
                         <!--<org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>-->
-
                         <name>allure.results.directory</name>
-                        <!--<value>./target/allure-results</value>-->
                         <value>./target/allure-results</value>
 
                         <buildDirectory>${project.build.directory}</buildDirectory>

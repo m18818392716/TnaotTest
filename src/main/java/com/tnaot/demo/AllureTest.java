@@ -34,6 +34,14 @@ public class AllureTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void testApp1()
+    {
+        System.out.println(System.getProperty("name"));
+        System.out.println(System.getProperty("buildDirectory"));
+        Assert.assertTrue(true);
+    }
+
     @AfterSuite
     public void senEmail() {
 
@@ -43,7 +51,7 @@ public class AllureTest {
             e.printStackTrace();
         }
         //SendEmail.send("D:/software/idea-workspace/test-output/allure-report");
-        SendEmail.send(PROJECT_PATH + "test-output");
+        //SendEmail.send(PROJECT_PATH + "test-output");
     }
 
 
