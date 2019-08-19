@@ -1,56 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Professinal Version -->
-<extentreports>
-    <configuration>
-        <!-- report theme -->
-        <!-- standard, dark -->
-        <theme>standard</theme>
-
-        <!-- document encoding -->
-        <!-- defaults to UTF-8 -->
-        <encoding>UTF-8</encoding>
-
-        <!-- protocol for script and stylesheets -->
-        <!-- defaults to https -->
-        <protocol>https</protocol>
-
-        <!-- title of the document -->
-        <documentTitle>Extent</documentTitle>
-
-        <!-- report name - displayed at top-nav -->
-        <reportName>Automation Report</reportName>
-
-        <!-- location of charts in the test view -->
-        <!-- top, bottom -->
-        <testViewChartLocation>bottom</testViewChartLocation>
-
-        <!-- settings to enable/disable views -->
-        <!-- professional version only -->
-        <enableCategoryView>true</enableCategoryView>
-        <enableAuthorView>false</enableAuthorView>
-        <enableExceptionView>true</enableExceptionView>
-        <enableTestRunnerLogsView>true</enableTestRunnerLogsView>
-
-        <!-- custom javascript -->
-        <scripts>
-            <![CDATA[
-                $(document).ready(function() {
-
-                });
-            ]]>
-        </scripts>
-
-        <!-- custom styles -->
-        <styles>
-            <![CDATA[
-
-            ]]>
-        </styles>
-    </configuration>
-</extentreports>
-
-<!--&lt;!&ndash; Community Version &ndash;&gt;-->
+<!--&lt;!&ndash; Professinal Version &ndash;&gt;-->
 <!--<extentreports>-->
     <!--<configuration>-->
         <!--&lt;!&ndash; report theme &ndash;&gt;-->
@@ -75,20 +25,70 @@
         <!--&lt;!&ndash; top, bottom &ndash;&gt;-->
         <!--<testViewChartLocation>bottom</testViewChartLocation>-->
 
+        <!--&lt;!&ndash; settings to enable/disable views &ndash;&gt;-->
+        <!--&lt;!&ndash; professional version only &ndash;&gt;-->
+        <!--<enableCategoryView>true</enableCategoryView>-->
+        <!--<enableAuthorView>false</enableAuthorView>-->
+        <!--<enableExceptionView>true</enableExceptionView>-->
+        <!--<enableTestRunnerLogsView>true</enableTestRunnerLogsView>-->
+
         <!--&lt;!&ndash; custom javascript &ndash;&gt;-->
         <!--<scripts>-->
             <!--<![CDATA[-->
-                    <!--$(document).ready(function() {-->
+                <!--$(document).ready(function() {-->
 
-                    <!--});-->
-                <!--]]>-->
+                <!--});-->
+            <!--]]>-->
         <!--</scripts>-->
 
         <!--&lt;!&ndash; custom styles &ndash;&gt;-->
         <!--<styles>-->
             <!--<![CDATA[-->
 
-                <!--]]>-->
+            <!--]]>-->
         <!--</styles>-->
     <!--</configuration>-->
 <!--</extentreports>-->
+
+<!-- Community Version -->
+<extentreports>
+    <configuration>
+        <!-- report theme -->
+        <!-- standard, dark -->
+        <theme>dark</theme>
+
+        <!-- document encoding -->
+        <!-- defaults to UTF-8 -->
+        <encoding>UTF-8</encoding>
+
+        <!-- protocol for script and stylesheets -->
+        <!-- defaults to https -->
+        <protocol>https</protocol>
+
+        <!-- title of the document -->
+        <documentTitle>Extent</documentTitle>
+
+        <!-- report name - displayed at top-nav -->
+        <reportName>Automation Report</reportName>
+
+        <!-- location of charts in the test view -->
+        <!-- top, bottom -->
+        <testViewChartLocation>bottom</testViewChartLocation>
+
+        <!-- custom javascript -->
+        <scripts>
+            <![CDATA[
+                    $(document).ready(function() {
+
+                    });
+                ]]>
+        </scripts>
+
+        <!-- custom styles -->
+        <styles>
+            <![CDATA[
+
+                ]]>
+        </styles>
+    </configuration>
+</extentreports>

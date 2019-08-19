@@ -21,6 +21,8 @@ public class ExtentReporterNGListener implements IReporter {
 
     private ExtentReports extent;
 
+    public static String EXTENT_CONFIG = System.getProperty("user.dir")+"\\src\\main\\resources\\extent-config.xml";
+
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory){
         // true为覆盖已经生成的报告
@@ -30,6 +32,7 @@ public class ExtentReporterNGListener implements IReporter {
         extent.startReporter(ReporterType.DB, outputDirectory + File.separator + "AutomationReport.html"); //生成本地的DB数据文件
 
         extent.addSystemInfo("Machine Type","Android");
+        extent.loadConfig(new File(EXTENT_CONFIG));
         extent.addSystemInfo("tester","ChenQian");
 
         for (ISuite suite : suites) {
