@@ -123,7 +123,7 @@ public class RunTestCase implements ITest {
         }
     }
 
-    // 判断上一个用例是否为pass、 并且[上一个用例为当前用例依赖的用例] 或 [上一个用例有constantId]
+    // 判断上一个用例是否  为pass、并且[上一个用例为当前用例依赖的用例] 或 [上一个用例有constantId]
     private boolean lastPassIsDependOrHasConst() {
         if(getLastTestCase() != null){
             // 获取上一个用例的结果
@@ -212,7 +212,7 @@ public class RunTestCase implements ITest {
             return targetClass.getMethod(methodName);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
-            Assert.fail();
+            Assert.fail("未找到改属性对应的get方法：[" + fieldName + "]");
         }
         return null;
     }

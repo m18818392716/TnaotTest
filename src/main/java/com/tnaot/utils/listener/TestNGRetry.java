@@ -11,7 +11,7 @@ public class TestNGRetry implements IRetryAnalyzer {
     @Override
     public boolean retry(ITestResult iTestResult) {
         if (retryCount<=maxRetryCount){
-            System.out.println("it's the "+retryCount+"times retry.And the current case is"+iTestResult.getName());//输出当前的重跑次数以及当前的正在重跑的用例名称。
+            System.out.println("it's the ["+retryCount+"] times retry.And the current case is ["+iTestResult.getTestName()+"]");//输出当前的重跑次数以及当前的正在重跑的用例名称。
 
             retryCount++;//重跑之后，次数+1
             return true;//当return true之后，代表继续重跑
