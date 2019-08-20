@@ -81,7 +81,7 @@ public class RunTestCase implements ITest {
             runLoginByUserId(testCase.getUserId());
         }
         // 如果依赖的用例不为上一个且执行成功的用例，则执行依赖的用例
-        if (StringUtils.isNotBlank(testCase.getDependId()) && !isLastPassForDepend()) {
+        if (StringUtils.isNotBlank(testCase.getDependId()) && !lastPassIsDependOrHasConst()) {
             runCase(testCase.getDependId());
         }
         // 获取用例步骤
@@ -111,7 +111,6 @@ public class RunTestCase implements ITest {
 //            Assert.fail("未定义用例断言！用例ID：" + caseId);
         }
 
-
         // 若有constantID，则运行constant步骤
         if (testCase.getConstantId() != null){
             List<ConstantStep> constantSteps = ExcelUtil.getConstantSteps().get(testCase.getConstantId());
@@ -124,12 +123,12 @@ public class RunTestCase implements ITest {
         }
     }
 
-    // 判断上一个用例是否为pass、并且为当前用例依赖的用例
-    private boolean isLastPassForDepend() {
+    // 判断上一个用例是否为pass、 并且[上一个用例为当前用例依赖的用例] 或 [上一个用例有constantId]
+    private boolean lastPassIsDependOrHasConst() {
         if(getLastTestCase() != null){
+            // 获取上一个用例的结果
             String lastCaseResult = ExcelUtil.getResults().get(getLastTestCase().getId()).getResult();
-            // 当上一个执行的用例为当前依赖的用例，并且上一个执行的用例成功时，返回true
-            if (getLastTestCase().getId().equals(testCase.getDependId()) && ExcelUtil.RESULT_PASS.equals(lastCaseResult)) {
+            if (ExcelUtil.RESULT_PASS.equals(lastCaseResult) && (getLastTestCase().getId().equals(testCase.getDependId()) || getLastTestCase().getConstantId() != null )) {
                 return true;
             }
         }
@@ -140,7 +139,7 @@ public class RunTestCase implements ITest {
     public static final String LOGIN_PHONE_NUMBER_ELEMENT = "LoginPage.phoneText";
     public static final String LOGIN_PASSWORD_ELEMENT = "LoginPage.pwdText";
     public static final String LOGIN_USER_NAME_ELEMENT = "MyPage.userName";
-    public static final String LOGIN_AREA_OPTION_ELEMENT = "LoginPage.areaSelect"; // 区域选择步骤
+    public static final String LOGIN_AREA_OPTION_ELEMENT = "LoginPage.areaSelect"; // 区域选择步骤的elementPath
     public static final Map<String, String> AREA_ELEMENT_MAP = new HashMap(){{ // 国家与对应元素的路径
         put("中国", "LoginPage.areaSelect");
         put("柬埔寨", "LoginPage.areaSelectJP");
