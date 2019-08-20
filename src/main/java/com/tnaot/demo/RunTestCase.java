@@ -135,7 +135,7 @@ public class RunTestCase implements ITest {
         return false;
     }
 
-    public static final String LOGIN_CASE_ID = "case_002";
+    public static final String LOGIN_CASE_ID = "login_001";
     public static final String LOGIN_PHONE_NUMBER_ELEMENT = "LoginPage.phoneText";
     public static final String LOGIN_PASSWORD_ELEMENT = "LoginPage.pwdText";
     public static final String LOGIN_USER_NAME_ELEMENT = "MyPage.userName";

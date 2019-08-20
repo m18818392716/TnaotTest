@@ -69,7 +69,8 @@
         <documentTitle>Extent</documentTitle>
 
         <!-- report name - displayed at top-nav -->
-        <reportName>Automation Report</reportName>
+        <!--<reportName>Automation Report</reportName>-->
+        <reportName>柬埔寨自动化测试报告</reportName>
 
         <!-- location of charts in the test view -->
         <!-- top, bottom -->
