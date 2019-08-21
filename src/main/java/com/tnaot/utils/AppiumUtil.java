@@ -1,5 +1,6 @@
 package com.tnaot.utils;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -165,61 +166,59 @@ public class AppiumUtil {
 //    }
 //
 //
-//    public WebElement getElement(Locator locator) throws IOException {
-//        return getElement(this.getDriver(), locator);
-//    }
-//
-//    public WebElement getElement(AndroidDriver<AndroidElement> driver, Locator locator)
-//            throws IOException {
-//        //System.out.println(locatorMap+"+++++++++++++++++++++++++++++++++++++++++");
-//        //locator = getLocator(locatorName);
-//        WebElement e = null;
-//        switch (locator.getBy()) {
-//            case xpath:
-//                log.debug("find element By xpath");
-//                e = driver.findElement(By.xpath(locator.getElement()));
-//                break;
-//            case id:
-//                log.debug("find element By id");
-//                e = driver.findElement(By.id(locator.getElement()));
-//                break;
-//            case name:
-//                log.debug("find element By name");
-//                e = driver.findElement(By.name(locator.getElement()));
-//                break;
-//            case cssSelector:
-//                log.debug("find element By cssSelector");
-//                e = driver.findElement(By.cssSelector(locator.getElement()));
-//                break;
-//            case className:
-//                log.debug("find element By className");
-//                e = driver.findElement(By.className(locator.getElement()));
-//                break;
-//            case tagName:
-//                log.debug("find element By tagName");
-//                e = driver.findElement(By.tagName(locator.getElement()));
-//                break;
-//            case linkText:
-//                log.debug("find element By linkText");
-//                e = driver.findElement(By.linkText(locator.getElement()));
-//                break;
-//            case partialLinkText:
-//                log.debug("find element By partialLinkText");
-//                e = driver.findElement(By.partialLinkText(locator.getElement()));
-//                break;
-//            case androidUIAutomator:
-//                //e = ((AndroidDriver) driver).findElementByAndroidUIAutomator(locator.getElement());
-//                break;
-//            case iOSUIAutomation:
-//                break;
-//            case by:
-//                break;
-//            default:
-//                e = driver.findElement(By.id(locator.getElement()));
-//                System.out.println("找不到对应的定位方法！");
-//        }
-//        return e;
-//    }
+    public static WebElement getMobileElement(Locator locator) {
+        return getMobileElement(SelectDriver.getAppiumDriver(), locator);
+    }
+    public static WebElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator) {
+        //System.out.println(locatorMap+"+++++++++++++++++++++++++++++++++++++++++");
+        //locator = getLocator(locatorName);
+        WebElement mobileElement = null;
+        switch (locator.getBy()) {
+            case xpath:
+                logger.debug("find element By xpath");
+                mobileElement = driver.findElement(By.xpath(locator.getElement()));
+                break;
+            case id:
+                logger.debug("find element By id");
+                mobileElement = driver.findElement(By.id(locator.getElement()));
+                break;
+            case name:
+                logger.debug("find element By name");
+                mobileElement = driver.findElement(By.name(locator.getElement()));
+                break;
+            case cssSelector:
+                logger.debug("find element By cssSelector");
+                mobileElement = driver.findElement(By.cssSelector(locator.getElement()));
+                break;
+            case className:
+                logger.debug("find element By className");
+                mobileElement = driver.findElement(By.className(locator.getElement()));
+                break;
+            case tagName:
+                logger.debug("find element By tagName");
+                mobileElement = driver.findElement(By.tagName(locator.getElement()));
+                break;
+            case linkText:
+                logger.debug("find element By linkText");
+                mobileElement = driver.findElement(By.linkText(locator.getElement()));
+                break;
+            case partialLinkText:
+                logger.debug("find element By partialLinkText");
+                mobileElement = driver.findElement(By.partialLinkText(locator.getElement()));
+                break;
+            case androidUIAutomator:
+                //e = ((AndroidDriver) driver).findElementByAndroidUIAutomator(locator.getElement());
+                break;
+            case iOSUIAutomation:
+                break;
+            case by:
+                break;
+            default:
+                mobileElement = driver.findElement(By.id(locator.getElement()));
+                System.out.println("找不到对应的定位方法！");
+        }
+        return mobileElement;
+    }
 //
 //
 //    public boolean isElementPresent(AndroidDriver<AndroidElement> driver, final Locator myLocator, int timeOut) throws IOException {

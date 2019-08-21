@@ -1,5 +1,6 @@
 package com.tnaot.page;
 
+import com.tnaot.anotation.FindElementBy;
 import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -14,8 +15,16 @@ public class LoginPage extends AppiumBaseExecutor {
 
     public LoginPage(AppiumDriver<?> driver) {
         super(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
+        PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);//初始化driver，否则@AndroidFindBy会提示空指针异常
     }
+
+    @FindElementBy(type="id", value="com.tnaot.news:id/tvLanguage")
+    @AndroidFindBy(id="com.tnaot.news:id/tvLanguage")
+    MobileElement tvLanguage;
+    @FindElementBy(type="id", value="com.tnaot.news:id/tvHistory")
+    @AndroidFindBy(id="com.tnaot.news:id/tvHistory")
+    MobileElement tvHistory;
+
 
     /** 初次安装页面弹框-是否允许获取当前位置 */
     @AndroidFindBy(id="com.android.packageinstaller:id/dialog_container")

@@ -38,6 +38,12 @@ public class Locator {
         this.byType = byType;
     }
 
+    public Locator(String element, ByType byType)
+    {
+        this.element = element;
+        this.byType = byType;
+    }
+
     public String getElement()
     {
         return element;

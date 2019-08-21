@@ -11,7 +11,9 @@ import java.util.zip.ZipOutputStream;
 public class ZipUtil {
 
     private static final int BUFFER_SIZE = 2 * 1024;
-    public static final String PROJECT_PATH = "D:/software/githubRespository/TnaotTest/";
+    //public static final String PROJECT_PATH = "D:/software/githubRespository/TnaotTest/";
+    public static final String PROJECT_PATH = System.getProperty("user.dir");
+
 
     /**
      * @param srcDir 压缩文件夹路径
@@ -183,10 +185,11 @@ public class ZipUtil {
 
     public static void main(String[] args) throws Exception {
 
-        String srcPath = PROJECT_PATH + "test-output";
-        String imgPath = PROJECT_PATH + "img";
+        String srcPath = PROJECT_PATH + "/test-output";
+        String imgPath = PROJECT_PATH + "/img";
         String[] srcDir = {srcPath, imgPath};
-        String outDir = "D:/software/githubRespository/TnaotTest/report.zip";
+        //String outDir = "D:/software/githubRespository/TnaotTest/report.zip";
+        String outDir = PROJECT_PATH + "/report.zip";
 
 //        String[] srcDir = { "path\\Desktop\\java",
 //                "path\\Desktop\\java2",

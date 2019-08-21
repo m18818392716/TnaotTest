@@ -24,7 +24,8 @@ import javax.mail.internet.*;
 
 public class SendEmail {
 
-    public static final String PROJECT_PATH = "D:\\software\\githubRespository\\TnaotTest\\";
+    //public static final String PROJECT_PATH = "D:\\software\\githubRespository\\TnaotTest\\";
+    public static final String PROJECT_PATH = System.getProperty("user.dir");
 
 //    static String HOST = "smtp.163.com"; // smtp服务器
 //    static String FROM = "m18818392716@163.com"; // 发件人地址
@@ -42,6 +43,7 @@ public class SendEmail {
     static String PWD = "uslrjkepjnkldjfi"; // QQ的授权码
     static String SUBJECT = "Tnaot Automation Report_" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date()); // 邮件标题
     static String[] TOS = new String[]{"394941528@qq.com"};//uslrjkepjnkldjfi
+    //static String[] TOS = new String[]{};//uslrjkepjnkldjfi
 
 
     /**
@@ -161,7 +163,7 @@ public class SendEmail {
 
             //附件一的操作
             //方式1：通过右上角绿色的运行按钮执行XML文件
-            FileDataSource fds1 = new FileDataSource(new File("D:\\software\\githubRespository\\TnaotTest\\test-output\\AutomationReport.html"));//构造附件一的数据源
+            FileDataSource fds1 = new FileDataSource(new File(PROJECT_PATH + "\\test-output\\AutomationReport.html"));//构造附件一的数据源
             //方式2：通过java调用cmd命令模式执行maven命令
             //FileDataSource fds1 = new FileDataSource(new File(PROJECT_PATH + "target\\surefire-reports\\AutomationReport.html"));//构造附件一的数据源
             DataHandler dh1 = new DataHandler(fds1);//数据处理
@@ -182,7 +184,7 @@ public class SendEmail {
 
             //附件三-》对文件夹下面的所有文件进行压缩-》添加到压缩文件（压缩后的命名）--方法2
             //String srcPath = "D:/software/idea-workspace/test-output";
-            String desPath = "D:/software/githubRespository/TnaotTest/report.zip";
+            String desPath = PROJECT_PATH + "/report.zip";
             ZipUtil.toZip(srcPath, desPath, true);
 
 
