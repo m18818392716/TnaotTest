@@ -19,6 +19,16 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
     MobileElement rlMine;
+    /** 红包-右下角的红包提示 */
+    @AndroidFindBy(id="com.tnaot.news:id/viewMessageTarget")
+    MobileElement bonus;
+    /** 红点击红包-红包弹窗 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_red_packet")
+    MobileElement redPacketOverlay;
+    /** 红点击红包-红包弹窗-领取的金额 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_red_packet")
+    MobileElement redPacketValue;
+
 
     /** 我的-金币 */
     @AndroidFindBy(id="com.tnaot.news:id/tvCoin")
@@ -26,7 +36,6 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的-零钱 */
     @AndroidFindBy(id="com.tnaot.news:id/tvMoney")
     MobileElement tvMoney;
-
 
 
     /** 我的-用户名 */
@@ -337,6 +346,18 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的资料-生日 750-1300 */
     @AndroidFindBy(id="com.tnaot.news:id/rl_birthday")
     MobileElement myInfoBirthday;
+    /** 我的资料-生日-输入年份 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.NumberPicker[1]/android.widget.EditText")
+    MobileElement myInfoBirthdayYear;
+    /** 我的资料-生日-输入月份 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.NumberPicker[2]/android.widget.EditText")
+    MobileElement myInfoBirthdayMonth;
+    /** 我的资料-生日-输入日 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.NumberPicker[3]/android.widget.EditText")
+    MobileElement myInfoBirthdayDay;
+
+
+
 
     /** 我的资料-地区   [0,1276][1440,1456]   700,1276~700,1456  */
     @AndroidFindBy(id="com.tnaot.news:id/rl_area")

@@ -32,7 +32,7 @@ public class ClazzUtils {
                     String protocol = url.getProtocol();
                     if("file".equals(protocol)) {
                         String path = url.getPath();
-                        System.out.println(path);
+                        System.out.println("包路径：" + path);
                         result.addAll(getAllClassNameByFile(new File(path), showChildPackageFlag));
                     } else if("jar".equals(protocol)) {
                         JarFile jarFile = null;
@@ -53,15 +53,10 @@ public class ClazzUtils {
         return result;
     }
         /**
-         66
          * 递归获取所有class文件的名字
-         67
          * @param file
-        68
          * @param flag  是否需要迭代遍历
-        69
          * @return List
-        70
          */
     private static List<String> getAllClassNameByFile(File file, boolean flag) {
         List<String> result =  new ArrayList<>();
@@ -141,7 +136,14 @@ public class ClazzUtils {
     public static void main(String[] args) {
         List<String> list = ClazzUtils.getClazzName("com.tnaot.page", false);
         for (String string : list) {
-            System.out.println(string);
+            String[] packageNames = string.split("\\.");
+            System.out.println(packageNames[3]);
+//            try {
+//                Class<?> cl =Class.forName(packageNames[3]);
+//                System.out.println(cl);
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 }

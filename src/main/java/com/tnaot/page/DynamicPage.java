@@ -16,6 +16,10 @@ public class DynamicPage extends AppiumBaseExecutor {
         PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
     }
 
+    /** 动态列表刷新提示语-暂无最新动态 */
+    @AndroidFindBy(id="//*[@text='暂无最新动态']")
+    MobileElement tipRefreshMessage;
+
     /** 发布-摄像机按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_top_release")
     MobileElement releaseButton;

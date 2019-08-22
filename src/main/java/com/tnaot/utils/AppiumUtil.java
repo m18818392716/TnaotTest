@@ -80,10 +80,21 @@ public class AppiumUtil {
     // 根据elementPath获取MobileElement
     public static MobileElement getMobileElement(String elementPath) {
         MobileElement mobileElement = null;
-        // 解析elementPath获取属性
+        String pageClassName = "";
+        String pageElementIndex = "";
+        String pageElement = "";
+        int index;
         String[] pathArray = elementPath.split("\\.");
-        String pageClassName = pathArray[0];
-        String pageElement = pathArray[1];
+        // 解析elementPath获取属性
+        if (elementPath.contains("[")) {
+            pageClassName = pathArray[0];
+            pageElementIndex = pathArray[1];
+            pageElement = pageElementIndex.substring(0,pageElementIndex.indexOf("["));
+            index = Integer.valueOf(pageElementIndex.substring(pageElementIndex.indexOf("[") + 1,pageElementIndex.indexOf("]")));
+        } else {
+            pageClassName = pathArray[0];
+            pageElement = pathArray[1];
+        }
         try {
             Class targetPage = Class.forName(PAGE_PACKAGE_PATH + "." + pageClassName);
             Field elementField = targetPage.getDeclaredField(pageElement);
@@ -91,7 +102,12 @@ public class AppiumUtil {
             // 如果有FindElementBy注解，则进行解析，否则直接调用get方法
             if(findElementBy != null){
 //                System.out.println("解析FindElementBy注解, 属性：["+ elementPath +"]");
-                mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())));
+                if (index != null) {
+                    mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())),index);
+                } else {
+                    mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())));
+                }
+
             } else {
                 Method getMethod = getGetMethod(targetPage, pageElement);
                 Constructor constructor = targetPage.getConstructor(AppiumDriver.class);
@@ -211,6 +227,19 @@ public class AppiumUtil {
     public static MobileElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator) {
         //System.out.println(locatorMap+"+++++++++++++++++++++++++++++++++++++++++");
         //locator = getLocator(locatorName);
+        WebElement webElement = driver.findElement(getBy(locator));
+        return (MobileElement)webElement;
+    }
+
+    public static MobileElement getMobileElement(Locator locator,int index) {
+        return getMobileElement(SelectDriver.getAppiumDriver(), locator,index);
+    }
+    public static MobileElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator, int index) {
+        WebElement webElement = driver.findElements(getBy(locator)).get(index);
+        return (MobileElement)webElement;
+    }
+
+    public static By getBy(Locator locator) {
         By by = null;
         switch (locator.getBy()) {
             case xpath:
@@ -256,8 +285,7 @@ public class AppiumUtil {
                 by = By.id(locator.getElement());
                 System.out.println("找不到对应的定位方法！");
         }
-        WebElement webElement = driver.findElement(by);
-        return (MobileElement)webElement;
+        return by;
     }
 //
 //
