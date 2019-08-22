@@ -67,6 +67,20 @@ public class ZipUtil {
     private static void compress(File sourceFile, ZipOutputStream zos,
                                  String name, boolean KeepDirStructure) throws Exception {
         byte[] buf = new byte[BUFFER_SIZE];
+        getAllFiles(zos,KeepDirStructure,sourceFile,name,buf);
+    }
+
+    private static void compress(List<File> sourceFileList,
+                                 ZipOutputStream zos, boolean KeepDirStructure) throws Exception {
+        byte[] buf = new byte[BUFFER_SIZE];
+        for (File sourceFile : sourceFileList) {
+            String name = sourceFile.getName();
+            getAllFiles(zos,KeepDirStructure,sourceFile,name,buf);
+        }
+    }
+
+
+    public static void getAllFiles(ZipOutputStream zos,boolean KeepDirStructure,File sourceFile,String name,byte[] buf) throws Exception {
         if (sourceFile.isFile()) {
             zos.putNextEntry(new ZipEntry(name));
             int len;
@@ -94,44 +108,6 @@ public class ZipUtil {
                         compress(file, zos, file.getName(), KeepDirStructure);
                     }
 
-                }
-            }
-        }
-    }
-
-    private static void compress(List<File> sourceFileList,
-                                 ZipOutputStream zos, boolean KeepDirStructure) throws Exception {
-        byte[] buf = new byte[BUFFER_SIZE];
-        for (File sourceFile : sourceFileList) {
-            String name = sourceFile.getName();
-            if (sourceFile.isFile()) {
-                zos.putNextEntry(new ZipEntry(name));
-                int len;
-                FileInputStream in = new FileInputStream(sourceFile);
-                while ((len = in.read(buf)) != -1) {
-                    zos.write(buf, 0, len);
-                }
-                zos.closeEntry();
-                in.close();
-            } else {
-                File[] listFiles = sourceFile.listFiles();
-                if (listFiles == null || listFiles.length == 0) {
-                    if (KeepDirStructure) {
-                        zos.putNextEntry(new ZipEntry(name + "/"));
-                        zos.closeEntry();
-                    }
-
-                } else {
-                    for (File file : listFiles) {
-                        if (KeepDirStructure) {
-                            compress(file, zos, name + "/" + file.getName(),
-                                    KeepDirStructure);
-                        } else {
-                            compress(file, zos, file.getName(),
-                                    KeepDirStructure);
-                        }
-
-                    }
                 }
             }
         }
