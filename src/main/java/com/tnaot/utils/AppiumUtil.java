@@ -1,15 +1,16 @@
 package com.tnaot.utils;
 
-import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
+import com.tnaot.anotation.FindElementBy;
 import com.tnaot.core.AndroidDriverWait;
-import com.tnaot.enums.ScrollDirection;
 import com.tnaot.utils.AppiumUtils.ScreenScr;
 import io.appium.java_client.*;
 import io.appium.java_client.NoSuchContextException;
@@ -20,7 +21,6 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 
@@ -31,6 +31,7 @@ public class AppiumUtil {
 
     public AppiumDriver<WebElement> driver;
     public ITestResult it;
+    public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
 
     @Getter
     private WebElement webElement;
@@ -76,6 +77,44 @@ public class AppiumUtil {
         Assert.assertNotNull(showClose);
     }
 
+    // 根据elementPath获取MobileElement
+    public static MobileElement getMobileElement(String elementPath) {
+        MobileElement mobileElement = null;
+        // 解析elementPath获取属性
+        String[] pathArray = elementPath.split("\\.");
+        String pageClassName = pathArray[0];
+        String pageElement = pathArray[1];
+        try {
+            Class targetPage = Class.forName(PAGE_PACKAGE_PATH + "." + pageClassName);
+            Field elementField = targetPage.getDeclaredField(pageElement);
+            FindElementBy findElementBy = elementField.getAnnotation(FindElementBy.class);
+            // 如果有FindElementBy注解，则进行解析，否则直接调用get方法
+            if(findElementBy != null){
+//                System.out.println("解析FindElementBy注解, 属性：["+ elementPath +"]");
+                mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())));
+            } else {
+                Method getMethod = getGetMethod(targetPage, pageElement);
+                Constructor constructor = targetPage.getConstructor(AppiumDriver.class);
+                Object pageObject = constructor.newInstance(SelectDriver.appiumDriver.get());
+                mobileElement = (MobileElement) getMethod.invoke(pageObject);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mobileElement;
+    }
+
+    // 获取属性的get方法
+    public static Method getGetMethod(Class targetClass, String fieldName) {
+        String methodName = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+        try {
+            return targetClass.getMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            Assert.fail("未找到改属性对应的get方法：[" + fieldName + "]");
+        }
+        return null;
+    }
 
     /** 等待 */
     public static void sleep(Long ms) {
@@ -166,45 +205,45 @@ public class AppiumUtil {
 //    }
 //
 //
-    public static WebElement getMobileElement(Locator locator) {
+    public static MobileElement getMobileElement(Locator locator) {
         return getMobileElement(SelectDriver.getAppiumDriver(), locator);
     }
-    public static WebElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator) {
+    public static MobileElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator) {
         //System.out.println(locatorMap+"+++++++++++++++++++++++++++++++++++++++++");
         //locator = getLocator(locatorName);
-        WebElement mobileElement = null;
+        By by = null;
         switch (locator.getBy()) {
             case xpath:
                 logger.debug("find element By xpath");
-                mobileElement = driver.findElement(By.xpath(locator.getElement()));
+                by = By.xpath(locator.getElement());
                 break;
             case id:
                 logger.debug("find element By id");
-                mobileElement = driver.findElement(By.id(locator.getElement()));
+                by = By.id(locator.getElement());
                 break;
             case name:
                 logger.debug("find element By name");
-                mobileElement = driver.findElement(By.name(locator.getElement()));
+                by = By.name(locator.getElement());
                 break;
             case cssSelector:
                 logger.debug("find element By cssSelector");
-                mobileElement = driver.findElement(By.cssSelector(locator.getElement()));
+                by = By.cssSelector(locator.getElement());
                 break;
             case className:
                 logger.debug("find element By className");
-                mobileElement = driver.findElement(By.className(locator.getElement()));
+                by = By.className(locator.getElement());
                 break;
             case tagName:
                 logger.debug("find element By tagName");
-                mobileElement = driver.findElement(By.tagName(locator.getElement()));
+                by = By.tagName(locator.getElement());
                 break;
             case linkText:
                 logger.debug("find element By linkText");
-                mobileElement = driver.findElement(By.linkText(locator.getElement()));
+                by = By.linkText(locator.getElement());;
                 break;
             case partialLinkText:
                 logger.debug("find element By partialLinkText");
-                mobileElement = driver.findElement(By.partialLinkText(locator.getElement()));
+                by = By.partialLinkText(locator.getElement());
                 break;
             case androidUIAutomator:
                 //e = ((AndroidDriver) driver).findElementByAndroidUIAutomator(locator.getElement());
@@ -214,10 +253,11 @@ public class AppiumUtil {
             case by:
                 break;
             default:
-                mobileElement = driver.findElement(By.id(locator.getElement()));
+                by = By.id(locator.getElement());
                 System.out.println("找不到对应的定位方法！");
         }
-        return mobileElement;
+        WebElement webElement = driver.findElement(by);
+        return (MobileElement)webElement;
     }
 //
 //

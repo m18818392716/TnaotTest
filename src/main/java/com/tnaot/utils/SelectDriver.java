@@ -74,7 +74,7 @@ public class SelectDriver {
         iosAppPath = context.getCurrentXmlTest().getParameter("iosAppPath");
         //通过testng的xml文件获取appPackage参数值，并赋给  appPackage变量
         appPackage = context.getCurrentXmlTest().getParameter("appPackage");
-        if (appPackage.contains("release")) {
+        if (androidAppPath.contains("release")) {
             ExcelUtil.excelPath = "ProduceTnaot.xls";
         } else {
             ExcelUtil.excelPath = "TestTnaot_1.xls";

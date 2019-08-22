@@ -33,7 +33,6 @@ import java.util.Map;
 
 public class RunTestCase implements ITest {
 
-    public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
     public static ThreadLocal<TestCase> lastTestCase = new ThreadLocal<>();
     public static Map<String,String> elementContent = new HashMap<>();
     private final static LogUtils logger = new LogUtils(RunTestCase.class);
@@ -188,35 +187,6 @@ public class RunTestCase implements ITest {
         }
     }
 
-    // 根据elementPath获取MobileElement
-    public MobileElement getMobileElement(String elementPath) {
-        String[] pathArray = elementPath.split("\\.");
-        String pageClassName = pathArray[0];
-        String pageElement = pathArray[1];
-        try {
-            Class targetPage = Class.forName(PAGE_PACKAGE_PATH + "." + pageClassName);
-            Method getMethod = getGetMethod(targetPage, pageElement);
-            Constructor constructor = targetPage.getConstructor(AppiumDriver.class);
-            Object pageObject = constructor.newInstance(SelectDriver.appiumDriver.get());
-            return (MobileElement) getMethod.invoke(pageObject);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    // 获取属性的get方法
-    public static Method getGetMethod(Class targetClass, String fieldName) {
-        String methodName = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
-        try {
-            return targetClass.getMethod(methodName);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            Assert.fail("未找到改属性对应的get方法：[" + fieldName + "]");
-        }
-        return null;
-    }
-
     public static final String ACTION_CLICK = "click";
     public static final String ACTION_SEND_KEY = "sendkeys";
     public static final String ACTION_CLEAR = "clear";
@@ -264,7 +234,7 @@ public class RunTestCase implements ITest {
     private void executeAction(String elementPath, String action, String data) {
         MobileElement mobileElement = null;
         if (StringUtils.isNotBlank(elementPath)) {
-            mobileElement = this.getMobileElement(elementPath);
+            mobileElement = AppiumUtil.getMobileElement(elementPath);
         }
         switch (action) {
             case ACTION_CLICK:
