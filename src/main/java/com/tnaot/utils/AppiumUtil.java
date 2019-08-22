@@ -80,19 +80,17 @@ public class AppiumUtil {
     // 根据elementPath获取MobileElement
     public static MobileElement getMobileElement(String elementPath) {
         MobileElement mobileElement = null;
-        String pageClassName = "";
+        String[] pathArray = elementPath.split("\\.");
+        String pageClassName = pathArray[0];
         String pageElementIndex = "";
         String pageElement = "";
-        int index;
-        String[] pathArray = elementPath.split("\\.");
+        int index = -1; // 控件索引
         // 解析elementPath获取属性
         if (elementPath.contains("[")) {
-            pageClassName = pathArray[0];
             pageElementIndex = pathArray[1];
             pageElement = pageElementIndex.substring(0,pageElementIndex.indexOf("["));
             index = Integer.valueOf(pageElementIndex.substring(pageElementIndex.indexOf("[") + 1,pageElementIndex.indexOf("]")));
         } else {
-            pageClassName = pathArray[0];
             pageElement = pathArray[1];
         }
         try {
@@ -102,7 +100,7 @@ public class AppiumUtil {
             // 如果有FindElementBy注解，则进行解析，否则直接调用get方法
             if(findElementBy != null){
 //                System.out.println("解析FindElementBy注解, 属性：["+ elementPath +"]");
-                if (index != null) {
+                if (index != -1) {
                     mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())),index);
                 } else {
                     mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())));
