@@ -198,9 +198,13 @@ public class RunTestCase implements ITest {
     public static final String SLIDE_DOWN = "swipeDown";//向下滑动
     public static final String SLIDE_LEFT = "swipeLeft";//向左滑动
     public static final String SLIDE_RIGHT = "swipeRight";//向右滑动
+    public static final String SLIDE_DOWN_TIMES = "swipeDownTimes";//向下滑动若干次数
+    public static final String SLIDE_LEFT_TIMES = "swipeLeftTimes";//向左滑动若干次数
+    public static final String SLIDE_RIGHT_TIMES = "swipeRightTimes";//向右滑动若干次数
+
     public static final String SLIDE_TO_TARGET = "swipeToTarget";//滑动到目标元素
 
-    public static final String SLIDE_UP_TO_End = "swipeUpToEnd";//向上滑动到目标元素
+    public static final String SLIDE_TO_End = "swipeToEnd";//向上滑动到目标元素
     public static final String SLIDE_DOWN_TO_End = "swipeDownToEnd";//向下滑动到目标元素
     public static final String SLIDE_LEFT_TO_End = "swipeLeftToEnd";//向左滑动到目标元素
     public static final String SLIDE_RIGHT_TO_End = "swipeRightToEnd";//向右滑动到目标元素
@@ -208,7 +212,8 @@ public class RunTestCase implements ITest {
     public static final String SLIDE_LEFT_ELEMENT = "swipeLeftElement";//向左滑动控件
     public static final String SLIDE_RIGHT_ELEMENT = "swipeRightElement";//向右滑动控件
 
-    public static final String SLIDE_ELEMENT = "slideElement";//滑动控件
+    public static final String SLIDE_ELEMENT = "slideElement";//滑动控件-控件内部滑动
+    public static final String SLIDE_ELEMENT_TO_TARGET = "slideElementToTarget";//滑动控件到目标元素-控件内部滑动
 
     public static final String TAP_POINT = "tapPoint";//点击某一个坐标
     public static final String TAP_POINT_MOVE_TO_POINT = "tapPointMoveToPoint";//两个坐标点之间的滑动
@@ -230,6 +235,10 @@ public class RunTestCase implements ITest {
     public static final String WAIT_SECONDS = "waitSeconds";// 等待多少秒
     public static final String BACK_LAST_PAGE = "backLastPage";// 返回上一层页面
 
+    public static final String GET_IMAGE_COUNT = "getImageCount";// 返回上一层页面
+
+    public static int imageCount = 0;
+
     // 传入控件路径对控件执行操作
     private void executeAction(String elementPath, String action, String data) {
         MobileElement mobileElement = null;
@@ -241,6 +250,7 @@ public class RunTestCase implements ITest {
                 mobileElement.click();
                 break;
             case ACTION_SEND_KEY:
+                mobileElement.clear();
                 mobileElement.sendKeys(data);
                 break;
             case ACTION_CLEAR:
@@ -267,11 +277,22 @@ public class RunTestCase implements ITest {
             case SLIDE_RIGHT:
                 SlideScreen.slideRight(SelectDriver.getAppiumDriver());
                 break;
+            case SLIDE_DOWN_TIMES:
+                SlideScreen.slideDown(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
+                break;
+            case SLIDE_LEFT_TIMES:
+                SlideScreen.slideLeft(SelectDriver.getAppiumDriver(), imageCount);
+                break;
+            case SLIDE_RIGHT_TIMES:
+                SlideScreen.slideRight(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
+                break;
             case SLIDE_TO_TARGET:
                 SlideScreen.slideToTarget(mobileElement);
                 break;
-            case SLIDE_UP_TO_End:
-                SlideScreen.swipeUpToEnd(SelectDriver.getAppiumDriver(), data);
+            case SLIDE_TO_End:
+                String endString = data.split("，")[0];
+                String direction = data.split("，")[1];
+                SlideScreen.swipeToEnd(SelectDriver.getAppiumDriver(), endString, SlideScreen.Heading.valueOf(direction));
                 break;
 //            case SLIDE_DOWN_TO_End:
 //                SlideScreen.swipeDownToEnd(SelectDriver.getAppiumDriver(), data);
@@ -294,6 +315,11 @@ public class RunTestCase implements ITest {
                 break;
             case SLIDE_ELEMENT:
                 SlideScreen.slideElement(mobileElement, SlideScreen.Heading.valueOf(data));
+                break;
+            case SLIDE_ELEMENT_TO_TARGET:
+                String targetText = data.split("，")[0];
+                String dir = data.split("，")[1];
+                SlideScreen.slideElementToTarget(SelectDriver.getAppiumDriver(), targetText, mobileElement, SlideScreen.Heading.valueOf(dir));
                 break;
             case TAP_POINT:
                 SlideScreen.tapPoint(SelectDriver.getAppiumDriver(), data);
@@ -343,6 +369,9 @@ public class RunTestCase implements ITest {
                 break;
             case BACK_LAST_PAGE:
                 SelectDriver.getAppiumDriver().navigate().back();
+                break;
+            case GET_IMAGE_COUNT:
+                imageCount = Integer.valueOf(mobileElement.getText().substring(0, mobileElement.getText().indexOf("图")));
                 break;
             default:
                 Assert.fail("预期以外的操作：Element[" + mobileElement + "] Action: [" + action + "]");

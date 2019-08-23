@@ -27,7 +27,7 @@ public class SlideScreen {
     public static void slideUp(AppiumDriver<WebElement> driver, int times) {
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
-        for (int i = 0; i <= times; i++) {
+        for (int i = 0; i < times; i++) {
 
             //new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height * 1 / 4)).release().perform();
 
@@ -42,7 +42,7 @@ public class SlideScreen {
     public static void slideDown(AppiumDriver<WebElement> driver, int times) {
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
-        for (int i = 0; i <= times; i++) {
+        for (int i = 0; i < times; i++) {
 
             //new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height / 10)).release().perform();
 
@@ -93,8 +93,21 @@ public class SlideScreen {
         //new TouchAction(driver).press(PointOption.point(width * 3 / 4, height / 2)).moveTo(PointOption.point(width / 10, height / 2)).release().perform();
 
         new TouchAction(driver)
-                .longPress(PointOption.point(width - 100, height / 2))
+                .press(PointOption.point(width - 100, height / 2))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
                 .moveTo(PointOption.point(100, height / 2)).release().perform();
+    }
+    public static void slideLeft(AppiumDriver<WebElement> driver, int times) {
+        //获取手机屏幕的宽度
+        int width = driver.manage().window().getSize().width;
+        // 获取手机屏幕的高度
+        int height = driver.manage().window().getSize().height;
+        for (int i = 0; i < times; i++) {
+            new TouchAction(driver)
+                    .press(PointOption.point(width - 100, height / 2))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
+                    .moveTo(PointOption.point(100, height / 2)).release().perform();
+        }
     }
 
     /**
@@ -109,8 +122,27 @@ public class SlideScreen {
 
         new TouchAction(driver).longPress(PointOption.point(100, height / 2))
                 .moveTo(PointOption.point(width - 100, height / 2)).release()
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
                 .perform();
     }
+    public static void slideRight(AppiumDriver<WebElement> driver, int times) {
+        int width = driver.manage().window().getSize().width;
+        int height = driver.manage().window().getSize().height;
+        for (int i = 0; i < times; i++) {
+            new TouchAction(driver).longPress(PointOption.point(100, height / 2))
+                    .moveTo(PointOption.point(width - 100, height / 2)).release()
+                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
+                    .perform();
+        }
+    }
+
+
+
+
+
+
+
+
 
 
     public static void slideToTarget(WebElement webElement) {
@@ -160,7 +192,7 @@ public class SlideScreen {
                 break;
             //向左滑动
             case LEFT:
-                new TouchAction(SelectDriver.getAppiumDriver()).press(PointOption.point(endX-100, centreY))
+                new TouchAction(SelectDriver.getAppiumDriver()).press(PointOption.point(endX-50, centreY))
                         .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
                         .moveTo(PointOption.point(startX, centreY)).release().perform();
                 break;
@@ -175,17 +207,49 @@ public class SlideScreen {
 
     }
 
+    //控件内部滑动到目标元素
+    public static void slideElementToTarget(AppiumDriver<WebElement> driver, String endString, WebElement webElement, Heading heading) {
+
+        boolean isSwipe = true;
+        //String endString = "THE END";
+        while (isSwipe) {
+            String temp = driver.getPageSource();
+            if (temp.contains(endString)) {
+                isSwipe = false;
+            } else {
+                slideElement(webElement, heading);//向上滑动屏幕
+            }
+        }
+    }
+
+
+
     //页面不断上滑，滑动到出现 THE END为止
-    public static void swipeUpToEnd(AppiumDriver<WebElement> driver, String endString) {
+    public static void swipeToEnd(AppiumDriver<WebElement> driver, String endString, Heading heading) {
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
         boolean isSwipe = true;
         //String endString = "THE END";
         while (isSwipe) {
-            slideUp(driver);//向上滑动屏幕
             String temp = driver.getPageSource();
-            if (temp.contains(endString))
+            if (temp.contains(endString)) {
                 isSwipe = false;
+            } else {
+                switch (heading) {
+                    case UP:
+                        slideUp(driver);//向上滑动屏幕
+                        break;
+                    case DOWN:
+                        slideDown(driver);
+                        break;
+                    case LEFT:
+                        slideLeft(driver);
+                        break;
+                    case RIGHT:
+                        slideRight(driver);
+                        break;
+                }
+            }
         }
     }
 

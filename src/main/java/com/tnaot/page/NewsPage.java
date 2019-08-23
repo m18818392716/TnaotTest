@@ -1,5 +1,6 @@
 package com.tnaot.page;
 
+import com.tnaot.anotation.FindElementBy;
 import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -59,45 +60,84 @@ public class NewsPage extends AppiumBaseExecutor {
 
 
     /** 资讯-本地 */
+    @FindElementBy(type = "accessibilityId", value = "本地")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='本地']")
     MobileElement localChannel;
 
     /** 资讯-推荐 */
+    @FindElementBy(type = "accessibilityId", value = "推荐")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='推荐']")
     MobileElement recommendedChannel;
 
     /** 资讯-娱乐 */
+    @FindElementBy(type = "accessibilityId", value = "娱乐")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='娱乐']")
     MobileElement entertainmentChannel;
 
     /** 资讯-社会 */
+    @FindElementBy(type = "accessibilityId", value = "社会")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='社会']")
     MobileElement socialChannel;
 
     /** 资讯-科技 */
+    @FindElementBy(type = "accessibilityId", value = "科技")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='科技']")
     MobileElement scienceChannel;
 
     /** 资讯-健康 */
+    @FindElementBy(type = "accessibilityId", value = "健康")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='健康']")
     MobileElement healthChannel;
 
     /** 资讯-体育 */
+    @FindElementBy(type = "accessibilityId", value = "体育")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='体育']")
     MobileElement sportsChannel;
 
     /** 资讯-美食 */
+    @FindElementBy(type = "accessibilityId", value = "美食")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='美食']")
     MobileElement foodChannel;
 
     /** 资讯-生活 */
+    @FindElementBy(type = "accessibilityId", value = "生活")
     @AndroidFindBy(xpath="//androidx.appcompat.app.ActionBar$Tab[@content-desc='生活']")
     MobileElement lifeChannel;
+
+    /** 资讯-图片 */
+    @FindElementBy(type = "accessibilityId", value = "图片")
+    MobileElement imageChannel;
+
+    /** 资讯-小说 */
+    @FindElementBy(type = "accessibilityId", value = "小说")
+    MobileElement novelChannel;
+
+
+
+
 
 
     /** 资讯-频道控件header */
     @AndroidFindBy(id="com.tnaot.news:id/tabLayout")
     MobileElement channelHeader;
+    /** 资讯-频道列表img */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_channel")
+    MobileElement channelListButton;
+    /** 资讯-频道列表img-图片 */
+    @AndroidFindBy(xpath="//*[contains(@text, '图片')]")
+    MobileElement channelListImage;
+    /** 资讯-频道列表img-小说 */
+    @AndroidFindBy(xpath="//*[contains(@text, '小说')]")
+    MobileElement channelListNovel;
+    /** 资讯-频道列表img-关闭按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_close")
+    MobileElement channelListCloseButton;
+
+
+
+
+
+
 
 
 
@@ -250,14 +290,17 @@ public class NewsPage extends AppiumBaseExecutor {
     MobileElement newestComments;
 
     /** 资讯详情-评论列表-评论第一条 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_content")
     @AndroidFindBy(id="com.tnaot.news:id/ll_parent")
     MobileElement llParent;
 
     /** 资讯详情-评论列表-评论点赞 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_like_count")
     @AndroidFindBy(id="com.tnaot.news:id/tv_like_count")
     MobileElement likeCount;
 
     /** 资讯详情-评论列表-评论删除 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_delete_comment")
     @AndroidFindBy(id="com.tnaot.news:id/tv_delete_comment")
     MobileElement deleteComment;
     /** 资讯详情-评论列表-评论删除-确定 */
@@ -301,6 +344,7 @@ public class NewsPage extends AppiumBaseExecutor {
 //    MobileElement commentPush;
 
     /** 图文资讯详情-换一批 */
+    //@FindElementBy(type = "name", value = "换一批")
     @AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '换一批')]")
     MobileElement changeContactList;
 
@@ -315,6 +359,28 @@ public class NewsPage extends AppiumBaseExecutor {
     /** 资讯详情-阅读资讯30秒-获取金币弹窗 */
     @AndroidFindBy(id="com.tnaot.news:id/ivBackground")
     MobileElement getCoinsOverlay;
+
+
+    /** 图集资讯详情-换一批-四条相关资讯图集 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/textView")
+    @AndroidFindBy(id="com.tnaot.news:id/textView")
+    MobileElement relativeNewsList;
+    /** 图集资讯详情-图片页数 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_img_count")
+    @AndroidFindBy(id="com.tnaot.news:id/tv_img_count")
+    MobileElement imgCount;
+
+
+    /** 资讯列表-资讯title */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_title")
+    //@AndroidFindBy(id="com.tnaot.news:id/tv_title")
+    MobileElement newsTitleList;
+    /** 资讯列表-置顶-红色字样 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_top")
+    //@AndroidFindBy(id="com.tnaot.news:id/tv_title")
+    MobileElement topNewsListLogo;
+
+
 
 
 
@@ -366,6 +432,9 @@ public class NewsPage extends AppiumBaseExecutor {
     //@AndroidFindBy(xpath="//*[contains(@text, '综合')]")
     @AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '综合')]")
     MobileElement comprehensiveTab;
+
+
+
 
 
 

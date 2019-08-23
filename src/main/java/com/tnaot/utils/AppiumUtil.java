@@ -225,7 +225,12 @@ public class AppiumUtil {
     public static MobileElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator) {
         //System.out.println(locatorMap+"+++++++++++++++++++++++++++++++++++++++++");
         //locator = getLocator(locatorName);
-        WebElement webElement = driver.findElement(getBy(locator));
+        WebElement webElement = null;
+        if (locator.getBy() == Locator.ByType.accessibilityId) {
+            webElement = driver.findElementByAccessibilityId(locator.getElement());
+        } else {
+            webElement = driver.findElement(getBy(locator));
+        }
         return (MobileElement)webElement;
     }
 
@@ -233,7 +238,12 @@ public class AppiumUtil {
         return getMobileElement(SelectDriver.getAppiumDriver(), locator,index);
     }
     public static MobileElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator, int index) {
-        WebElement webElement = driver.findElements(getBy(locator)).get(index);
+        WebElement webElement = null;
+        if (locator.getBy() == Locator.ByType.accessibilityId) {
+            webElement = driver.findElementsByAccessibilityId(locator.getElement()).get(index);
+        } else {
+            webElement = driver.findElements(getBy(locator)).get(index);
+        }
         return (MobileElement)webElement;
     }
 
@@ -251,6 +261,9 @@ public class AppiumUtil {
             case name:
                 logger.debug("find element By name");
                 by = By.name(locator.getElement());
+                break;
+            case accessibilityId:
+                logger.debug("find element By accessibilityId");
                 break;
             case cssSelector:
                 logger.debug("find element By cssSelector");
