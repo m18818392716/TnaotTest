@@ -20,6 +20,8 @@ public class SelectDriver {
     public DesiredCapabilities capabilities;
     //声明ITestContext，用于获取testng配置文件内容
     public ITestContext testContext;
+    //测试环境environment
+    public String environment;
     //appium server地址
     public String serverURL;
     //测试引擎名字
@@ -58,6 +60,8 @@ public class SelectDriver {
     public static Logger logger = Logger.getLogger(SelectDriver.class);
 
     public AppiumDriver<WebElement> selectDriver(ITestContext context, AppiumUtil appiumUtil) {
+        //测试环境environment
+        environment = context.getCurrentXmlTest().getParameter("environment");
         //通过testng的xml文件获取serverURL参数值，并赋给  serverURL变量
         serverURL = context.getCurrentXmlTest().getParameter("serverURL");
 //        //通过testng的xml文件获取automationName参数值，并赋给  automationName变量
@@ -74,11 +78,14 @@ public class SelectDriver {
         iosAppPath = context.getCurrentXmlTest().getParameter("iosAppPath");
         //通过testng的xml文件获取appPackage参数值，并赋给  appPackage变量
         appPackage = context.getCurrentXmlTest().getParameter("appPackage");
-        if (androidAppPath.contains("release")) {
-            ExcelUtil.excelPath = "ProduceTnaot.xls";
-        } else {
-            ExcelUtil.excelPath = "TestTnaot_1.xls";
-        }
+
+//        if (androidAppPath.contains("release")) {
+//            ExcelUtil.excelPath = "ProduceTnaot.xls";
+//        } else {
+//            ExcelUtil.excelPath = "TestTnaot_1.xls";
+//        }
+
+
         //通过testng的xml文件获取appActivity参数值，并赋给  appActivity变量
         appActivity = context.getCurrentXmlTest().getParameter("appActivity");
 //        //通过testng的xml文件获取unicodeKeyboard参数值，并赋给  unicodeKeyboard变量
@@ -116,9 +123,17 @@ public class SelectDriver {
             /**
              * 设置和android  测试相关的capability并实例化driver对象
              * */
-            File app = new File(classpathRoot, androidAppPath);
-            logger.info("App: " + app.getAbsolutePath());
-            capabilities.setCapability("app", app.getAbsolutePath());
+            if (environment.equalsIgnoreCase("test")) {//测试环境
+                ExcelUtil.excelPath = "TestTnaot_1.xls";
+                File app = new File(classpathRoot, "src/main/resources/news_v3.1.0_google_debug_20190808.apk");
+                logger.info("App: " + app.getAbsolutePath());
+                capabilities.setCapability("app", app.getAbsolutePath());
+            } else {//正式环境
+                ExcelUtil.excelPath = "ProduceTnaot.xls";
+                File app = new File(classpathRoot, "src/main/resources/news_v3.1.0_google_release_20190815.apk");
+                logger.info("App: " + app.getAbsolutePath());
+                capabilities.setCapability("app", app.getAbsolutePath());
+            }
             capabilities.setCapability("unicodeKeyboard", unicodeKeyboard);
             capabilities.setCapability("resetKeyboard", resetKeyboard);
             capabilities.setCapability("automationName", automationName);
@@ -136,9 +151,17 @@ public class SelectDriver {
             /**
              * 设置和ios  测试相关的capability并实例化driver对象
              * */
-            File app = new File(classpathRoot, iosAppPath);
-            logger.info("App: " + app.getAbsolutePath());
-            capabilities.setCapability("app", app.getAbsolutePath());
+            if (environment.equalsIgnoreCase("test")) {
+                ExcelUtil.excelPath = "TestTnaot_1.xls";
+                File app = new File(classpathRoot, "src/main/resources/Tnaot_test.ipa");
+                logger.info("App: " + app.getAbsolutePath());
+                capabilities.setCapability("app", app.getAbsolutePath());
+            } else {
+                ExcelUtil.excelPath = "ProduceTnaot.xls";
+                File app = new File(classpathRoot, "src/main/resources/Tnaot_produce.ipa");
+                logger.info("App: " + app.getAbsolutePath());
+                capabilities.setCapability("app", app.getAbsolutePath());
+            }
             //ios设置自动接收系统alert，注意IOS弹出的alert，APPIUM可以自动处理掉，支持ios8以上系统
             capabilities.setCapability("autoAcceptAlerts", true);
             appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities, platformName));
