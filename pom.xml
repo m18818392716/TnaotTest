@@ -238,14 +238,17 @@
                         <!--<value>false</value>-->
                         <!-- excel数据表的位置，此为resource下的文件路径 -->
                         <environment>${excelPath}</environment>
+                        <env>${env}</env>
 
                     </systemPropertyVariables>
 
                     <!--测试失败后，是否忽略并继续测试-->
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
-                        -Dfile.encoding=UTF-8
+                        -Dfile.encoding=UTF-8 -Xmx1024m -XX:MaxPermSize=256m
                     </argLine>
+
+                    <reportsDirectory>target/surefire-reports</reportsDirectory>
 
                     <!--<suiteXmlFiles>-->
                         <!--&lt;!&ndash;代表的是要执行的测试套件名称&ndash;&gt;-->

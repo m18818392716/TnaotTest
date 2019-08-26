@@ -1,6 +1,5 @@
 package com.tnaot.demo;
 
-import com.sun.deploy.security.WIExplorerSigningCertStore;
 import com.tnaot.core.AndroidDriverWait;
 import com.tnaot.utils.*;
 import com.tnaot.utils.AppiumUtils.SwipeUtils;

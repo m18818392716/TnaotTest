@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+
+    <test verbose="2" preserve-order="true" name="Google Nexus 6">
+        <parameter name="report.config" value="src/main/resources/config/extent-config.xml" />
+        <parameter name="system.info" value="com.tnaot.utils.extentutils.MySystemInfo" />
+        <parameter name="environment" value="produce" />
+        <parameter name="serverURL" value="http://127.0.0.1:4723/wd/hub"/>
+        <parameter name="automationName" value="Appium"/>
+        <parameter name="platformName" value="iOS"/>
+
+        <parameter name="platformVersion" value="11.2"/>
+        <parameter name="deviceName" value="iPhone 6"/>
+
+        <parameter name="appPackage" value="com.tnaot.news"/>
+        <parameter name="appActivity" value=".mctnews.detail.activity.MainActivity"/>
+        <parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190808.ipa"/>
+        <parameter name="elementTimeOut" value="10"/>
+        <classes>
+            <class name="com.tnaot.demo.TestCaseFactory"/>
+        </classes>
+    </test>
+
+    <!--用例失败重跑机制-->
+    <listeners>
+        <!--失败重试-->
+        <listener class-name="com.tnaot.utils.listener.TestRunnerListener" />
+        <!--<listener class-name="com.tnaot.utils.listener.RetryListener"/>-->
+
+        <!-- 控制TestCase执行顺序 -->
+        <listener class-name="com.tnaot.utils.listener.TestCaseInterceptor"/>
+
+        <!--生成extent report-->
+        <listener class-name="com.vimalselvam.testng.listener.ExtentTestNgFormatter" />
+        <listener class-name="com.tnaot.utils.extentutils.ExtentReporterNGListener" />
+
+
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+        <listener class-name="org.uncommons.reportng.HTMLReporter" />
+    </listeners>
+
+</suite>

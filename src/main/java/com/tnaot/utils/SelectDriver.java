@@ -61,7 +61,8 @@ public class SelectDriver {
 
     public AppiumDriver<WebElement> selectDriver(ITestContext context, AppiumUtil appiumUtil) {
         //测试环境environment
-        environment = context.getCurrentXmlTest().getParameter("environment");
+        //environment = context.getCurrentXmlTest().getParameter("environment");
+
         //通过testng的xml文件获取serverURL参数值，并赋给  serverURL变量
         serverURL = context.getCurrentXmlTest().getParameter("serverURL");
 //        //通过testng的xml文件获取automationName参数值，并赋给  automationName变量
