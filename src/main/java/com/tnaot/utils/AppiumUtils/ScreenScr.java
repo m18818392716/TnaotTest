@@ -18,12 +18,14 @@ public class ScreenScr {
         try {
             //((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(cyrPatn+"\\img\\"+filename+".png");
             FileUtils.copyFile(scrfile, new File(cyrPatn+"\\img\\"+filename+".png"));
+            //FileUtils.copyFile(scrfile, new File(cyrPatn+"\\target\\img\\"+filename+".png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             System.out.println("GetScreenshot Fail");
         }finally{
             System.out.println("GetScreenshot Successful"+cyrPatn+"\\img\\"+filename+".png");
+            //System.out.println("GetScreenshot Successful"+cyrPatn+"\\target\\img\\"+filename+".png");
         }
 
     }
