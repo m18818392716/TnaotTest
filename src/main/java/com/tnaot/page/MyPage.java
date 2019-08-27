@@ -1,5 +1,6 @@
 package com.tnaot.page;
 
+import com.tnaot.anotation.FindElementBy;
 import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -168,14 +169,49 @@ public class MyPage extends AppiumBaseExecutor {
     /** 提现 */
     @AndroidFindBy(id="com.tnaot.news:id/tvCashWithdrawal")
     MobileElement tvCashWithdrawal;
+    /** 提现-详情页-title */
+    @FindElementBy(type = "accessibilityId", value = "提现")
+    MobileElement tvCashWithdrawalDetail;
+
+    /** 提现-金额-$1 */
+    @FindElementBy(type = "accessibilityId", value = "$1")
+    MobileElement tvCashWithdrawalAmount1;
+    /** 提现-金额-$2 */
+    @FindElementBy(type = "accessibilityId", value = "$2")
+    MobileElement tvCashWithdrawalAmount2;
+    /** 提现-金额-$5 */
+    @FindElementBy(type = "accessibilityId", value = "$5")
+    MobileElement tvCashWithdrawalAmount3;
+    /** 提现-金额-$10 */
+    @FindElementBy(type = "accessibilityId", value = "$10")
+    MobileElement tvCashWithdrawalAmount4;
+    /** 提现-金额-$20 */
+    @FindElementBy(type = "accessibilityId", value = "$20")
+    MobileElement tvCashWithdrawalAmount5;
+    /** 提现-金额-$30 */
+    @FindElementBy(type = "accessibilityId", value = "$30")
+    MobileElement tvCashWithdrawalAmount6;
+    /** 提现-立即提现 */
+    @FindElementBy(type = "accessibilityId", value = "立即提现")
+    MobileElement toCashWithdrawal;
+
+
 
     /** 账单 */
     @AndroidFindBy(id="com.tnaot.news:id/tvBill")
     MobileElement tvBill;
+    /** 账单-详情页-title */
+    @FindElementBy(type = "accessibilityId", value = "兑换记录")
+    MobileElement tvBillDetail;
+
 
     /** 钱包 */
     @AndroidFindBy(id="com.tnaot.news:id/tvWallet")
     MobileElement tvWallet;
+    /** 钱包-详情页-title */
+    @FindElementBy(type = "accessibilityId", value = "我的钱包")
+    MobileElement tvWalletDetail;
+
 
 
     /** 收藏 */

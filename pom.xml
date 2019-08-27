@@ -249,6 +249,7 @@
                     </argLine>
 
                     <reportsDirectory>target/surefire-reports</reportsDirectory>
+                    <!--<reportsDirectory>test-output/surefire-reports</reportsDirectory>-->
 
                     <!--<suiteXmlFiles>-->
                         <!--&lt;!&ndash;代表的是要执行的测试套件名称&ndash;&gt;-->
