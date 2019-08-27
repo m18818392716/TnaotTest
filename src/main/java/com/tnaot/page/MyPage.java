@@ -410,7 +410,7 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/rl_user_tag")
     MobileElement myInfoHobby;
     /** 我的资料-兴趣标签-科技-手机 */
-    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='手机']")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='英超']")
     MobileElement hobbyScienceType1;
     /** 我的资料-兴趣标签-科技-互联网 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='互联网']")
@@ -426,7 +426,7 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement hobbyScienceType5;
 
     /** 我的资料-兴趣标签-体育-英超 */
-    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='英超']")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='二手车']")
     MobileElement hobbySportsType1;
     /** 我的资料-兴趣标签-体育-拳击 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='拳击']")
@@ -442,7 +442,7 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement hobbySportsType5;
 
     /** 我的资料-兴趣标签-汽车-二手车 */
-    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='二手车']")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='养生']")
     MobileElement hobbyCarType1;
     /** 我的资料-兴趣标签-汽车-保养 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='保养']")
@@ -459,7 +459,7 @@ public class MyPage extends AppiumBaseExecutor {
 
 
     /** 我的资料-兴趣标签-健康-养生 */
-    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='养生']")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='家居']")
     MobileElement hobbyHealthType1;
     /** 我的资料-兴趣标签-健康-减肥 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_user_tag'][@text='减肥']")
