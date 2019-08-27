@@ -49,6 +49,11 @@ public class ExcelUtil {
     private static ThreadLocal<Map<String, Result>> results = new ThreadLocal<>(); // caseId为key，保存对应Result
     private final static LogUtils logger = new LogUtils(ExcelUtil.class);
 
+    @Test
+    public void test(){
+        readAllExcel();
+    }
+
     public static void readAllExcel() {
         readCaseExcel();
         readCaseStepExcel();
@@ -134,7 +139,7 @@ public class ExcelUtil {
                     Row row = sheet.getRow(i);
                     if (row != null && row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
                         CaseStep caseStep = new CaseStep();
-//                        System.out.println("Preset Excel Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
+//                        System.out.println("Preset Excel Sheet:" + sheetIndex +" Row:"+row.getRowNum()+" CellTotalNum:"+row.getPhysicalNumberOfCells());
 
                         for (Cell cell : row) {
                             // 如果dataNum列不为空，则把将对应要使用的数据取出来，存放在data变量里面
