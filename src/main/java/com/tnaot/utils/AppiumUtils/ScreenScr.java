@@ -17,8 +17,8 @@ public class ScreenScr {
 
         try {
             //((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(cyrPatn+"\\img\\"+filename+".png");
-            FileUtils.copyFile(scrfile, new File(cyrPatn+"\\img\\"+filename+".png"));
-            //FileUtils.copyFile(scrfile, new File(cyrPatn+"\\target\\img\\"+filename+".png"));
+            //FileUtils.copyFile(scrfile, new File(cyrPatn+"\\img\\"+filename+".png"));
+            FileUtils.copyFile(scrfile, new File(cyrPatn+"\\target\\surefire-reports\\img\\"+filename+".png"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
