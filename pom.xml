@@ -249,8 +249,8 @@
                         -Dfile.encoding=UTF-8 -Xmx1024m -XX:MaxPermSize=256m
                     </argLine>
 
-                    <reportsDirectory>target/surefire-reports</reportsDirectory>
-                    <!--<reportsDirectory>test-output/surefire-reports</reportsDirectory>-->
+                    <!--<reportsDirectory>target/surefire-reports</reportsDirectory>-->
+                    <reportsDirectory>test-output/surefire-reports</reportsDirectory>
 
                     <!--<suiteXmlFiles>-->
                         <!--&lt;!&ndash;代表的是要执行的测试套件名称&ndash;&gt;-->
