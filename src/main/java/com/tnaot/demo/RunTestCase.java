@@ -140,6 +140,7 @@ public class RunTestCase implements ITest {
     private void runLoginByUserId(String userId) {
         List<CaseStep> caseSteps = ExcelUtil.getCaseSteps().get(LOGIN_CASE_ID);
         User user = ExcelUtil.getUsers().get(userId);
+        System.out.println("Run Login User: " + user);
         for(CaseStep caseStep : caseSteps){
             if(LOGIN_PHONE_NUMBER_ELEMENT.equals(caseStep.getElementPath())){
                 caseStep.setData(user.getPhoneNumber());

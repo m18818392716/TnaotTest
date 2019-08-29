@@ -64,20 +64,20 @@ public class MyPage extends AppiumBaseExecutor {
 
 
     /** 我的头像-动态列表-第一个转发的资讯-标题 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.TextView")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_news_content")
     MobileElement dynamicListNewsTitle;
     /** 我的头像-动态列表-第一个发布的动态-内容 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.TextView")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_content_comment")
     MobileElement dynamicListDynamicTitle;
 
     /** 我的头像-生活列表-第一个生活的动态（转发并评论）-内容 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.TextView")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_content_comment")
     MobileElement lifeListContent;
     /** 我的头像-生活列表-第一个生活的动态（转发并评论）-标题 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.TextView")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_news_content")
     MobileElement lifeListNewsTitle;
     /** 我的头像-生活列表-第一个生活的动态（转发并评论）-更多 */
-    @AndroidFindBy(xpath="//hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ScrollView/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RelativeLayout/android.widget.ImageView")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/iv_delete")
     MobileElement lifeListMore;
     /** 我的头像-生活列表-第一个生活的动态（转发并评论）-更多-删除 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_delete")
@@ -201,7 +201,7 @@ public class MyPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tvBill")
     MobileElement tvBill;
     /** 账单-详情页-title */
-    @FindElementBy(type = "accessibilityId", value = "兑换记录")
+    @FindElementBy(type = "accessibilityId", value = "账单")
     MobileElement tvBillDetail;
 
 
@@ -235,25 +235,19 @@ public class MyPage extends AppiumBaseExecutor {
 
 
     /** 收藏资讯列表-发布时间 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[3]")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_time")
     MobileElement releaseTime;
     /** 收藏资讯列表-作者 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tvAuthor")
     MobileElement releaseAuthor;
     /** 收藏资讯列表-标题 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_title")
     MobileElement releaseTitle;
 
 
     /** 收藏生活列表-标题 */
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RelativeLayout/android.widget.TextView[1]")
     MobileElement collectLifeListTitle;
-
-
-
-
-
-
 
 
 
@@ -275,17 +269,26 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement historyLifeList;
 
     /** 历史-资讯列表-标题 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_title")
     MobileElement historyTitle;
     /** 历史-资讯列表-作者 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tvAuthor")
     MobileElement historyAuthor;
     /** 历史-资讯列表-发布时间 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.widget.LinearLayout/android.widget.TextView[3]")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_time")
     MobileElement historyReleaseTime;
 
+
+    /** 历史-资讯列表-动态--作者 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_name")
+    MobileElement historyDynamicAuthor;
+    /** 历史-资讯列表-动态-发布时间 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_content")
+    MobileElement historyDynamicContent;
+
+
     /** 历史-生活列表-标题 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RelativeLayout/android.widget.TextView[1]")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_life_content")
     MobileElement historyLifeListTitle;
 
 
