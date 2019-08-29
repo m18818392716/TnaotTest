@@ -19,6 +19,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 @Data
+@SuppressWarnings("unchecked")
 public class LoginStep implements ITest {
 
     @BeforeSuite

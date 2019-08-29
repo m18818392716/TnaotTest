@@ -14,6 +14,7 @@ import io.appium.java_client.android.AndroidDriver;
 
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("deprecation")
 public class AndroidDriverWait extends FluentWait<AndroidDriver> {
 
     public final static long DEFAULT_SLEEP_TIMEOUT = 500;

@@ -107,10 +107,10 @@ public class ExcelUtil {
                 }
             }
 
-            System.out.println("Case excel数据：");
-            for (String key : ExcelUtil.getTestCases().keySet()) {
-                System.out.println(key + " : " + ExcelUtil.getTestCases().get(key));
-            }
+//            System.out.println("Case excel数据：");
+//            for (String key : ExcelUtil.getTestCases().keySet()) {
+//                System.out.println(key + " : " + ExcelUtil.getTestCases().get(key));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Read Case Excel Fail!");
@@ -167,10 +167,10 @@ public class ExcelUtil {
                     }
                 }
             }
-            System.out.println("Step excel数据：");
-            for (String key : ExcelUtil.getCaseSteps().keySet()) {
-                System.out.println(key + " : " + ExcelUtil.getCaseSteps().get(key));
-            }
+//            System.out.println("Step excel数据：");
+//            for (String key : ExcelUtil.getCaseSteps().keySet()) {
+//                System.out.println(key + " : " + ExcelUtil.getCaseSteps().get(key));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Read Step Excel Fail!");
@@ -226,10 +226,10 @@ public class ExcelUtil {
                     }
                 }
             }
-            System.out.println("Case Assert Step excel数据：");
-            for (String key : ExcelUtil.getAssertSteps().keySet()) {
-                System.out.println(key + " : " + ExcelUtil.getAssertSteps().get(key));
-            }
+//            System.out.println("Case Assert Step excel数据：");
+//            for (String key : ExcelUtil.getAssertSteps().keySet()) {
+//                System.out.println(key + " : " + ExcelUtil.getAssertSteps().get(key));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Read Case Assert Step Excel Fail!");
@@ -282,10 +282,10 @@ public class ExcelUtil {
                 }
             }
 
-            System.out.println("Global Step excel数据：");
-            for (String key : ExcelUtil.getGlobalSteps().keySet()) {
-                System.out.println(key + " : " + ExcelUtil.getGlobalSteps().get(key));
-            }
+//            System.out.println("Global Step excel数据：");
+//            for (String key : ExcelUtil.getGlobalSteps().keySet()) {
+//                System.out.println(key + " : " + ExcelUtil.getGlobalSteps().get(key));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Read Global Step Excel Fail!");
@@ -342,10 +342,10 @@ public class ExcelUtil {
                     }
                 }
             }
-            System.out.println("Constant Step excel数据：");
-            for (String key : ExcelUtil.getConstantSteps().keySet()) {
-                System.out.println(key + " : " + ExcelUtil.getConstantSteps().get(key));
-            }
+//            System.out.println("Constant Step excel数据：");
+//            for (String key : ExcelUtil.getConstantSteps().keySet()) {
+//                System.out.println(key + " : " + ExcelUtil.getConstantSteps().get(key));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Constant Read Step Excel Fail!");
@@ -380,10 +380,10 @@ public class ExcelUtil {
                 }
             }
 
-            System.out.println("User excel数据：");
-            for (String key : ExcelUtil.getUsers().keySet()) {
-                System.out.println(key + " : " + ExcelUtil.getUsers().get(key));
-            }
+//            System.out.println("User excel数据：");
+//            for (String key : ExcelUtil.getUsers().keySet()) {
+//                System.out.println(key + " : " + ExcelUtil.getUsers().get(key));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Read User Excel Fail!");
