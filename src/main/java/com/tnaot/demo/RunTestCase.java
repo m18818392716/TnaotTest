@@ -2,34 +2,27 @@ package com.tnaot.demo;
 
 import com.tnaot.core.AndroidDriverWait;
 import com.tnaot.utils.*;
-import com.tnaot.utils.AppiumUtils.SwipeUtils;
 import com.tnaot.utils.entity.*;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.ITest;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public class RunTestCase implements ITest {
 
     public static ThreadLocal<TestCase> lastTestCase = new ThreadLocal<>();

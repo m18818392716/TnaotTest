@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import io.appium.java_client.AppiumDriver;
 
+@SuppressWarnings("unchecked")
 public class SelectDriver {
 
     //声明driver
@@ -124,12 +125,12 @@ public class SelectDriver {
             /**
              * 设置和android  测试相关的capability并实例化driver对象
              * */
-            if (environment.equalsIgnoreCase("test")) {//测试环境
+            if (environment.equalsIgnoreCase("test")) {// 测试环境
                 ExcelUtil.excelPath = "TestTnaot_1.xls";
                 File app = new File(classpathRoot, "src/main/resources/news_v3.1.0_google_debug_20190808.apk");
                 logger.info("App: " + app.getAbsolutePath());
                 capabilities.setCapability("app", app.getAbsolutePath());
-            } else {//正式环境
+            } else {// 正式环境
                 ExcelUtil.excelPath = "ProduceTnaot.xls";
                 File app = new File(classpathRoot, "src/main/resources/news_v3.1.0_google_release_20190815.apk");
                 logger.info("App: " + app.getAbsolutePath());

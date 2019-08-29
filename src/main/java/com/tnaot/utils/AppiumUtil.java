@@ -27,6 +27,7 @@ import org.testng.ITestResult;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
+@SuppressWarnings("unchecked")
 public class AppiumUtil {
 
     public AppiumDriver<WebElement> driver;
