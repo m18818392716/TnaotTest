@@ -2,8 +2,10 @@ package com.tnaot.utils.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class CaseStep {
+public class CaseStep implements Serializable {
 
     private String caseId;
     private String stepNum;

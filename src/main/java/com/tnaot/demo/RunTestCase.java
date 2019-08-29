@@ -8,6 +8,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -18,9 +19,7 @@ import org.testng.ITest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class RunTestCase implements ITest {
@@ -126,7 +125,9 @@ public class RunTestCase implements ITest {
         return false;
     }
 
-    public static final String LOGIN_CASE_ID = "login_001";
+
+    public static List<CaseStep> userLoginStep = new ArrayList<>(); // 原登录用例数据
+    public static final String LOGIN_CASE_ID = "login_001"; // 登录用例ID
     public static final String LOGIN_PHONE_NUMBER_ELEMENT = "LoginPage.phoneText";
     public static final String LOGIN_PASSWORD_ELEMENT = "LoginPage.pwdText";
     public static final String LOGIN_USER_NAME_ELEMENT = "MyPage.userName";
@@ -154,6 +155,8 @@ public class RunTestCase implements ITest {
             }
         }
         runCase(LOGIN_CASE_ID);
+        // 复原登录用例数据
+        ExcelUtil.getCaseSteps().put(LOGIN_CASE_ID, userLoginStep);
     }
 
     private void executeGlobalStep(String elementPath){

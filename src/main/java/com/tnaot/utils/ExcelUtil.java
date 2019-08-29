@@ -1,5 +1,6 @@
 package com.tnaot.utils;
 
+import com.tnaot.demo.RunTestCase;
 import com.tnaot.utils.entity.*;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -61,6 +62,9 @@ public class ExcelUtil {
         readGlobalStepExcel();
         readUserExcel();
         readConstantStepExcel();
+        if(getCaseSteps().get(RunTestCase.LOGIN_CASE_ID) != null){
+            RunTestCase.userLoginStep = getCaseSteps().get(RunTestCase.LOGIN_CASE_ID);
+        }
     }
 
     public static void readCaseExcel() {
@@ -295,7 +299,7 @@ public class ExcelUtil {
 
     public static void readConstantStepExcel() {
 
-        logger.info("Constant Read Step Excel Start!");
+        logger.info("Read Constant Step Excel Start!");
         try {
             Workbook wb = ExcelUtil.getWorkbook();
             String[] sheet_array = CONSTANT_STEP_SHEET_INDEX.split(",");
@@ -348,9 +352,9 @@ public class ExcelUtil {
 //            }
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("Constant Read Step Excel Fail!");
+            Assert.fail("Read Constant Step Excel Fail!");
         }
-        logger.info("Constant Read Step Excel End!");
+        logger.info("Read Constant Step Excel End!");
     }
 
     public static void readUserExcel() {
