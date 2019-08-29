@@ -129,6 +129,34 @@ public class NewsPage extends AppiumBaseExecutor {
     /** 资讯-频道列表img-小说 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '小说')]")
     MobileElement channelListNovel;
+    /** 资讯-频道列表img-本地 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '本地')]")
+    MobileElement channelListLocal;
+    /** 资讯-频道列表img-推薦 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '推薦')]")
+    MobileElement channelListLocal1;
+    /** 资讯-频道列表img-娛樂 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '娛樂')]")
+    MobileElement channelListEnjoy;
+    /** 资讯-频道列表img-體育 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '體育')]")
+    MobileElement channelListSports;
+    /** 资讯-频道列表img-社會 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '社會')]")
+    MobileElement channelListSocienty;
+    /** 资讯-频道列表img-健康 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '健康')]")
+    MobileElement channelListHealth;
+    /** 资讯-频道列表img-美食 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '美食')]")
+    MobileElement channelListFood;
+    /** 资讯-频道列表img-生活 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '生活')]")
+    MobileElement channelListLife;
+
+
+
+
     /** 资讯-频道列表img-关闭按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_close")
     MobileElement channelListCloseButton;
