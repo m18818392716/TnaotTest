@@ -126,7 +126,7 @@ public class SelectDriver {
              * */
             if (environment.equalsIgnoreCase("test")) {//测试环境
                 ExcelUtil.excelPath = "TestTnaot_1.xls";
-                File app = new File(classpathRoot, "src/main/resources/news_v3.1.0_google_debug_20190808.apk");
+                File app = new File(classpathRoot, "src/main/resources/news_v3.1.0_google_preview_20190828.apk");
                 logger.info("App: " + app.getAbsolutePath());
                 capabilities.setCapability("app", app.getAbsolutePath());
             } else {//正式环境

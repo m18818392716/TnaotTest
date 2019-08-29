@@ -78,7 +78,8 @@ public class ExtentReporterNGListener implements IReporter {
                   //test.log(status, test.addScreenCapture("./img/"+result.getMethod().getMethodName()+".png"));
 
                   //test.log(status, test.addScreenCapture("../img/"+result.getTestName()+".png"));//直接运行绿色运行按钮生成test-output
-                  test.log(status, test.addScreenCapture("img/"+result.getTestName()+".png"));//通过maven命令进行运行
+                  //test.log(status, test.addScreenCapture("img/"+result.getTestName()+".png"));//通过maven命令进行运行
+                  test.log(status, test.addScreenCapture("./surefire-reports/img/"+result.getTestName()+".png"));//通过绿色按钮进行运行
                   test.log(status, result.getThrowable());
 
                 }

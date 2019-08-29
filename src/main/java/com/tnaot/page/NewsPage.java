@@ -124,10 +124,10 @@ public class NewsPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/iv_channel")
     MobileElement channelListButton;
     /** 资讯-频道列表img-图片 */
-    @AndroidFindBy(xpath="//*[contains(@text, '图片')]")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '图片')]")
     MobileElement channelListImage;
     /** 资讯-频道列表img-小说 */
-    @AndroidFindBy(xpath="//*[contains(@text, '小说')]")
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '小说')]")
     MobileElement channelListNovel;
     /** 资讯-频道列表img-关闭按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_close")
@@ -408,7 +408,7 @@ public class NewsPage extends AppiumBaseExecutor {
 
 
     /** 热搜词输入框 */
-    @AndroidFindBy(id="com.tnaot.news:id/tv_search_hot_text")
+    @AndroidFindBy(id="com.tnaot.news:id/ll_search")
     MobileElement searchText;
     /** 热搜词编辑框-输入内容 */
     @AndroidFindBy(id="com.tnaot.news:id/et_search_keywords")
@@ -418,20 +418,24 @@ public class NewsPage extends AppiumBaseExecutor {
     MobileElement searchButton;
     /** 热搜词编辑框-搜索按钮-搜索结果-图片 */
     @AndroidFindBy(xpath="//*[contains(@text, '图片')]")
-    //@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '图片')]")
     MobileElement imageTab;
     /** 热搜词编辑框-搜索按钮-搜索结果-视频 */
     @AndroidFindBy(xpath="//*[contains(@text, '视频')]")
-    //@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '视频')]")
     MobileElement videoTab;
     /** 热搜词编辑框-搜索按钮-搜索结果-生活 */
     @AndroidFindBy(xpath="//*[contains(@text, '生活')]")
-    //@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '生活')]")
     MobileElement lifeTab;
     /** 热搜词编辑框-搜索按钮-搜索结果-综合 */
     //@AndroidFindBy(xpath="//*[contains(@text, '综合')]")
     @AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '综合')]")
     MobileElement comprehensiveTab;
+
+    /** 热搜词编辑框-搜索按钮-搜索结果-图片、视频、综合-列表中的资讯标题 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_title")
+    MobileElement searchNewsListTitle;
+    /** 热搜词编辑框-搜索按钮-搜索结果-生活列表中的生活标题 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_life_content")
+    MobileElement searchLifeListTitle;
 
 
 

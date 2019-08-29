@@ -109,7 +109,7 @@ public class AppiumUtil {
             } else {
                 Method getMethod = getGetMethod(targetPage, pageElement);
                 Constructor constructor = targetPage.getConstructor(AppiumDriver.class);
-                Object pageObject = constructor.newInstance(SelectDriver.appiumDriver.get());
+                Object pageObject = constructor.newInstance(SelectDriver.getAppiumDriver());
                 mobileElement = (MobileElement) getMethod.invoke(pageObject);
             }
         } catch (Exception e) {
