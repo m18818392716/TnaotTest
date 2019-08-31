@@ -55,6 +55,8 @@ public class ExcelUtil {
         readAllExcel();
     }
 
+
+    public static List<CaseStep> userLoginStep = new ArrayList<>(); // 原登录用例数据
     public static void readAllExcel() {
         readCaseExcel();
         readCaseStepExcel();
@@ -63,7 +65,8 @@ public class ExcelUtil {
         readUserExcel();
         readConstantStepExcel();
         if(getCaseSteps().get(RunTestCase.LOGIN_CASE_ID) != null){
-            RunTestCase.userLoginStep = getCaseSteps().get(RunTestCase.LOGIN_CASE_ID);
+            List<CaseStep> caseSteps = CommonUtil.deepCopy(getCaseSteps().get(RunTestCase.LOGIN_CASE_ID));
+            userLoginStep = caseSteps;
         }
     }
 

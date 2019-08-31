@@ -126,7 +126,6 @@ public class RunTestCase implements ITest {
     }
 
 
-    public static List<CaseStep> userLoginStep = new ArrayList<>(); // 原登录用例数据
     public static final String LOGIN_CASE_ID = "login_001"; // 登录用例ID
     public static final String LOGIN_PHONE_NUMBER_ELEMENT = "LoginPage.phoneText";
     public static final String LOGIN_PASSWORD_ELEMENT = "LoginPage.pwdText";
@@ -157,7 +156,7 @@ public class RunTestCase implements ITest {
         }
         runCase(LOGIN_CASE_ID);
         // 复原登录用例数据
-        ExcelUtil.getCaseSteps().put(LOGIN_CASE_ID, userLoginStep);
+        ExcelUtil.getCaseSteps().put(LOGIN_CASE_ID, ExcelUtil.userLoginStep);
     }
 
     private void executeGlobalStep(String elementPath){
