@@ -132,17 +132,20 @@ public class NewsPage extends AppiumBaseExecutor {
     /** 资讯-频道列表img-本地 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '本地')]")
     MobileElement channelListLocal;
-    /** 资讯-频道列表img-推薦 */
-    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '推薦')]")
+    /** 资讯-频道列表img-推荐 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '推荐')]")
     MobileElement channelListLocal1;
-    /** 资讯-频道列表img-娛樂 */
-    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '娛樂')]")
+    /** 资讯-频道列表img-娱乐 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '娱乐')]")
     MobileElement channelListEnjoy;
-    /** 资讯-频道列表img-體育 */
-    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '體育')]")
+    /** 资讯-频道列表img-科技 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '科技')]")
+    MobileElement channelListTechno;
+    /** 资讯-频道列表img-体育 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '体育')]")
     MobileElement channelListSports;
-    /** 资讯-频道列表img-社會 */
-    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '社會')]")
+    /** 资讯-频道列表img-社会 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '社会')]")
     MobileElement channelListSocienty;
     /** 资讯-频道列表img-健康 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv'][contains(@text, '健康')]")

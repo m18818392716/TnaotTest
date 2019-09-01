@@ -12,4 +12,5 @@ public @interface FindElementBy {
 
     public String type() default "";
     public String value() default "";
+    public boolean isWeb() default false;
 }

@@ -1,11 +1,13 @@
 package com.tnaot.page;
 
+import com.tnaot.anotation.FindElementBy;
 import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Data;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Data
@@ -33,28 +35,28 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='房地产']")
     MobileElement estateSubType;
     /** 首页-房地产-二手房 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='二手房']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[1]", isWeb = true)
     MobileElement estateSubType1;
     /** 首页-房地产-新房 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='新房']")
+    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[2]")
     MobileElement estateSubType2;
     /** 首页-房地产-租房 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='租房']")
+    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[3]")
     MobileElement estateSubType3;
     /** 首页-房地产-写字楼 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='写字楼']")
+    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[4]")
     MobileElement estateSubType4;
     /** 首页-房地产-厂房 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='厂房']")
+    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[5]")
     MobileElement estateSubType5;
     /** 首页-房地产-仓库 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='仓库']")
+    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[6]")
     MobileElement estateSubType6;
     /** 首页-房地产-商铺 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='商铺']")
+    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[7]")
     MobileElement estateSubType7;
     /** 首页-房地产-土地 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='土地']")
+    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[8]")
     MobileElement estateSubType8;
 
     /** 首页-周边商家 */

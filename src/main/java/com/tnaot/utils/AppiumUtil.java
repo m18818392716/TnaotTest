@@ -34,6 +34,8 @@ public class AppiumUtil {
     public ITestResult it;
     public static final String PAGE_PACKAGE_PATH = "com.tnaot.page";
 
+    public static SelectDriver selectDriver = new SelectDriver();
+
     @Getter
     private WebElement webElement;
     /**
@@ -101,6 +103,9 @@ public class AppiumUtil {
             // 如果有FindElementBy注解，则进行解析，否则直接调用get方法
             if(findElementBy != null){
 //                System.out.println("解析FindElementBy注解, 属性：["+ elementPath +"]");
+                if (findElementBy.isWeb()) {
+                    selectDriver.getContextHandle(SelectDriver.getAppiumDriver());
+                }
                 if (index != -1) {
                     mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())),index);
                 } else {

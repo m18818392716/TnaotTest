@@ -1,10 +1,17 @@
 package com.tnaot.utils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.tnaot.enums.DriverContext;
 import io.appium.java_client.remote.MobileCapabilityType;
+import lombok.Data;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -12,7 +19,10 @@ import org.testng.ITestContext;
 import io.appium.java_client.AppiumDriver;
 
 @SuppressWarnings("unchecked")
+@Data
 public class SelectDriver {
+
+    private DriverContext driverContext = DriverContext.NATIVE_APP;
 
     //声明driver
 //    public  AppiumDriver<WebElement> driver;
@@ -146,7 +156,7 @@ public class SelectDriver {
             appiumDriver.set(appiumUtil.getDriver(serverURL, capabilities, platformName));
             testContext.setAttribute("APPIUM_DRIVER", appiumDriver.get());
 //            logger.info(PropertiesDataProvider.getTestData(appFilePath, appPackage)+"已经启动");这个地方刚才是这里出的错。这里的意思是获取你配置文件里面的值打印出来。也就是properties里面的。你里面没有写东西所以报错
-
+            //this.getContextHandle(getAppiumDriver());
 
             //如果测试平台是ios的话，执行下面这个if语句内容
         } else if (platformName.equalsIgnoreCase("ios")) {
@@ -183,5 +193,113 @@ public class SelectDriver {
 
     public static AppiumDriver getAppiumDriver() {
         return appiumDriver.get();
+    }
+
+
+    public void getContextHandle(AppiumDriver<WebElement> driver) {
+        Set<String> context = null ;
+        context = driver.getContextHandles();
+        for(String contextName : context) {
+            System.out.println(contextName);//打印当前上下文
+            if(contextName != null && contextName.contains("WEBVIEW_com.tnaot.news")){
+                //switchTo_WEBVIEW(driver);
+                driver.context("WEBVIEW");
+                //switchToWindowTitle("WEBVIEW");
+                driver.getPageSource();
+                return;
+            }
+        }
+
+
+
+//        for(int i=1;i<=5;i++){
+//            context = driver.getContextHandles();
+//            for(String contextName : context) {
+//                System.out.println(contextName);//打印当前上下文
+//                if(contextName!=null && contextName.contains("WEBVIEW_com.tnaot.news")||contextName.contains("WEBVIEW_com.tencent.mm:tools")){
+//                    switchTo_WEBVIEW(driver);
+//                    driver.getPageSource();
+//                    return;
+//                }
+//                //if(i==20) assert false;
+//            }
+//            //Log.goSleep(1);
+        AppiumUtil.sleep(500);
+
+    }
+
+    public void switchTo_WEBVIEW(AppiumDriver<WebElement> driver) {
+
+//        String targetContext;
+//        AppiumDriver appiumDriver = getAppiumDriver();
+//        List<String> contextList = new ArrayList<String>(appiumDriver.getContextHandles());
+//
+//
+//        if (DriverContext.WEBVIEW.equals(driverContext)) {
+//            targetContext = contestList.get(contestList.size() - 1);
+//
+//        } else {
+//            targetContext = contestList.get(0);
+//        }
+//
+//        appiumDriver.context(targetContext);
+//
+//        this.driverContext = driverContext;
+        //String str = appActivity;//检查当前APP
+        try {
+            if(appActivity.contains(".MainActivity")){
+                //driver.context("WEBVIEW_com.tnaot.news");
+                driver.context("WEBVIEW");
+                return;
+            }
+        } catch (Exception e) {
+
+        } finally{
+            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        }
+
+
+    }
+
+    public static void switchToWindowTitle(String windowTitle) {
+
+        AppiumDriver driver = getAppiumDriver();
+        try {
+            String currentHandle = driver.getWindowHandle();
+            Set<String> handles = driver.getWindowHandles();
+            for (String s : handles) {
+                if (s.equals(currentHandle))
+                    continue;
+                else {
+                    driver.switchTo().window(s);
+                    if (driver.getTitle().contains(windowTitle)) {
+                        System.out.println("Switch to window: "
+                                + windowTitle + " successfully!");
+                        break;
+                    } else
+                        continue;
+                }
+            }
+        } catch (NoSuchWindowException e) {
+            System.out.println("Window: " + windowTitle
+                    + " cound not found!" + e.fillInStackTrace());
+        }
+    }
+
+
+    /**
+     * Switch to NATIVE_APP or WEBVIEW
+     * @param sWindow window name
+     */
+    private void switchToWindow(String sWindow) {
+        LogManager.getLogger(this.getClass()).info("Swith to window: " + sWindow);
+        Set<String> contextNames = SelectDriver.getAppiumDriver().getContextHandles();
+        LogManager.getLogger(this.getClass()).info("Exists windows: " + contextNames.toString());
+        for (String contextName : contextNames) {
+            if (contextName.contains(sWindow)) {
+                SelectDriver.getAppiumDriver().context(contextName);
+                break;
+            }
+        }
     }
 }
