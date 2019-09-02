@@ -38,53 +38,89 @@ public class MainPage extends AppiumBaseExecutor {
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[1]", isWeb = true)
     WebElement estateSubType1;
     /** 首页-房地产-新房 */
-    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[2]")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[2]", isWeb = true)
     WebElement estateSubType2;
     /** 首页-房地产-租房 */
-    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[3]")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[3]", isWeb = true)
     WebElement estateSubType3;
     /** 首页-房地产-写字楼 */
-    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[4]")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[4]", isWeb = true)
     WebElement estateSubType4;
     /** 首页-房地产-厂房 */
-    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[5]")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[5]", isWeb = true)
     WebElement estateSubType5;
     /** 首页-房地产-仓库 */
-    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[6]")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[6]", isWeb = true)
     WebElement estateSubType6;
     /** 首页-房地产-商铺 */
-    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[7]")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[7]", isWeb = true)
     WebElement estateSubType7;
     /** 首页-房地产-土地 */
-    @FindBy(xpath="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[8]")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[8]", isWeb = true)
     WebElement estateSubType8;
+
+    /** 首页-房地产-列表-标题 */
+    @FindElementBy(type = "className", value="item-title", isWeb = true)
+    WebElement estateListTitle;
+    /** 首页-房地产-列表-面议方式 */
+    @FindElementBy(type = "className", value="money", isWeb = true)
+    WebElement estateListDiscussType;
+    /** 首页-房地产-列表-更多 */
+    @FindElementBy(type = "className", value="more", isWeb = true)
+    WebElement estateListMore;
+
+    /** 首页-房地产-列表详情-返回 */
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/span[1]/img", isWeb = true)
+    WebElement estateListDetailBack;
+    /** 首页-房地产-列表详情-收藏 */
+    @FindElementBy(type = "className", value="headerIcon", isWeb = true)
+    WebElement estateListDetailCollect;
+    /** 首页-房地产-列表详情-更多 */
+    @FindElementBy(type = "className", value="headerMoreIcon", isWeb = true)
+    WebElement estateListDetailMore;
+
+//    /** 首页-房地产-列表详情-标题 */
+//    @FindElementBy(type = "className", value="font-house-contactTitle", isWeb = true)
+//    WebElement estateListMore;
+//    /** 首页-房地产-列表详情-出售方式 */
+//    @FindElementBy(type = "className", value="more", isWeb = true)
+//    WebElement estateListMore;
+//    /** 首页-房地产-列表详情-面议方式 */
+//    @FindElementBy(type = "className", value="more", isWeb = true)
+//    WebElement estateListMore;
+
+
+
+
+
+
 
     /** 首页-周边商家 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='周边商家']")
     WebElement businessSubType;
     /** 首页-周边商家-美食 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='美食']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[1]", isWeb = true)
     WebElement businessSubType1;
     /** 首页-周边商家-娱乐 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='娱乐']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[2]", isWeb = true)
     WebElement businessSubType2;
     /** 首页-周边商家-旅行 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='旅行']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[3]", isWeb = true)
     WebElement businessSubType3;
     /** 首页-周边商家-购物 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='购物']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[4]", isWeb = true)
     WebElement businessSubType4;
     /** 首页-周边商家-健身 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='健身']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[5]", isWeb = true)
     WebElement businessSubType5;
     /** 首页-周边商家-医疗 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='医疗']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[6]", isWeb = true)
     WebElement businessSubType6;
     /** 首页-周边商家-教育 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='教育']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[7]", isWeb = true)
     WebElement businessSubType7;
     /** 首页-周边商家-服务 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='服务']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div/div[2]/div[2]/ul/li[8]", isWeb = true)
     WebElement businessSubType8;
 
 
@@ -92,28 +128,28 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='交易买卖']")
     WebElement tradeSubType;
     /** 首页-交易买卖-手机/平板 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='手机/平板']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[1]", isWeb = true)
     WebElement tradeSubType1;
     /** 首页-交易买卖-电子数码 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='电子数码']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[2]", isWeb = true)
     WebElement tradeSubType2;
     /** 首页-交易买卖-家电 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='家电']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[3]", isWeb = true)
     WebElement tradeSubType3;
     /** 首页-交易买卖-汽车 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='汽车']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[4]", isWeb = true)
     WebElement tradeSubType4;
     /** 首页-交易买卖-摩托车 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='摩托车']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[5]", isWeb = true)
     WebElement tradeSubType5;
     /** 首页-交易买卖-服装 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='服装']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[6]", isWeb = true)
     WebElement tradeSubType6;
     /** 首页-交易买卖-家居 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='家居']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[7]", isWeb = true)
     WebElement tradeSubType7;
     /** 首页-交易买卖-更多分类 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='更多分类']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[8]", isWeb = true)
     WebElement tradeSubType8;
 
     /** 首页-交易买卖-生活资讯列表第一条-标题 */
@@ -129,56 +165,56 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='折扣优惠']")
     WebElement discountSubType;
     /** 首页-折扣优惠-美食餐饮 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='美食餐饮']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[1]", isWeb = true)
     WebElement discountSubType1;
     /** 首页-折扣优惠-休闲娱乐 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='休闲娱乐']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[2]", isWeb = true)
     WebElement discountSubType2;
     /** 首页-折扣优惠-购物卖场 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='购物卖场']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[3]", isWeb = true)
     WebElement discountSubType3;
     /** 首页-折扣优惠-时尚女性 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='时尚女性']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[4]", isWeb = true)
     WebElement discountSubType4;
     /** 首页-折扣优惠-汽车服务 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='汽车服务']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[5]", isWeb = true)
     WebElement discountSubType5;
     /** 首页-折扣优惠-家居装饰 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='家居装饰']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[6]", isWeb = true)
     WebElement discountSubType6;
     /** 首页-折扣优惠-培训机构 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='培训机构']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[7]", isWeb = true)
     WebElement discountSubType7;
     /** 首页-折扣优惠-更多优惠 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='更多优惠']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[8]", isWeb = true)
     WebElement discountSubType8;
 
     /** 首页-便民服务 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='便民服务']")
     WebElement serviceSubType;
     /** 首页-便民服务-手机充值 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='手机充值']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[1]", isWeb = true)
     WebElement serviceSubType1;
     /** 首页-便民服务-本地黄页 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='本地黄页']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[2]", isWeb = true)
     WebElement serviceSubType2;
     /** 首页-便民服务-柬文翻译 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='柬文翻译']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[3]", isWeb = true)
     WebElement serviceSubType3;
     /** 首页-便民服务-本地汇率 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='本地汇率']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[4]", isWeb = true)
     WebElement serviceSubType4;
     /** 首页-便民服务-出入境指南 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='出入境指南']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[5]", isWeb = true)
     WebElement serviceSubType5;
     /** 首页-便民服务-柬文学习 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='柬文学习']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[6]", isWeb = true)
     WebElement serviceSubType6;
     /** 首页-便民服务-一键报警 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='一键报警']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[7]", isWeb = true)
     WebElement serviceSubType7;
     /** 首页-便民服务-寻人求助 */
-    @AndroidFindBy(xpath="//android.view.View[@content-desc='寻人求助']")
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[8]", isWeb = true)
     WebElement serviceSubType8;
 
 
@@ -225,6 +261,23 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-客服 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='客服']")
     WebElement secondTitle10;
+
+
+    /** 首页-手机充值 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_bottom_icon_title'][@text='手机充值']")
+    WebElement additional1;
+    /** 首页-租车打车 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_bottom_icon_title'][@text='租车打车']")
+    WebElement additional2;
+    /** 首页-商家入驻 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_bottom_icon_title'][@text='商家入驻']")
+    WebElement additional3;
+    /** 首页-新闻爆料 */
+    @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_bottom_icon_title'][@text='新闻爆料']")
+    WebElement additional4;
+
+
+
 
 
     /** 发布按钮 */
