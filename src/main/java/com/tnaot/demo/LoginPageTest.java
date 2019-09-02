@@ -52,7 +52,7 @@ public class LoginPageTest {
                 System.out.println("Found Use Case:" + uc.type() + " ---- "
                         + uc.value());
                 findElementBys.remove(new String(uc.type()));
-                WebElement webElement = AppiumUtil.getMobileElement(new Locator(uc.value(), Locator.ByType.valueOf(uc.type())));
+                WebElement webElement = AppiumUtil.getWebElement(new Locator(uc.value(), Locator.ByType.valueOf(uc.type())));
                 elementList.put(m.getName(),webElement);
             }
         }

@@ -6,5 +6,13 @@ package com.tnaot.enums;
  */
 public enum DriverContext {
 
-    NATIVE_APP, WEBVIEW;
+    NATIVE_APP("NATIVE_APP"), WEBVIEW("WEBVIEW");
+
+    private String driverContext;
+
+    DriverContext(String driverContext){
+        this.driverContext = driverContext;
+    }
+
+    public String getDriverContext(){ return driverContext; }
 }

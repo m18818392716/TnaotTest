@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.ITestResult;
 
@@ -82,6 +83,9 @@ public class AppiumUtil {
 
     // 根据elementPath获取WebElement
     public static WebElement getWebElement(String elementPath) {
+
+        //selectDriver.getContextHandle(SelectDriver.getAppiumDriver());
+
         WebElement webElement = null;
         String[] pathArray = elementPath.split("\\.");
         String pageClassName = pathArray[0];
@@ -104,7 +108,10 @@ public class AppiumUtil {
             if(findElementBy != null){
 //                System.out.println("解析FindElementBy注解, 属性：["+ elementPath +"]");
                 if (findElementBy.isWeb()) {
-                    selectDriver.getContextHandle(SelectDriver.getAppiumDriver());
+                    //selectDriver.getContextHandle(SelectDriver.getAppiumDriver());
+                    SelectDriver.getAppiumDriver().context("WEBVIEW_com.tnaot.news");
+                } else {
+                    SelectDriver.getAppiumDriver().context("NATIVE_APP");
                 }
                 if (index != -1) {
                     webElement = AppiumUtil.getWebElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())),index);
@@ -113,6 +120,7 @@ public class AppiumUtil {
                 }
 
             } else {
+                SelectDriver.getAppiumDriver().context("NATIVE_APP");
                 Method getMethod = getGetMethod(targetPage, pageElement);
                 Constructor constructor = targetPage.getConstructor(AppiumDriver.class);
                 Object pageObject = constructor.newInstance(SelectDriver.getAppiumDriver());

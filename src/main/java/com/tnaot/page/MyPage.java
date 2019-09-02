@@ -3,6 +3,7 @@ package com.tnaot.page;
 import com.tnaot.anotation.FindElementBy;
 import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Data;
@@ -172,6 +173,9 @@ public class MyPage extends AppiumBaseExecutor {
     /** 提现-详情页-title */
     @FindElementBy(type = "accessibilityId", value = "提现")
     WebElement tvCashWithdrawalDetail;
+    /** 提现-详情页-你尚未设置账号 */
+    @FindElementBy(type = "className", value = "none-accounts", isWeb = true)
+    MobileElement noSetAccount;
 
     /** 提现-金额-$1 */
     @FindElementBy(type = "accessibilityId", value = "$1")

@@ -11,14 +11,17 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.Data;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.stereotype.Component;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import io.appium.java_client.AppiumDriver;
 
 @SuppressWarnings("unchecked")
+@Component
 @Data
 public class SelectDriver {
 
@@ -201,10 +204,13 @@ public class SelectDriver {
         context = driver.getContextHandles();
         for(String contextName : context) {
             System.out.println(contextName);//打印当前上下文
-            if(contextName != null && contextName.contains("WEBVIEW_com.tnaot.news")){
-                //switchTo_WEBVIEW(driver);
-                driver.context("WEBVIEW");
-                //switchToWindowTitle("WEBVIEW");
+            //if(contextName != null && contextName.contains("WEBVIEW_com.tnaot.news")){
+            if(contextName.contains("WEBVIEW_com.tnaot.news")){
+                driver.context("WEBVIEW_com.tnaot.news");//切换至H5页面
+                System.out.println("已经进入webview");
+                System.out.println("当前context" + driver.getContext());
+                System.out.println(driver.getContext());
+                //driver.findElement(By.className("none-accounts")).click();
                 driver.getPageSource();
                 return;
             }
