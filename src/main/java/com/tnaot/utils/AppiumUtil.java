@@ -187,7 +187,7 @@ public class AppiumUtil {
     public static void clickElementIfExist(WebElement webElement) {
         try {
             webElement.click();
-        } catch (NoSuchElementException e){
+        } catch (WebDriverException e){
             logger.info("该元素不存在："+webElement);
         }
     }
