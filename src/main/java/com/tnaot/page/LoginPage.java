@@ -3,11 +3,11 @@ package com.tnaot.page;
 import com.tnaot.anotation.FindElementBy;
 import com.tnaot.core.AppiumBaseExecutor;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AndroidFindBys;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Data;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 @Data
@@ -20,100 +20,100 @@ public class LoginPage extends AppiumBaseExecutor {
 
     @FindElementBy(type="id", value="com.tnaot.news:id/tvLanguage")
     @AndroidFindBy(id="com.tnaot.news:id/tvLanguage")
-    MobileElement tvLanguage;
+    WebElement tvLanguage;
     @FindElementBy(type="id", value="com.tnaot.news:id/tvHistory")
     @AndroidFindBy(id="com.tnaot.news:id/tvHistory")
-    MobileElement tvHistory;
+    WebElement tvHistory;
 
 
     /** 初次安装页面弹框-是否允许获取当前位置 */
     @AndroidFindBy(id="com.android.packageinstaller:id/dialog_container")
-    MobileElement dialogContainer;
+    WebElement dialogContainer;
 
     /** 初次安装页面弹框-点击“允许” */
     @AndroidFindBy(id="com.android.packageinstaller:id/permission_allow_button")
-    MobileElement allowButton;
+    WebElement allowButton;
 
     /** 我的 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
-    MobileElement rlMine;
+    WebElement rlMine;
 
     /** 手机号登录 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_phone")
-    MobileElement phoneLoginType;
+    WebElement phoneLoginType;
 
     /** 区域 */
     @AndroidFindBy(id="com.tnaot.news:id/et_country")
-    MobileElement areaText;
+    WebElement areaText;
 
     /** 区域-选择 */
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.TextView[2]")
-    MobileElement areaSelect;
+    WebElement areaSelect;
 
     /** 区域-选择 */
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView")
-    MobileElement areaSelectJP;
+    WebElement areaSelectJP;
 
 
 
     /** 手机号 */
     @AndroidFindBy(id="com.tnaot.news:id/user_name")
-    MobileElement phoneText;
+    WebElement phoneText;
 
     /** 密码 */
     @AndroidFindBy(id="com.tnaot.news:id/user_pwd")
-    MobileElement pwdText;
+    WebElement pwdText;
 
     /** 登录按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/tvLogin")
-    MobileElement loginButton;
+    WebElement loginButton;
 
     /** 快速注册 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_quick_registration")
-    MobileElement quickRegistration;
+    WebElement quickRegistration;
 
     /** 忘记密码 */
     @AndroidFindBy(id="com.tnaot.news:id/tv_forget_pwd")
-    MobileElement forgetPwd;
+    WebElement forgetPwd;
 
     /** 第一条资讯 */
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/androidx.viewpager.widget.ViewPager/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout[1]/android.widget.TextView")
-    MobileElement newsOne;
+    WebElement newsOne;
 
     /** 收藏按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/ivFavorite")
-    MobileElement isCollect;
+    WebElement isCollect;
 
 
 
     /**  For Test */
 //    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.Switch[1]")
     @AndroidFindBy(id = "com.hsbc.personalbanking.MobileGPBUKUAT:id/accountSwitch")
-    MobileElement switch1;
+    WebElement switch1;
     //    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.Switch[2]")
     @AndroidFindBy(id = "com.hsbc.personalbanking.MobileGPBUKUAT:id/currencySwitchLess")
-    MobileElement switch2;
+    WebElement switch2;
     //    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[10]")
     @AndroidFindBy(id = "com.hsbc.personalbanking.MobileGPBUKUAT:id/go")
-    MobileElement goBtn;
+    WebElement goBtn;
 
     @AndroidFindBy(id = "com.hsbc.personalbanking.MobileGPBUKUAT:id/ivAllocationOff")
-    MobileElement allocationBtn;
+    WebElement allocationBtn;
 
     @AndroidFindBy(id = "com.hsbc.personalbanking.MobileGPBUKUAT:id/ivAllocationOn")
-    MobileElement allocationBtn1;
+    WebElement allocationBtn1;
 
     @AndroidFindBy(id = "com.hsbc.personalbanking.MobileGPBUKUAT:id/tvLeft")
-    MobileElement accountLable;
+    WebElement accountLable;
 
 
     /**  */
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.Switch[1]")
-    MobileElement openButton1;
+    WebElement openButton1;
 
     /**  */
     @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[10]")
-    MobileElement openButton2;
+    WebElement openButton2;
 
 
 }

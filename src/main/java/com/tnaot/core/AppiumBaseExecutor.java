@@ -42,7 +42,7 @@ public abstract class AppiumBaseExecutor implements AppiumAPI {
      *            the message
      */
     public void type(Locator locator, String message) {
-        MobileElement e = (MobileElement) findElement(locator);
+        WebElement e = (WebElement) findElement(locator);
         e.sendKeys(message);
 
     }
@@ -54,7 +54,7 @@ public abstract class AppiumBaseExecutor implements AppiumAPI {
      *            the locator
      */
     public void click(Locator locator) {
-        MobileElement e = (MobileElement) findElement(locator);
+        WebElement e = (WebElement) findElement(locator);
         e.click();
 
     }
@@ -85,37 +85,37 @@ public abstract class AppiumBaseExecutor implements AppiumAPI {
      *            the locator
      * @return the mobile element
      */
-    public MobileElement findElement(Locator locator) {
-        MobileElement e = null;
+    public WebElement findElement(Locator locator) {
+        WebElement e = null;
         switch (locator.getBy()) {
             case xpath:
-                e = (MobileElement) driver.findElementByXPath(locator.getElement());
+                e = driver.findElementByXPath(locator.getElement());
                 break;
             case id:
-                e = (MobileElement) driver.findElementById(locator.getElement());
+                e = driver.findElementById(locator.getElement());
                 break;
             case name:
-                e = (MobileElement) driver.findElementByName(locator.getElement());
+                e = driver.findElementByName(locator.getElement());
                 break;
             case cssSelector:
-                e = (MobileElement) driver.findElementByCssSelector(locator.getElement());
+                e = driver.findElementByCssSelector(locator.getElement());
                 break;
             case className:
-                e = (MobileElement) driver.findElementByClassName(locator.getElement());
+                e = driver.findElementByClassName(locator.getElement());
                 break;
             case tagName:
-                e = (MobileElement) driver.findElementByTagName(locator.getElement());
+                e = driver.findElementByTagName(locator.getElement());
                 break;
             case linkText:
-                e = (MobileElement) driver.findElementByLinkText(locator.getElement());
+                e = driver.findElementByLinkText(locator.getElement());
                 break;
             case partialLinkText:
-                e = (MobileElement) driver.findElementByPartialLinkText(locator.getElement());
+                e = driver.findElementByPartialLinkText(locator.getElement());
                 break;
             case accessibilityId:
-                e = (MobileElement) driver.findElementByAccessibilityId(locator.getElement());
+                e = driver.findElementByAccessibilityId(locator.getElement());
             case androidUIAutomator:
-                e = (MobileElement) ((AndroidDriver) driver).findElementByAndroidUIAutomator(locator.getElement());
+                e = ((AndroidDriver) driver).findElementByAndroidUIAutomator(locator.getElement());
                 break;
             case iOSUIAutomation:
                 break;

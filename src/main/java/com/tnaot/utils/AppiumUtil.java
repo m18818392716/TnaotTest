@@ -80,9 +80,9 @@ public class AppiumUtil {
         Assert.assertNotNull(showClose);
     }
 
-    // 根据elementPath获取MobileElement
-    public static MobileElement getMobileElement(String elementPath) {
-        MobileElement mobileElement = null;
+    // 根据elementPath获取WebElement
+    public static WebElement getWebElement(String elementPath) {
+        WebElement webElement = null;
         String[] pathArray = elementPath.split("\\.");
         String pageClassName = pathArray[0];
         String pageElementIndex = "";
@@ -107,21 +107,21 @@ public class AppiumUtil {
                     selectDriver.getContextHandle(SelectDriver.getAppiumDriver());
                 }
                 if (index != -1) {
-                    mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())),index);
+                    webElement = AppiumUtil.getWebElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())),index);
                 } else {
-                    mobileElement = AppiumUtil.getMobileElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())));
+                    webElement = AppiumUtil.getWebElement(new Locator(findElementBy.value(), Locator.ByType.valueOf(findElementBy.type())));
                 }
 
             } else {
                 Method getMethod = getGetMethod(targetPage, pageElement);
                 Constructor constructor = targetPage.getConstructor(AppiumDriver.class);
                 Object pageObject = constructor.newInstance(SelectDriver.getAppiumDriver());
-                mobileElement = (MobileElement) getMethod.invoke(pageObject);
+                webElement = (WebElement) getMethod.invoke(pageObject);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return mobileElement;
+        return webElement;
     }
 
     // 获取属性的get方法
@@ -176,11 +176,11 @@ public class AppiumUtil {
 
     }
 
-    public static void clickElementIfExist(MobileElement mobileElement) {
+    public static void clickElementIfExist(WebElement webElement) {
         try {
-            mobileElement.click();
+            webElement.click();
         } catch (NoSuchElementException e){
-            logger.info("该元素不存在："+mobileElement);
+            logger.info("该元素不存在："+webElement);
         }
     }
 
@@ -225,10 +225,10 @@ public class AppiumUtil {
 //    }
 //
 //
-    public static MobileElement getMobileElement(Locator locator) {
-        return getMobileElement(SelectDriver.getAppiumDriver(), locator);
+    public static WebElement getWebElement(Locator locator) {
+        return getWebElement(SelectDriver.getAppiumDriver(), locator);
     }
-    public static MobileElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator) {
+    public static WebElement getWebElement(AppiumDriver<WebElement> driver, Locator locator) {
         //System.out.println(locatorMap+"+++++++++++++++++++++++++++++++++++++++++");
         //locator = getLocator(locatorName);
         WebElement webElement = null;
@@ -237,20 +237,20 @@ public class AppiumUtil {
         } else {
             webElement = driver.findElement(getBy(locator));
         }
-        return (MobileElement)webElement;
+        return webElement;
     }
 
-    public static MobileElement getMobileElement(Locator locator,int index) {
-        return getMobileElement(SelectDriver.getAppiumDriver(), locator,index);
+    public static WebElement getWebElement(Locator locator, int index) {
+        return getWebElement(SelectDriver.getAppiumDriver(), locator,index);
     }
-    public static MobileElement getMobileElement(AppiumDriver<WebElement> driver, Locator locator, int index) {
+    public static WebElement getWebElement(AppiumDriver<WebElement> driver, Locator locator, int index) {
         WebElement webElement = null;
         if (locator.getBy() == Locator.ByType.accessibilityId) {
             webElement = driver.findElementsByAccessibilityId(locator.getElement()).get(index);
         } else {
             webElement = driver.findElements(getBy(locator)).get(index);
         }
-        return (MobileElement)webElement;
+        return webElement;
     }
 
     public static By getBy(Locator locator) {

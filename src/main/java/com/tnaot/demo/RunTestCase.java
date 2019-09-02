@@ -3,12 +3,10 @@ package com.tnaot.demo;
 import com.tnaot.core.AndroidDriverWait;
 import com.tnaot.utils.*;
 import com.tnaot.utils.entity.*;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -236,29 +234,29 @@ public class RunTestCase implements ITest {
 
     // 传入控件路径对控件执行操作
     private void executeAction(String elementPath, String action, String data) {
-        MobileElement mobileElement = null;
+        WebElement webElement = null;
         if (StringUtils.isNotBlank(elementPath)) {
-            mobileElement = AppiumUtil.getMobileElement(elementPath);
+            webElement = AppiumUtil.getWebElement(elementPath);
         }
         switch (action) {
             case ACTION_CLICK:
-                mobileElement.click();
+                webElement.click();
                 break;
             case ACTION_SEND_KEY:
-                mobileElement.clear();
-                mobileElement.sendKeys(data);
+                webElement.clear();
+                webElement.sendKeys(data);
                 break;
             case ACTION_CLEAR:
-                mobileElement.clear();
+                webElement.clear();
                 break;
             case COMPARE_TEXT:
-                Assert.assertTrue(mobileElement.getText().contains(data), "Element[" + mobileElement + "] not exsist!");
+                Assert.assertTrue(webElement.getText().contains(data), "Element[" + webElement + "] not exsist!");
                 break;
             case COMPARE_CONTENT_DESC_TEXT:
-                Assert.assertEquals(mobileElement.getAttribute("content-desc"), data, "Expected ["+ data +"],Actual ["+ mobileElement.getAttribute("content-desc")+"]!");
+                Assert.assertEquals(webElement.getAttribute("content-desc"), data, "Expected ["+ data +"],Actual ["+ webElement.getAttribute("content-desc")+"]!");
                 break;
             case IS_SELECTED:
-                Assert.assertTrue(mobileElement.isSelected());
+                Assert.assertTrue(webElement.isSelected());
                 break;
             case SLIDE_UP:
                 SlideScreen.slideUp(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
@@ -282,7 +280,7 @@ public class RunTestCase implements ITest {
                 SlideScreen.slideRight(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
                 break;
             case SLIDE_TO_TARGET:
-                SlideScreen.slideToTarget(mobileElement);
+                SlideScreen.slideToTarget(webElement);
                 break;
             case SLIDE_TO_End:
                 String endString = data.split("，")[0];
@@ -299,22 +297,22 @@ public class RunTestCase implements ITest {
 //                SlideScreen.swipeRightToEnd(SelectDriver.getAppiumDriver(), data);
 //                break;
             case SLIDE_LEFT_ELEMENT:
-                int h = mobileElement.getSize().getHeight();
-                int w = mobileElement.getSize().getWidth();
+                int h = webElement.getSize().getHeight();
+                int w = webElement.getSize().getWidth();
                 new TouchAction(SelectDriver.getAppiumDriver()).press(PointOption.point(w, h / 2)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5))) ).moveTo(PointOption.point(0, h / 2)).release().perform();
                 break;
             case SLIDE_RIGHT_ELEMENT:
-                int h1 = mobileElement.getSize().getHeight();
-                int w1 = mobileElement.getSize().getWidth();
+                int h1 = webElement.getSize().getHeight();
+                int w1 = webElement.getSize().getWidth();
                 new TouchAction(SelectDriver.getAppiumDriver()).press(PointOption.point(0, h1 / 2)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(5))) ).moveTo(PointOption.point(w1, h1 / 2)).release().perform();
                 break;
             case SLIDE_ELEMENT:
-                SlideScreen.slideElement(mobileElement, SlideScreen.Heading.valueOf(data));
+                SlideScreen.slideElement(webElement, SlideScreen.Heading.valueOf(data));
                 break;
             case SLIDE_ELEMENT_TO_TARGET:
                 String targetText = data.split("，")[0];
                 String dir = data.split("，")[1];
-                SlideScreen.slideElementToTarget(SelectDriver.getAppiumDriver(), targetText, mobileElement, SlideScreen.Heading.valueOf(dir));
+                SlideScreen.slideElementToTarget(SelectDriver.getAppiumDriver(), targetText, webElement, SlideScreen.Heading.valueOf(dir));
                 break;
             case TAP_POINT:
                 SlideScreen.tapPoint(SelectDriver.getAppiumDriver(), data);
@@ -327,37 +325,37 @@ public class RunTestCase implements ITest {
                 SlideScreen.tapPointMoveToPoint(SelectDriver.getAppiumDriver(), data);
                 break;
             case LONG_PRESS_ELEMENT:
-                SlideScreen.longPressElement(mobileElement);
+                SlideScreen.longPressElement(webElement);
                 break;
             case LONG_PRESS_POINT:
                 SlideScreen.longPressPoint(SelectDriver.getAppiumDriver(), data);
                 break;
             case IS_EXIST:
                 //判断元素是否存在后续需要自己封装方法
-                //mobileElement.isDisplayed();
-                Assert.assertTrue(mobileElement.isDisplayed(),"Element[" + mobileElement + "] not exsist!");
+                //webElement.isDisplayed();
+                Assert.assertTrue(webElement.isDisplayed(),"Element[" + webElement + "] not exsist!");
 
 //                driver.findElement(By.Xpath("//android.view.View[@content-desc='业务说明']");
 //                SelectDriver.getAppiumDriver().findElementByAccessibilityId("content-desc的值");
                 break;
             case ASSET_CONTEXT:
-                Assert.assertEquals(mobileElement.getText(), data);
+                Assert.assertEquals(webElement.getText(), data);
                 break;
             case CLICK_IF_EXIST:
-                AppiumUtil.clickElementIfExist(mobileElement);
+                AppiumUtil.clickElementIfExist(webElement);
                 break;
             case SAVE_VALUE:
-                System.out.println("Element text: "+mobileElement.getText());
+                System.out.println("Element text: "+webElement.getText());
                 // 以elementPath为key，控件内容为value进行保存
-                elementContent.put(elementPath, mobileElement.getText());
+                elementContent.put(elementPath, webElement.getText());
                 break;
             case ASSERT_EQUALS:
-                System.out.println("Element text: "+mobileElement.getText()+" Map data: "+elementContent.get(data));
-                Assert.assertEquals(mobileElement.getText(), elementContent.get(data));
+                System.out.println("Element text: "+webElement.getText()+" Map data: "+elementContent.get(data));
+                Assert.assertEquals(webElement.getText(), elementContent.get(data));
                 break;
             case ASSERT_NOT_EQUALS:
-                System.out.println("Element text: "+mobileElement.getText()+" Map data: "+elementContent.get(data));
-                Assert.assertNotEquals(mobileElement.getText(), elementContent.get(data), "Expected Not Equals ["+ elementContent.get(data) +"],But Actual ["+ mobileElement.getText()+"] Is Equals!");
+                System.out.println("Element text: "+webElement.getText()+" Map data: "+elementContent.get(data));
+                Assert.assertNotEquals(webElement.getText(), elementContent.get(data), "Expected Not Equals ["+ elementContent.get(data) +"],But Actual ["+ webElement.getText()+"] Is Equals!");
                 break;
             case WAIT_SECONDS:
                 AppiumUtil.sleep(Long.valueOf(data)*1000);
@@ -366,10 +364,10 @@ public class RunTestCase implements ITest {
                 SelectDriver.getAppiumDriver().navigate().back();
                 break;
             case GET_IMAGE_COUNT:
-                imageCount = Integer.valueOf(mobileElement.getText().substring(0, mobileElement.getText().indexOf("图")));
+                imageCount = Integer.valueOf(webElement.getText().substring(0, webElement.getText().indexOf("图")));
                 break;
             default:
-                Assert.fail("预期以外的操作：Element[" + mobileElement + "] Action: [" + action + "]");
+                Assert.fail("预期以外的操作：Element[" + webElement + "] Action: [" + action + "]");
                 break;
         }
     }
