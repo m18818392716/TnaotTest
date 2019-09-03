@@ -232,6 +232,25 @@ public class RunTestCase implements ITest {
 
     public static int imageCount = 0;
 
+
+
+
+
+//    关于webview页面的滑动方法
+    public static final String WEBVIEW_SCROLL_TO_PRESENCE = "scrolltoPresence";// 滑动到目标元素
+    public static final String WEBVIEW_SCROLL_TO_BOTTOM_PAGE = "scrollToBottomfPage";// 滑动到页面底部
+    public static final String WEBVIEW_TO_BOTTOM = "toBottom";// 滚动条向下拉到顶
+    public static final String WEBVIEW_TO_TOP = "toTop";// 滚动条向上拉到顶
+    public static final String WEBVIEW_SCROLL_TO_BOTTOM = "scrolltoBottom";// 控制滚动条向下拉到顶
+    public static final String WEBVIEW_SCROLL_TO_TOP = "scrolltoTop";// 控制滚动条向上拉到顶
+    public static final String WEBVIEW_SCROLL_TO_VERTICAL_MIDDLE = "verticaltoMiddle";// 控制垂直滚动条拉到中间
+    public static final String WEBVIEW_SCROLL_TO_HORIZONTAL_MIDDLE = "horizontaltoMiddle";// 控制水平滚动条左右拉到中间
+
+
+
+
+
+
     // 传入控件路径对控件执行操作
     private void executeAction(String elementPath, String action, String data) {
         WebElement webElement = null;
@@ -366,6 +385,32 @@ public class RunTestCase implements ITest {
             case GET_IMAGE_COUNT:
                 imageCount = Integer.valueOf(webElement.getText().substring(0, webElement.getText().indexOf("图")));
                 break;
+            // 关于webview页面元素的相关滑动方法
+            case WEBVIEW_SCROLL_TO_PRESENCE:
+                ScrollBarUtil.scrolltoPresence(SelectDriver.getAppiumDriver(), webElement);
+                break;
+            case WEBVIEW_SCROLL_TO_BOTTOM_PAGE:
+                ScrollBarUtil.scrollingToBottomofPage(SelectDriver.getAppiumDriver());
+                break;
+            case WEBVIEW_TO_BOTTOM:
+                ScrollBarUtil.toBottom(SelectDriver.getAppiumDriver());
+                break;
+            case WEBVIEW_TO_TOP:
+                ScrollBarUtil.toTop(SelectDriver.getAppiumDriver());
+                break;
+            case WEBVIEW_SCROLL_TO_BOTTOM:
+                ScrollBarUtil.scrolltoBottom(SelectDriver.getAppiumDriver());
+                break;
+            case WEBVIEW_SCROLL_TO_TOP:
+                ScrollBarUtil.scrolltoTop(SelectDriver.getAppiumDriver());
+                break;
+            case WEBVIEW_SCROLL_TO_VERTICAL_MIDDLE:
+                ScrollBarUtil.verticaltoMiddle(SelectDriver.getAppiumDriver());
+                break;
+            case WEBVIEW_SCROLL_TO_HORIZONTAL_MIDDLE:
+                ScrollBarUtil.horizontaltoMiddle(SelectDriver.getAppiumDriver());
+                break;
+
             default:
                 Assert.fail("预期以外的操作：Element[" + webElement + "] Action: [" + action + "]");
                 break;

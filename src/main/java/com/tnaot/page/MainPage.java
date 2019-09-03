@@ -68,6 +68,27 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-房地产-列表-更多 */
     @FindElementBy(type = "className", value="more", isWeb = true)
     WebElement estateListMore;
+    /** 首页-房地产-列表-更多-收藏 */
+    @FindElementBy(type = "xpath", value="//span[contains(text(),'收藏')]", isWeb = true)
+    WebElement estateListMoreCollect;
+    /** 首页-房地产-列表-更多-举报 */
+    @FindElementBy(type = "xpath", value="//span[contains(text(),'举报')]", isWeb = true)
+    WebElement estateListMoreReport;
+    /** 首页-房地产-列表-更多-举报-虚假广告 */
+    @FindElementBy(type = "xpath", value="//span[contains(text(),'虚假广告')]", isWeb = true)
+    WebElement estateListMoreReportReason1;
+    /** 首页-房地产-列表-更多-举报-低俗色情 */
+    @FindElementBy(type = "xpath", value="//span[contains(text(),'低俗色情')]", isWeb = true)
+    WebElement estateListMoreReportReason2;
+    /** 首页-房地产-列表-更多-举报-垃圾内容 */
+    @FindElementBy(type = "xpath", value="//span[contains(text(),'垃圾内容')]", isWeb = true)
+    WebElement estateListMoreReportReason3;
+    /** 首页-房地产-列表-更多-举报-确定 */
+    @FindElementBy(type = "xpath", value="//span[contains(text(),'确定')]", isWeb = true)
+    WebElement estateListMoreReportAccept;
+    /** 首页-房地产-列表-更多-转发 */
+    @FindElementBy(type = "xpath", value="//span[contains(text(),'转发')]", isWeb = true)
+    WebElement estateListMorePublish;
 
     /** 首页-房地产-列表详情-返回 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/span[1]/img", isWeb = true)

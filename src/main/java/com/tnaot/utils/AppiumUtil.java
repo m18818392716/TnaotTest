@@ -110,6 +110,7 @@ public class AppiumUtil {
                 if (findElementBy.isWeb()) {
                     //selectDriver.getContextHandle(SelectDriver.getAppiumDriver());
                     SelectDriver.getAppiumDriver().context("WEBVIEW_com.tnaot.news");
+                    SelectDriver.getAppiumDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 } else {
                     SelectDriver.getAppiumDriver().context("NATIVE_APP");
                 }
