@@ -255,6 +255,13 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-二手房 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='二手房']")
     WebElement secondTitle1;
+    /** 首页-美食、娱乐、购物、服务 */
+    @FindElementBy(type = "className", value = "headerText", isWeb = true )
+    WebElement secondTitle1ListHeader;
+    /** 首页-美食、娱乐、购物、服务 */
+    @FindElementBy(type = "className", value = "mer-name", isWeb = true )
+    WebElement secondTitle1ListTitle;
+
     /** 首页-租房 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='租房']")
     WebElement secondTitle2;
