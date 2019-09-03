@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ public class SqlLiteUtil {
 
     public static final String DB_PATH = "test-output\\extents.db";
     protected static Connection connect = null;
-    protected static Statement stmt = null;
 
     static {
         try {
@@ -27,37 +25,18 @@ public class SqlLiteUtil {
         System.out.println("Opened database successfully");
     }
 
-    @Test
-    public void printAllTest() {
-//        System.out.println("SQLLITE START!!!!!!");
-//        try {
-//            Class.forName("org.sqlite.JDBC");
-//            String db = "test-output\\extents.db";
-//            Connection conn = DriverManager.getConnection("jdbc:sqlite:" + db);
-//            Statement state = conn.createStatement();
-//            ResultSet rs = state.executeQuery("select * from Test;"); //查询数据
-////            ResultSet rs = state.executeQuery("select distinct TestName from Test where Status = 'fail';"); //查询数据
-//            while (rs.next()) { //将查询到的数据打印出来
-//                System.out.print("name = " + rs.getString("TestName") + " "); //列属性一
-//                System.out.println("age = " + rs.getString("ReportIDExtent")); //列属性二
-//            }
-//            rs.close();
-//            conn.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//    @Test
+//    public void printAllTest() {
 //        createTable();
 //        startCase("第二个case");
-//        endCaseByName("第二个case","PASS");
-        getAllLastCaseByStatus("PASS");
-        closeConnection();
-    }
+//        endCaseByName("news_003(资讯转发并评论（转发toast消息提示框显示时间过短导致无法捕捉元素 测试失败）)","哈哈哈","PASS");
+//        getAllLastCaseByStatus("PASS");
+//        closeConnection();
+//    }
 
     public static void createTable() {
         try {
             connect.setAutoCommit(false);
-
-            stmt = connect.createStatement();
 
 //            String sql = "create table user(id int,name text,sex text)";
             String sql = "CREATE TABLE IF NOT EXISTS test_case" +
@@ -73,14 +52,15 @@ public class SqlLiteUtil {
                         "last_update_time DATETIME" +
                     ")";
 
-            stmt.executeUpdate(sql);
+            PreparedStatement pstm = connect.prepareStatement(sql);
+            pstm.executeUpdate();
             System.out.println("create data success");
 
             // 提交
             connect.commit();
 
             // 关闭Statement
-            stmt.close();
+            pstm.close();
 //            connect.close();
 
         } catch (SQLException e) {
@@ -92,11 +72,12 @@ public class SqlLiteUtil {
     public static void startCase(String caseName) {
         try {
             connect.setAutoCommit(false);
-            stmt = connect.createStatement();
             String sql = "insert into test_case(test_name,status,start_time,create_time) " +
-                    "values ('"+ caseName +"','RUNNING',datetime('now', 'localtime'),datetime('now', 'localtime'))";
+                    "values (?,'RUNNING',datetime('now', 'localtime'),datetime('now', 'localtime'))";
+            PreparedStatement pstm = connect.prepareStatement(sql);
+            pstm.setString(1, caseName);
             // 执行
-            int count = stmt.executeUpdate(sql);
+            int count = pstm.executeUpdate();
             if (count > 0) {
                 System.out.println("insert data success");
             } else {
@@ -106,7 +87,7 @@ public class SqlLiteUtil {
             // 提交
             connect.commit();
             // 关闭Statement
-            stmt.close();
+            pstm.close();
 //            connect.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,11 +97,12 @@ public class SqlLiteUtil {
     public static List<Map<String, Object>> getAllLastCaseByStatus(String status) {
         try {
             connect.setAutoCommit(false);
-            stmt = connect.createStatement();
 
-            String sql = "select * from (select * from test_case group by test_name having max(start_time) order by test_name) where status = '" + status + "'";
+            String sql = "select * from (select * from test_case group by test_name having max(start_time) order by test_name) where status = ?";
+            PreparedStatement pstm = connect.prepareStatement(sql);
+            pstm.setString(1, status);
+            ResultSet result = pstm.executeQuery();
 
-            ResultSet result = stmt.executeQuery(sql);
             List<Map<String, Object>> caseList = new ArrayList<>();
             while (result.next()) {
                 Map<String, Object> testCase = new HashMap<>();
@@ -139,9 +121,9 @@ public class SqlLiteUtil {
             }
 
             result.close();
-            stmt.close();
-            return caseList;
+            pstm.close();
 //            connect.close();
+            return caseList;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -152,11 +134,11 @@ public class SqlLiteUtil {
     public static List<Map<String, Object>> getAllLastCase() {
         try {
             connect.setAutoCommit(false);
-            stmt = connect.createStatement();
 
             String sql = "select * from test_case group by test_name having max(start_time) order by test_name";
+            PreparedStatement pstm = connect.prepareStatement(sql);
+            ResultSet result = pstm.executeQuery();
 
-            ResultSet result = stmt.executeQuery(sql);
             List<Map<String, Object>> caseList = new ArrayList<>();
             while (result.next()) {
                 Map<String, Object> testCase = new HashMap<>();
@@ -175,9 +157,9 @@ public class SqlLiteUtil {
             }
 
             result.close();
-            stmt.close();
-            return caseList;
+            pstm.close();
 //            connect.close();
+            return caseList;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -188,15 +170,23 @@ public class SqlLiteUtil {
     public static void endCaseByName(String caseName, String throwableMessage, String status) {
         try {
             connect.setAutoCommit(false);
-            stmt = connect.createStatement();
 
-            String sql = "update test_case set status = '" + status + "'";
+            String sql = "update test_case set status = ?";
             if(throwableMessage != null){
-                sql += ",throwable_message = '" + throwableMessage + "'";
+                sql += ",throwable_message = ?";
             }
             sql += ",end_time = datetime('now', 'localtime'),last_update_time = datetime('now', 'localtime')" +
-                    " where start_time = (select max(start_time) from test_case where test_name = '" + caseName + "')";
-            int count = stmt.executeUpdate(sql);
+                    " where start_time = (select max(start_time) from test_case where test_name = ?)";
+//            System.out.println("excute sql: " + sql);
+            PreparedStatement pstm = connect.prepareStatement(sql);
+            pstm.setString(1, status);
+            if(throwableMessage != null){
+                pstm.setString(2, throwableMessage);
+                pstm.setString(3, caseName);
+            } else {
+                pstm.setString(2, caseName);
+            }
+            int count = pstm.executeUpdate();
 
             if (count > 0) {
                 System.out.println("update data success");
@@ -204,7 +194,7 @@ public class SqlLiteUtil {
                 System.out.println("update data fail");
             }
             connect.commit();
-            stmt.close();
+            pstm.close();
 //            connect.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -212,13 +202,14 @@ public class SqlLiteUtil {
     }
 
 
-    public static void delById(int id) {
+    public static void deleteById(int id) {
         try {
             connect.setAutoCommit(false);
-            stmt = connect.createStatement();
 
-            String sql = "delete from test_case where id = " + id;
-            int count = stmt.executeUpdate(sql);
+            String sql = "delete from test_case where id = ?";
+            PreparedStatement pstm = connect.prepareStatement(sql);
+            pstm.setInt(1, id);
+            int count = pstm.executeUpdate();
 
             if (count > 0) {
                 System.out.println("delete data success");
@@ -227,7 +218,7 @@ public class SqlLiteUtil {
             }
 
             connect.commit();
-            stmt.close();
+            pstm.close();
 //            connect.close();
         } catch (SQLException e) {
             e.printStackTrace();
