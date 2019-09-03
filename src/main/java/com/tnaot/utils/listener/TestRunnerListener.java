@@ -1,10 +1,13 @@
 package com.tnaot.utils.listener;
 
+import com.relevantcodes.extentreports.model.ExceptionInfo;
+import com.relevantcodes.extentreports.utils.ExceptionUtil;
 import com.tnaot.demo.RunTestCase;
 import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.AppiumUtils.ScreenScr;
 import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
+import com.tnaot.utils.SqlLiteUtil;
 import com.tnaot.utils.entity.TestCase;
 import org.testng.*;
 
@@ -28,11 +31,21 @@ public class TestRunnerListener extends TestListenerAdapter {
     public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
         setExcelResult(tr, ExcelUtil.RESULT_PASS);
+        SqlLiteUtil.endCaseByName(tr.getName(), getThrowableMessage(tr.getThrowable()), ExcelUtil.RESULT_PASS);
         logger.info("【" + tr.getName() + " Success】");
 
 //        TestNGRetry retryAnalyzer = (TestNGRetry) tr.getMethod().getRetryAnalyzer();
 //        retryAnalyzer.reSetCount();
 //        finish(tr);由于版本问题，报错
+    }
+
+    // 获取栈信息
+    private String getThrowableMessage(Throwable throwable) {
+        if(throwable != null){
+            ExceptionInfo exceptionInfo = ExceptionUtil.createExceptionInfo(throwable, null);
+            return exceptionInfo.getStackTrace();
+        }
+        return null;
     }
 
     private void setExcelResult(ITestResult tr, String resultPass) {
@@ -48,6 +61,7 @@ public class TestRunnerListener extends TestListenerAdapter {
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
         setExcelResult(tr, ExcelUtil.RESULT_FAIL);
+        SqlLiteUtil.endCaseByName(tr.getName(), getThrowableMessage(tr.getThrowable()), ExcelUtil.RESULT_FAIL);
         //String picName =tr.getStartMillis()+""+tr.getTestName();
         String picName = tr.getTestName();
         ScreenScr.getScreen(SelectDriver.getAppiumDriver(),picName);
@@ -65,6 +79,7 @@ public class TestRunnerListener extends TestListenerAdapter {
     public void onTestStart(ITestResult tr) {
         super.onTestStart(tr);
         logger.info("【" + tr.getName() + " Start】");
+        SqlLiteUtil.startCase(tr.getName());
         //    extent=InitDriverCase.getextent();
         //    test= extent.startTest(tr.getName());
     }
@@ -79,6 +94,7 @@ public class TestRunnerListener extends TestListenerAdapter {
     @Override
     public void onTestSkipped(ITestResult tr) {
         super.onTestSkipped(tr);
+        SqlLiteUtil.endCaseByName(tr.getName(), getThrowableMessage(tr.getThrowable()), ExcelUtil.RESULT_SKIP);
         setExcelResult(tr, ExcelUtil.RESULT_SKIP);
         //String picName =tr.getStartMillis()+""+tr.getTestName();
         String picName = tr.getTestName();
