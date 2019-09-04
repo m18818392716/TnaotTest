@@ -879,7 +879,8 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tv_more_cancel")
     WebElement cancelButton;
 
-
+    @AndroidFindBy(id="com.tnaot.news:id/iv_update_close")
+    WebElement mainCloseButton;
 
 
 
