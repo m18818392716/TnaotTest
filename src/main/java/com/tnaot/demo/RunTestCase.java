@@ -48,8 +48,12 @@ public class RunTestCase implements ITest {
                 logger.info("Reset App!");
                 SelectDriver.getAppiumDriver().resetApp();
                 resetGlobalExecuteNum();
+                runInitAppAction();
             }
+        } else {
+            runInitAppAction();
         }
+
         try {
             this.runCase(testCase.getId());
         } catch (NoSuchElementException e){
@@ -60,6 +64,10 @@ public class RunTestCase implements ITest {
         } finally {
             setLastTestCase(testCase);
         }
+    }
+
+    public void runInitAppAction(){
+        this.executeAction("MainPage.mainCloseButton", CLICK_IF_EXIST, null);
     }
 
     public void runCase(String caseId) {
@@ -136,6 +144,8 @@ public class RunTestCase implements ITest {
 
     private void runLoginByUserId(String userId) {
         List<CaseStep> caseSteps = ExcelUtil.getCaseSteps().get(LOGIN_CASE_ID);
+        // 保存原登录step
+        List<CaseStep> userCaseSteps = CommonUtil.deepCopy(caseSteps);
         User user = ExcelUtil.getUsers().get(userId);
         System.out.println("Run Login User: " + user);
         for(CaseStep caseStep : caseSteps){
@@ -154,7 +164,7 @@ public class RunTestCase implements ITest {
         }
         runCase(LOGIN_CASE_ID);
         // 复原登录用例数据
-        ExcelUtil.getCaseSteps().put(LOGIN_CASE_ID, ExcelUtil.userLoginStep);
+        ExcelUtil.getCaseSteps().put(LOGIN_CASE_ID, userCaseSteps);
     }
 
     private void executeGlobalStep(String elementPath){
@@ -163,6 +173,7 @@ public class RunTestCase implements ITest {
             for (GlobalStep globalStep : globalStepList){
                 // 该步骤尚未执行过或者type不为1，则执行
                 if(globalStep.getExecuteNum() == 0 || !"1".equals(globalStep.getType())){
+                    System.out.println("Run global step: " + globalStep);
                     executeAction(globalStep.getElementPath(), globalStep.getAction(), globalStep.getData());
                     globalStep.setExecuteNum(globalStep.getExecuteNum() + 1);
                 }
