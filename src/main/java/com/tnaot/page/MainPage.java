@@ -91,7 +91,7 @@ public class MainPage extends AppiumBaseExecutor {
     WebElement estateListMorePublish;
 
     /** 首页-房地产-列表详情-返回 */
-    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/span[1]/img", isWeb = true)
+    @FindElementBy(type = "className", value="back", isWeb = true)
     WebElement estateListDetailBack;
     /** 首页-房地产-列表详情-收藏 */
     @FindElementBy(type = "className", value="headerIcon", isWeb = true)
@@ -256,7 +256,8 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='二手房']")
     WebElement secondTitle1;
     /** 首页-美食、娱乐、购物、服务 */
-    @FindElementBy(type = "className", value = "headerText", isWeb = true )
+    //@FindElementBy(type = "className", value = "headerText", isWeb = true )
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'美食')]", isWeb = true )
     WebElement secondTitle1ListHeader;
     /** 首页-美食、娱乐、购物、服务 */
     @FindElementBy(type = "className", value = "mer-name", isWeb = true )
