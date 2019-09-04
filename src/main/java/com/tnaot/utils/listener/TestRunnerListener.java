@@ -63,6 +63,7 @@ public class TestRunnerListener extends TestListenerAdapter {
         setExcelResult(tr, ExcelUtil.RESULT_FAIL);
         SqlLiteUtil.endCaseByName(tr.getName(), getThrowableMessage(tr.getThrowable()), ExcelUtil.RESULT_FAIL);
         //String picName =tr.getStartMillis()+""+tr.getTestName();
+        SelectDriver.getAppiumDriver().context("NATIVE_APP");
         String picName = tr.getTestName();
         ScreenScr.getScreen(SelectDriver.getAppiumDriver(),picName);
         logger.info("【" + tr.getName() + " Failure】");

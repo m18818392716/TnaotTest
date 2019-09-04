@@ -242,6 +242,30 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-求职招聘 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='求职招聘']")
     WebElement job;
+    /** 首页-求职招聘-销售 */
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'销售')]", isWeb = true )
+    WebElement jobSubType1;
+    /** 首页-求职招聘-建筑/工程 */
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'建筑/工程')]", isWeb = true )
+    WebElement jobSubType2;
+    /** 首页-求职招聘-行政 */
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'行政')]", isWeb = true )
+    WebElement jobSubType3;
+    /** 首页-求职招聘-司机/保安 */
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'司机/保安')]", isWeb = true )
+    WebElement jobSubType4;
+    /** 首页-求职招聘-技工/保养 */
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'技工/保养')]", isWeb = true )
+    WebElement jobSubType5;
+    /** 首页-求职招聘-操作/生产 */
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'操作/生产')]", isWeb = true )
+    WebElement jobSubType6;
+    /** 首页-求职招聘-教育培训 */
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'教育培训')]", isWeb = true )
+    WebElement jobSubType7;
+    /** 首页-求职招聘-更多分类 */
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'更多分类')]", isWeb = true )
+    WebElement jobSubType8;
 
     /** 首页-寻人求职 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='寻人求职']")
@@ -256,8 +280,8 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='二手房']")
     WebElement secondTitle1;
     /** 首页-美食、娱乐、购物、服务 */
-    //@FindElementBy(type = "className", value = "headerText", isWeb = true )
-    @FindElementBy(type = "xpath", value = "//span[contains(text(),'美食')]", isWeb = true )
+    @FindElementBy(type = "className", value = "headerText", isWeb = true )
+    //@FindElementBy(type = "xpath", value = "//span[contains(text(),'美食')]", isWeb = true )
     WebElement secondTitle1ListHeader;
     /** 首页-美食、娱乐、购物、服务 */
     @FindElementBy(type = "className", value = "mer-name", isWeb = true )
@@ -281,6 +305,55 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-学柬语 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='学柬语']")
     WebElement secondTitle7;
+    /** 首页-学柬语-酒店宾馆*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'酒店宾馆')]", isWeb = true )
+    WebElement secondTitle7List1;
+    /** 首页-学柬语-通讯邮寄*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'通讯邮寄')]", isWeb = true )
+    WebElement secondTitle7List2;
+    /** 首页-学柬语-娱乐体育*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'娱乐体育')]", isWeb = true )
+    WebElement secondTitle7List3;
+    /** 首页-学柬语-美食购物*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'美食购物')]", isWeb = true )
+    WebElement secondTitle7List4;
+    /** 首页-学柬语-健康看病*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'健康看病')]", isWeb = true )
+    WebElement secondTitle7List5;
+    /** 首页-学柬语-地理方位*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'地理方位')]", isWeb = true )
+    WebElement secondTitle7List6;
+    /** 首页-学柬语-会客拜访*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'会客拜访')]", isWeb = true )
+    WebElement secondTitle7List7;
+    /** 首页-学柬语-数字表达*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'数字表达')]", isWeb = true )
+    WebElement secondTitle7List8;
+    /** 首页-学柬语-宗教节日*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'宗教节日')]", isWeb = true )
+    WebElement secondTitle7List9;
+    /** 首页-学柬语-咨询问询*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'咨询问询')]", isWeb = true )
+    WebElement secondTitle7List10;
+    /** 首页-学柬语-时间日期*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'时间日期')]", isWeb = true )
+    WebElement secondTitle7List11;
+    /** 首页-学柬语-问候祝福*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'问候祝福')]", isWeb = true )
+    WebElement secondTitle7List12;
+    /** 首页-学柬语-地名地点*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'地名地点')]", isWeb = true )
+    WebElement secondTitle7List13;
+    /** 首页-学柬语-安全报警*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'安全报警')]", isWeb = true )
+    WebElement secondTitle7List14;
+    /** 首页-学柬语-交通运输*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'交通运输')]", isWeb = true )
+    WebElement secondTitle7List15;
+    /** 首页-学柬语-天气气象*/
+    @FindElementBy(type = "xpath", value = "//span[contains(text(),'天气气象')]", isWeb = true )
+    WebElement secondTitle7List16;
+
     /** 首页-服务 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_mid_text'][@text='服务']")
     WebElement secondTitle8;
