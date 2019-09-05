@@ -23,6 +23,7 @@ public class SlideScreen {
      * 向上滑动屏幕
      *
      * @param driver
+     * @param times 滑动次数
      */
     public static void slideUp(AppiumDriver<WebElement> driver, int times) {
         int width = driver.manage().window().getSize().width;
@@ -39,6 +40,12 @@ public class SlideScreen {
     }
 
 
+    /**
+     * 向下滑动屏幕
+     *
+     * @param driver
+     * @param times 滑动次数
+     */
     public static void slideDown(AppiumDriver<WebElement> driver, int times) {
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;
@@ -53,50 +60,24 @@ public class SlideScreen {
     }
 
     public static void slideUp(AppiumDriver<WebElement> driver) {
-        int width = driver.manage().window().getSize().width;
-        int height = driver.manage().window().getSize().height;
-        //new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height / 10)).release().perform();
+        slideUp(driver, 1);
+    }
 
-        new TouchAction(driver).longPress(PointOption.point(width / 2, 100))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
-                .moveTo(PointOption.point(width / 2, height - 500)).release().perform();
+    public static void slideDown(AppiumDriver<WebElement> driver) {
+        slideDown(driver, 1);
     }
 
 
-    /**
-     * 向下滑动屏幕
-     *
-     * @param driver
-     */
-    public static void slideDown(AppiumDriver<WebElement> driver) {
-        int width = driver.manage().window().getSize().width;//获取屏幕宽度
-        int height = driver.manage().window().getSize().height;//获取屏幕高度
-        //new TouchAction(driver).press(PointOption.point(width / 2, height / 10)).moveTo(PointOption.point(width / 2, height * 3 / 4)).release().perform();
-
-        new TouchAction(driver)
-                .press(PointOption.point(width / 2, 600))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
-                .moveTo(PointOption.point(width / 2, height - 500)).release().perform();
+    public static void slideLeft(AppiumDriver<WebElement> driver) {
+        slideLeft(driver, 1);
     }
 
     /**
      * 向左滑动屏幕
      *
      * @param driver
+     * @param times 滑动次数
      */
-    public static void slideLeft(AppiumDriver<WebElement> driver) {
-        //获取手机屏幕的宽度
-        int width = driver.manage().window().getSize().width;
-        // 获取手机屏幕的高度
-        int height = driver.manage().window().getSize().height;
-        // /*new一个TouchAction对象，调用其按压press()方法，输入坐标点,moveTo移动到下一个坐标点，之后调用release()和perform()方法执行，注意，宽乘以或者除以的数字自己来定义计算的，主要是呈现一个公共的方式，兼容所有的手机*/
-        //new TouchAction(driver).press(PointOption.point(width * 3 / 4, height / 2)).moveTo(PointOption.point(width / 10, height / 2)).release().perform();
-
-        new TouchAction(driver)
-                .press(PointOption.point(width - 100, height / 2))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
-                .moveTo(PointOption.point(100, height / 2)).release().perform();
-    }
     public static void slideLeft(AppiumDriver<WebElement> driver, int times) {
         //获取手机屏幕的宽度
         int width = driver.manage().window().getSize().width;
@@ -110,21 +91,16 @@ public class SlideScreen {
         }
     }
 
+    public static void slideRight(AppiumDriver<WebElement> driver) {
+        slideRight(driver, 1);
+    }
+
     /**
      * 向右滑动屏幕
      *
      * @param driver
+     * @param times 滑动次数
      */
-    public static void slideRight(AppiumDriver<WebElement> driver) {
-        int width = driver.manage().window().getSize().width;
-        int height = driver.manage().window().getSize().height;
-        //new TouchAction(driver).press(PointOption.point(width / 10, height / 2)).moveTo(PointOption.point(width * 3 / 4 , height / 2)).release().perform();
-
-        new TouchAction(driver).longPress(PointOption.point(100, height / 2))
-                .moveTo(PointOption.point(width - 100, height / 2)).release()
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
-                .perform();
-    }
     public static void slideRight(AppiumDriver<WebElement> driver, int times) {
         int width = driver.manage().window().getSize().width;
         int height = driver.manage().window().getSize().height;

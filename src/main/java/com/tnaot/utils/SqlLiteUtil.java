@@ -98,7 +98,7 @@ public class SqlLiteUtil {
         try {
             connect.setAutoCommit(false);
 
-            String sql = "select * from (select * from test_case group by test_name having max(start_time) order by test_name) where status = ?";
+            String sql = "select * from (select * from test_case where status != 'RUNNING' group by test_name having max(start_time) order by test_name) where status = ?";
             PreparedStatement pstm = connect.prepareStatement(sql);
             pstm.setString(1, status);
             ResultSet result = pstm.executeQuery();
