@@ -310,7 +310,7 @@ public class RunTestCase implements ITest {
                 SlideScreen.slideRight(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
                 break;
             case SLIDE_TO_TARGET:
-                SlideScreen.slideToTarget(webElement);
+                SlideScreen.slideToTarget(SelectDriver.getAppiumDriver(), webElement);
                 break;
             case SLIDE_TO_End:
                 String endString = data.split("，")[0];
