@@ -164,6 +164,11 @@ public class NewsPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/iv_close")
     WebElement channelListCloseButton;
 
+    /** 资讯列表-删除图标 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_x")
+    WebElement deleteNewsIcon;
+
+
 
 
 
@@ -375,12 +380,12 @@ public class NewsPage extends AppiumBaseExecutor {
 //    WebElement commentPush;
 
     /** 图文资讯详情-换一批 */
-    //@FindElementBy(type = "name", value = "换一批")
+    //@FindElementBy(type = "name", value = "换一批")com.tnaot.news:id/tvTitle
     @AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '换一批')]")
     WebElement changeContactList;
 
     /** 图文资讯详情-换一批-延展阅读列表第一条数据-资讯标题 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.RelativeLayout/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView")
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tvTitle")
     WebElement contactListTitle;
 
     /** 资讯详情-返回按钮 */

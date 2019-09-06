@@ -21,6 +21,10 @@ public class MyPage extends AppiumBaseExecutor {
     /** 我的 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
     WebElement rlMine;
+    /** 我的-版本更新弹窗关闭按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/iv_update_close")
+    WebElement updateCloseButton;
+
     /** 红包-右下角的红包提示 */
     @AndroidFindBy(id="com.tnaot.news:id/viewMessageTarget")
     WebElement bonus;
@@ -310,7 +314,7 @@ public class MyPage extends AppiumBaseExecutor {
     WebElement tvLanguageZH;
 
     /** Language-英文 */
-    @AndroidFindBy(id="com.tnaot.news:id/tv_ens")
+    @AndroidFindBy(id="com.tnaot.news:id/tv_en")
     WebElement tvLanguageEN;
 
     /** Language-柬文 */

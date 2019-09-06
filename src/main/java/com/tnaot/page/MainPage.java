@@ -172,10 +172,12 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-交易买卖-更多分类 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[8]", isWeb = true)
     WebElement tradeSubType8;
-
     /** 首页-交易买卖-生活资讯列表第一条-标题 */
-    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/androidx.viewpager.widget.ViewPager/android.widget.FrameLayout/android.widget.LinearLayout[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView[2]/android.widget.RelativeLayout[1]/android.widget.LinearLayout/android.widget.TextView[1]")
-    WebElement tradeLifeList1;
+    @FindElementBy(type = "className", value="money", isWeb = true)
+    WebElement tradeLifeListTitle;
+    /** 首页-交易买卖-生活资讯列表第二条-标题 */
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[3]/div/ul/li[2]/div/div[1]/h2", isWeb = true)
+    WebElement tradeLifeListTitle2;
 
 
 
@@ -209,6 +211,13 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-折扣优惠-更多优惠 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div/div[2]/ul/li[8]", isWeb = true)
     WebElement discountSubType8;
+    /** 首页-折扣优惠-生活资讯列表第一条-标题 */
+    @FindElementBy(type = "className", value="list-tail", isWeb = true)
+    WebElement discountLifeListTitle;
+    /** 首页-折扣优惠-生活资讯列表第二条-标题 */
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[2]/div[2]/div[1]/div/ul/li[2]/div[1]/p[2]", isWeb = true)
+    WebElement discountLifeListTitle2;
+
 
     /** 首页-便民服务 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='便民服务']")
@@ -266,6 +275,16 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-求职招聘-更多分类 */
     @FindElementBy(type = "xpath", value = "//span[contains(text(),'更多分类')]", isWeb = true )
     WebElement jobSubType8;
+    /** 首页-求职招聘-生活资讯列表第一条-标题 */
+    @FindElementBy(type = "className", value="price", isWeb = true)
+    WebElement jobLifeListTitle;
+    /** 首页-求职招聘-生活资讯列表第二条-标题 */
+    @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[3]/div/ul/li[2]/div/div[1]/h2", isWeb = true)
+    WebElement jobLifeListTitle2;
+    /** 首页-求职招聘-二级页面-返回按钮 */
+    @FindElementBy(type = "className", value="sea-return", isWeb = true)
+    WebElement backFromTwoToOne;
+
 
     /** 首页-寻人求职 */
     @AndroidFindBy(xpath="//*[@resource-id='com.tnaot.news:id/tv_top_text'][@text='寻人求职']")

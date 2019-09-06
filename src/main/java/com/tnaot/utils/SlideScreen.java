@@ -39,7 +39,6 @@ public class SlideScreen {
         }
     }
 
-
     /**
      * 向下滑动屏幕
      *
@@ -53,23 +52,10 @@ public class SlideScreen {
 
             //new TouchAction(driver).press(PointOption.point(width / 2, height * 3 / 4)).moveTo(PointOption.point(width / 2, height / 10)).release().perform();
 
-            new TouchAction(driver).longPress(PointOption.point(width / 2, 100))
+            new TouchAction(driver).press(PointOption.point(width / 2, 500))
                     .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(Math.round(3))))
                     .moveTo(PointOption.point(width / 2, height - 500)).release().perform();
         }
-    }
-
-    public static void slideUp(AppiumDriver<WebElement> driver) {
-        slideUp(driver, 1);
-    }
-
-    public static void slideDown(AppiumDriver<WebElement> driver) {
-        slideDown(driver, 1);
-    }
-
-
-    public static void slideLeft(AppiumDriver<WebElement> driver) {
-        slideLeft(driver, 1);
     }
 
     /**
@@ -91,10 +77,6 @@ public class SlideScreen {
         }
     }
 
-    public static void slideRight(AppiumDriver<WebElement> driver) {
-        slideRight(driver, 1);
-    }
-
     /**
      * 向右滑动屏幕
      *
@@ -112,18 +94,36 @@ public class SlideScreen {
         }
     }
 
+    public static void slideUp(AppiumDriver<WebElement> driver) {
+        slideUp(driver, 1);
+    }
+
+    public static void slideDown(AppiumDriver<WebElement> driver) {
+        slideDown(driver, 1);
+    }
+
+    public static void slideLeft(AppiumDriver<WebElement> driver) {
+        slideLeft(driver, 1);
+    }
+
+    public static void slideRight(AppiumDriver<WebElement> driver) {
+        slideRight(driver, 1);
+    }
 
 
+    public static void slideToTarget(AppiumDriver<WebElement> driver, WebElement webElement) {
+//        JavascriptExecutor dj = (JavascriptExecutor) SelectDriver.getAppiumDriver();//将Driver实例化为js对象
+//        dj.executeScript("arguments[0].scrollIntoViewIfNeeded(true);", webElement);//滑动到上面定位到的元素的位置
 
+        boolean isSwipe = true;
+        while (isSwipe) {
+            if (AppiumUtil.isVisible(webElement)) {//判断元素是否可见
+                isSwipe = false;
+            } else {
+                slideUp(driver);//向上滑动屏幕
+            }
+        }
 
-
-
-
-
-
-    public static void slideToTarget(WebElement webElement) {
-        JavascriptExecutor dj = (JavascriptExecutor) SelectDriver.getAppiumDriver();//将Driver实例化为js对象
-        dj.executeScript("arguments[0].scrollIntoViewIfNeeded(true);", webElement);//滑动到上面定位到的元素的位置
     }
 
     public enum Heading {
