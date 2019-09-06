@@ -1,18 +1,16 @@
 package com.tnaot.utils.listener;
 
-import com.relevantcodes.extentreports.model.ExceptionInfo;
-import com.relevantcodes.extentreports.utils.ExceptionUtil;
-import com.tnaot.demo.RunTestCase;
 import com.tnaot.utils.AppiumUtil;
 import com.tnaot.utils.AppiumUtils.ScreenScr;
 import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SelectDriver;
 import com.tnaot.utils.SqlLiteUtil;
-import com.tnaot.utils.entity.TestCase;
 import org.testng.*;
 
 import org.apache.log4j.Logger;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -42,8 +40,10 @@ public class TestRunnerListener extends TestListenerAdapter {
     // 获取栈信息
     private String getThrowableMessage(Throwable throwable) {
         if(throwable != null){
-            ExceptionInfo exceptionInfo = ExceptionUtil.createExceptionInfo(throwable, null);
-            return exceptionInfo.getStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            throwable.printStackTrace(pw);
+            return sw.toString();
         }
         return null;
     }

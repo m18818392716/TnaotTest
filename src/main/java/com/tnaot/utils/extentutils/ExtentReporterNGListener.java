@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.relevantcodes.extentreports.model.ExceptionInfo;
+import com.relevantcodes.extentreports.model.Test;
 import com.tnaot.utils.ExcelUtil;
 import com.tnaot.utils.SqlLiteUtil;
 import org.testng.*;
@@ -15,9 +17,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.relevantcodes.extentreports.NetworkMode;
-import com.relevantcodes.extentreports.ReporterType;
 
-import javax.imageio.ImageIO;
 
 public class ExtentReporterNGListener implements IReporter {
 
@@ -141,7 +141,19 @@ public class ExtentReporterNGListener implements IReporter {
                 // 打印错误信息
                 if(testCase.get("throwableMessage") != null){
                     test.log(status, test.addScreenCapture("./surefire-reports/img/"+testCase.get("testName")+".png"));//通过绿色按钮进行运行
-                    test.log(status, "<pre>" + testCase.get("throwableMessage") + "</pre>");
+                    // 设置异常信息
+                    String throwableMessage = testCase.get("throwableMessage").toString();
+                    ExceptionInfo exceptionInfo = new ExceptionInfo();
+                    exceptionInfo.setTest((Test) test.getTest());
+                    exceptionInfo.setExceptionName(throwableMessage.substring(0, throwableMessage.indexOf(":")));
+                    exceptionInfo.setStackTrace(throwableMessage);
+                    test.getTest().setException(exceptionInfo);
+                    String tag = "pre";
+                    String s = exceptionInfo.getStackTrace();
+                    if (s.contains("<") || s.contains(">")) {
+                        tag = "textarea";
+                    }
+                    test.log(status, null,"<" + tag + ">" + exceptionInfo.getStackTrace() + "</" + tag + ">");
                 } else {
                     test.log(status, "Test " + status.toString().toLowerCase() + "ed");
                 }
