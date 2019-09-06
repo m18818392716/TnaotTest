@@ -168,13 +168,17 @@ public class NewsPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/iv_x")
     WebElement deleteNewsIcon;
 
+    /** 资讯列表-标题 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_title")
+    WebElement imageNewsListTitle;
 
+    /** 资讯列表-作者 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tvAuthor")
+    WebElement imageNewsAuthor;
 
-
-
-
-
-
+    /** 资讯列表-评论数 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_comment_num")
+    WebElement imageNewsCommentCount;
 
 
 
@@ -190,6 +194,10 @@ public class NewsPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/ll_another")
     WebElement changeAnother;
 
+
+    /** 资讯详情-右上角-更多按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/ivShare")
+    WebElement ivShare;
 
     /** 资讯详情-评论输入框 */
     @AndroidFindBy(id="com.tnaot.news:id/etComment")
@@ -383,11 +391,9 @@ public class NewsPage extends AppiumBaseExecutor {
     //@FindElementBy(type = "name", value = "换一批")com.tnaot.news:id/tvTitle
     @AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '换一批')]")
     WebElement changeContactList;
-
     /** 图文资讯详情-换一批-延展阅读列表第一条数据-资讯标题 */
     @FindElementBy(type = "id", value = "com.tnaot.news:id/tvTitle")
     WebElement contactListTitle;
-
     /** 资讯详情-返回按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/ivBack")
     WebElement backButton;
@@ -397,13 +403,14 @@ public class NewsPage extends AppiumBaseExecutor {
     WebElement getCoinsOverlay;
 
 
+    /** 图集资讯详情-发布时间 */
+    @FindElementBy(type = "id", value = "com.tnaot.news:id/tvTime")
+    WebElement imageNewsDetailReleaseTime;
     /** 图集资讯详情-换一批-四条相关资讯图集 */
     @FindElementBy(type = "id", value = "com.tnaot.news:id/textView")
-    @AndroidFindBy(id="com.tnaot.news:id/textView")
     WebElement relativeNewsList;
     /** 图集资讯详情-图片页数 */
     @FindElementBy(type = "id", value = "com.tnaot.news:id/tv_img_count")
-    @AndroidFindBy(id="com.tnaot.news:id/tv_img_count")
     WebElement imgCount;
 
 

@@ -14,22 +14,23 @@ import java.util.Map;
 
 public class TestCaseFactory{
 
-    @Parameters({"env"})
-    @BeforeSuite
-    public void initProject(ITestContext context, @Optional String env){
-        // 初始化appium
+    public void initProject(ITestContext context, String env){
+        System.out.println("初始化项目开始！");
+        SqlLiteUtil.createTable();
         AppiumUtil appiumUtil = new AppiumUtil();
         SelectDriver selectDriver = new SelectDriver();
         selectDriver.environment = env;
         selectDriver.selectDriver(context, appiumUtil);
-        // 创建case表
-        SqlLiteUtil.createTable();
+        ExcelUtil.readAllExcel();
+        System.out.println("初始化项目结束！");
     }
 
     // 使用Factory实现动态添加用例
     @Factory
-    public Object[] createInstances(ITestContext context) {
-        ExcelUtil.readAllExcel();
+    @Parameters({"excelPath","env"})
+    public Object[] createInstances(ITestContext context, @Optional String excelPath, @Optional String env) {
+        ExcelUtil.excelPath = excelPath;
+        initProject(context, env);
         Map<String, TestCase> testCases = ExcelUtil.getTestCases();
         // 遍历添加Excel用例数据，转化为即将要执行的测试用例
         List<Object> caseList = new ArrayList<>();

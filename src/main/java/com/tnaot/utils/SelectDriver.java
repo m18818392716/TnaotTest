@@ -139,7 +139,7 @@ public class SelectDriver {
              * 设置和android  测试相关的capability并实例化driver对象
              * */
             if (environment.equalsIgnoreCase("test")) {// 测试环境
-                ExcelUtil.excelPath = "TestTnaot_1.xls";
+                ExcelUtil.excelPath = "TestTnaot.xls";
                 File app = new File(classpathRoot, "src/main/resources/news_v3.2.0_google_debug_20190904.apk");
                 //File app = new File(classpathRoot, "src/main/resources/news_v3.1.0_google_preview_20190828.apk");
                 logger.info("App: " + app.getAbsolutePath());
@@ -168,7 +168,7 @@ public class SelectDriver {
              * 设置和ios  测试相关的capability并实例化driver对象
              * */
             if (environment.equalsIgnoreCase("test")) {
-                ExcelUtil.excelPath = "TestTnaot_1.xls";
+                ExcelUtil.excelPath = "TestTnaot.xls";
                 File app = new File(classpathRoot, "src/main/resources/Tnaot_test.ipa");
                 logger.info("App: " + app.getAbsolutePath());
                 capabilities.setCapability("app", app.getAbsolutePath());
