@@ -168,9 +168,6 @@ public class MyPage extends AppiumBaseExecutor {
 
 
 
-
-
-
     /** 提现 */
     @AndroidFindBy(id="com.tnaot.news:id/tvCashWithdrawal")
     WebElement tvCashWithdrawal;
@@ -182,26 +179,86 @@ public class MyPage extends AppiumBaseExecutor {
     MobileElement noSetAccount;
 
     /** 提现-金额-$1 */
-    @FindElementBy(type = "accessibilityId", value = "$1")
+    @FindElementBy(type = "accessibilityId", value = "$2")
     WebElement tvCashWithdrawalAmount1;
     /** 提现-金额-$2 */
-    @FindElementBy(type = "accessibilityId", value = "$2")
+    @FindElementBy(type = "accessibilityId", value = "$5")
     WebElement tvCashWithdrawalAmount2;
     /** 提现-金额-$5 */
-    @FindElementBy(type = "accessibilityId", value = "$5")
+    @FindElementBy(type = "accessibilityId", value = "$10")
     WebElement tvCashWithdrawalAmount3;
     /** 提现-金额-$10 */
-    @FindElementBy(type = "accessibilityId", value = "$10")
+    @FindElementBy(type = "accessibilityId", value = "$20")
     WebElement tvCashWithdrawalAmount4;
     /** 提现-金额-$20 */
-    @FindElementBy(type = "accessibilityId", value = "$20")
+    @FindElementBy(type = "accessibilityId", value = "$30")
     WebElement tvCashWithdrawalAmount5;
     /** 提现-金额-$30 */
-    @FindElementBy(type = "accessibilityId", value = "$30")
+    @FindElementBy(type = "accessibilityId", value = "$50")
     WebElement tvCashWithdrawalAmount6;
     /** 提现-立即提现 */
     @FindElementBy(type = "accessibilityId", value = "立即提现")
     WebElement toCashWithdrawal;
+    /** 提现-立即提现-返回按钮 */
+    @FindElementBy(type = "className", value = "back", isWeb = true)
+    WebElement webviewBackButton;
+    /** 提现-立即提现-提现密码数字“1” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[1]", isWeb = true)
+    WebElement cashPasword1;
+    /** 提现-立即提现-提现密码数字“2” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[2]", isWeb = true)
+    WebElement cashPasword2;
+    /** 提现-立即提现-提现密码数字“3” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[3]", isWeb = true)
+    WebElement cashPasword3;
+    /** 提现-立即提现-提现密码数字“4” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[4]", isWeb = true)
+    WebElement cashPasword4;
+    /** 提现-立即提现-提现密码数字“5” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[5]", isWeb = true)
+    WebElement cashPasword5;
+    /** 提现-立即提现-提现密码数字“6” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[6]", isWeb = true)
+    WebElement cashPasword6;
+    /** 提现-立即提现-提现密码数字“7” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[7]", isWeb = true)
+    WebElement cashPasword7;
+    /** 提现-立即提现-提现密码数字“8” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[8]", isWeb = true)
+    WebElement cashPasword8;
+    /** 提现-立即提现-提现密码数字“9” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[9]", isWeb = true)
+    WebElement cashPasword9;
+    /** 提现-立即提现-提现密码数字“0” */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/ul/li[11]", isWeb = true)
+    WebElement cashPasword0;
+
+
+
+    /** 提现-立即提现-申请成功 */
+    @FindElementBy(type = "className", value = "headerText", isWeb = true)
+    WebElement toCashHeaderText;
+    /** 提现-立即提现-“提现申请已提交” */
+    @FindElementBy(type = "className", value = "title", isWeb = true)
+    WebElement toCashTitle;
+    /** 提现-立即提现-“预计到账时间三个工作日内” */
+    @FindElementBy(type = "className", value = "tip", isWeb = true)
+    WebElement toCashTip;
+    /** 提现-立即提现-提现金额 */
+    @FindElementBy(type = "className", value = "red-money", isWeb = true)
+    WebElement toCashRedMoney;
+    /** 提现-立即提现-提现方式 */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/p[2]/span", isWeb = true)
+    WebElement toCashPayType;
+    /** 提现-立即提现-提现账号 */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/p[3]/span", isWeb = true)
+    WebElement toCashPayAccount;
+    /** 提现-立即提现-账号名字 */
+    @FindElementBy(type = "xpath", value = "//*[@id='app']/div[2]/div[3]/p[4]/span", isWeb = true)
+    WebElement toCashAccountName;
+    /** 提现-立即提现-“知道了”按钮 */
+    @FindElementBy(type = "className", value = "setting-btn", isWeb = true)
+    WebElement toCashIKnowButton;
 
 
 
@@ -211,6 +268,45 @@ public class MyPage extends AppiumBaseExecutor {
     /** 账单-详情页-title */
     @FindElementBy(type = "accessibilityId", value = "账单")
     WebElement tvBillDetail;
+    /** 账单-类型下拉菜单 */
+    @FindElementBy(type = "className", value = "arrows", isWeb = true)
+    WebElement orderTypeSelect;
+    /** 账单-类型下拉菜单-全部 */
+    @FindElementBy(type = "className", value = "//*[@id='app']/div[2]/div[2]/div/div[2]/div/ul/li[1]", isWeb = true)
+    WebElement orderTypeSelect1;
+    /** 账单-类型下拉菜单-手机充值 */
+    @FindElementBy(type = "className", value = "//*[@id='app']/div[2]/div[2]/div/div[2]/div/ul/li[2]", isWeb = true)
+    WebElement orderTypeSelect2;
+    /** 账单-类型下拉菜单-租车打车 */
+    @FindElementBy(type = "className", value = "//*[@id='app']/div[2]/div[2]/div/div[2]/div/ul/li[3]", isWeb = true)
+    WebElement orderTypeSelect3;
+    /** 账单-类型下拉菜单-零钱 */
+    @FindElementBy(type = "className", value = "//*[@id='app']/div[2]/div[2]/div/div[2]/div/ul/li[4]", isWeb = true)
+    WebElement orderTypeSelect4;
+    /** 账单-类型下拉菜单-系统赠送 */
+    @FindElementBy(type = "className", value = "//*[@id='app']/div[2]/div[2]/div/div[2]/div/ul/li[5]", isWeb = true)
+    WebElement orderTypeSelect5;
+    /** 账单-类型下拉菜单-有退款 */
+    @FindElementBy(type = "className", value = "//*[@id='app']/div[2]/div[2]/div/div[2]/div/ul/li[6]", isWeb = true)
+    WebElement orderTypeSelect6;
+
+
+    /** 账单-订单名称 */
+    @FindElementBy(type = "className", value = "order-name", isWeb = true)
+    WebElement orderName;
+    /** 账单-订单金额 */
+    @FindElementBy(type = "className", value = "order-price", isWeb = true)
+    WebElement orderPrice;
+    /** 账单-订单类型 */
+    @FindElementBy(type = "className", value = "order-type", isWeb = true)
+    WebElement orderType;
+    /** 账单-订单状态 */
+    @FindElementBy(type = "className", value = "order-state", isWeb = true)
+    WebElement orderState;
+    /** 账单-订单时间 */
+    @FindElementBy(type = "className", value = "order-date", isWeb = true)
+    WebElement orderDate;
+
 
 
     /** 钱包 */
@@ -219,7 +315,6 @@ public class MyPage extends AppiumBaseExecutor {
     /** 钱包-详情页-title */
     @FindElementBy(type = "accessibilityId", value = "我的钱包")
     WebElement tvWalletDetail;
-
 
 
     /** 收藏 */
