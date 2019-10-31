@@ -68,6 +68,9 @@ public class RunTestCase implements ITest {
 
     public void runInitAppAction(){
         this.executeAction("MainPage.mainCloseButton", CLICK_IF_EXIST, null);
+//        this.executeAction("MainPage.noviceBootPageCloseButton", CLICK_IF_EXIST, null);
+//        this.executeAction("MainPage.noviceBootPageCloseButton", CLICK_IF_EXIST, null);
+//        this.executeAction("MainPage.noviceBootPageCloseButton", CLICK_IF_EXIST, null);
     }
 
     public void runCase(String caseId) {
@@ -241,7 +244,8 @@ public class RunTestCase implements ITest {
 
     public static final String GET_IMAGE_COUNT = "getImageCount";// 返回上一层页面
 
-    public static int imageCount = 0;
+    public static int imageCountZH = 0;
+    public static int imageCountEN = 0;
 
 
 
@@ -304,7 +308,7 @@ public class RunTestCase implements ITest {
                 SlideScreen.slideDown(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
                 break;
             case SLIDE_LEFT_TIMES:
-                SlideScreen.slideLeft(SelectDriver.getAppiumDriver(), imageCount);
+                SlideScreen.slideLeft(SelectDriver.getAppiumDriver(), imageCountZH);
                 break;
             case SLIDE_RIGHT_TIMES:
                 SlideScreen.slideRight(SelectDriver.getAppiumDriver(), Integer.parseInt(data));
@@ -394,7 +398,8 @@ public class RunTestCase implements ITest {
                 SelectDriver.getAppiumDriver().navigate().back();
                 break;
             case GET_IMAGE_COUNT:
-                imageCount = Integer.valueOf(webElement.getText().substring(0, webElement.getText().indexOf("图")));
+                imageCountZH = Integer.valueOf(webElement.getText().substring(0, webElement.getText().indexOf("图")));
+                //imageCountEN = Integer.valueOf(webElement.getText().substring(0, webElement.getText().indexOf("Pics")));
                 break;
             // 关于webview页面元素的相关滑动方法
             case WEBVIEW_SCROLL_TO_PRESENCE:

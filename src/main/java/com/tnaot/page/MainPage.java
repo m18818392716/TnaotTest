@@ -226,24 +226,92 @@ public class MainPage extends AppiumBaseExecutor {
     /** 首页-便民服务-手机充值 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[1]", isWeb = true)
     WebElement serviceSubType1;
+    /** 首页-便民服务-手机充值-输入要充值的手机号码 */
+    @FindElementBy(type = "xpath", value="//android.widget.EditText[@content-desc='输入要充值的手机号码']")
+    WebElement serviceSubType1InputTelephone;
+    /** 首页-便民服务-手机充值-充值金额 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='充值金额']")
+    WebElement serviceSubType1PayMoney;
+    /** 首页-便民服务-手机充值-更多服务 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='更多服务']")
+    WebElement serviceSubType1MoreService;
+    /** 首页-便民服务-手机充值-充值说明 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='充值说明']")
+    WebElement serviceSubType1PayIntroduce;
+
     /** 首页-便民服务-本地黄页 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[2]", isWeb = true)
     WebElement serviceSubType2;
+    /** 首页-便民服务-本地黄页-应急电话 */
+    @FindElementBy(type = "xpath", value = "//android.view.View[@content-desc='应急电话']")
+    WebElement serviceSubType2Tab1;
+    /** 首页-便民服务-本地黄页-应急电话-标题 */
+    @FindElementBy(type = "className", value = "name", isWeb = true )
+    WebElement serviceSubType2ListTitle;
+    /** 首页-便民服务-本地黄页-应急电话-电话图标 */
+    @FindElementBy(type = "xpath", value = "//android.widget.Image[@content-desc='phone@2x']")
+    WebElement serviceSubType2PhoneIcon;
+    /** 首页-便民服务-本地黄页-政府 */
+    @FindElementBy(type = "xpath", value = "//android.view.View[@content-desc='政府']" )
+    WebElement serviceSubType2Tab2;
+    /** 首页-便民服务-本地黄页-商会 */
+    @FindElementBy(type = "xpath", value = "//android.view.View[@content-desc='商会']")
+    WebElement serviceSubType2Tab3;
+    /** 首页-便民服务-本地黄页-学校 */
+    @FindElementBy(type = "xpath", value = "//android.view.View[@content-desc='学校']")
+    WebElement serviceSubType2Tab4;
+    /** 首页-便民服务-本地黄页-航空公司 */
+    @FindElementBy(type = "xpath", value = "//android.view.View[@content-desc='航空公司']")
+    WebElement serviceSubType2Tab5;
+    /** 首页-便民服务-本地黄页-医院 */
+    @FindElementBy(type = "xpath", value = "//android.view.View[@content-desc='医院']")
+    WebElement serviceSubType2Tab6;
+
     /** 首页-便民服务-柬文翻译 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[3]", isWeb = true)
     WebElement serviceSubType3;
     /** 首页-便民服务-本地汇率 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[4]", isWeb = true)
     WebElement serviceSubType4;
+    /** 首页-便民服务-本地汇率-美元 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='美元']")
+    WebElement serviceSubType4Tab1;
+    /** 首页-便民服务-本地汇率-人民币 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='人民币']")
+    WebElement serviceSubType4Tab2;
+    /** 首页-便民服务-本地汇率-瑞尔 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='瑞尔']")
+    WebElement serviceSubType4Tab3;
+
+
     /** 首页-便民服务-出入境指南 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[5]", isWeb = true)
     WebElement serviceSubType5;
+    /** 首页-便民服务-出入境指南-落地签表单 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='落地签表单']")
+    WebElement serviceSubType5Tab1;
+    /** 首页-便民服务-出入境指南-出入境单 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='出入境单']")
+    WebElement serviceSubType5Tab2;
+    /** 首页-便民服务-出入境指南-申报单 */
+    @FindElementBy(type = "xpath", value="//android.view.View[@content-desc='申报单']")
+    WebElement serviceSubType5Tab3;
+
+
     /** 首页-便民服务-柬文学习 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[6]", isWeb = true)
     WebElement serviceSubType6;
     /** 首页-便民服务-一键报警 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[7]", isWeb = true)
     WebElement serviceSubType7;
+    /** 首页-便民服务-一键报警-联系电话弹窗 */
+    @FindElementBy(type = "className", value="alarm", isWeb = true)
+    WebElement serviceSubType7Overlay;
+    /** 首页-便民服务-一键报警-联系电话弹窗关闭按钮 */
+    @FindElementBy(type = "className", value="cancel", isWeb = true)
+    WebElement serviceSubType7OverlayCloseButton;
+
+
     /** 首页-便民服务-寻人求助 */
     @FindElementBy(type = "xpath", value="//*[@id='app']/div[2]/div[1]/div[2]/ul/li[8]", isWeb = true)
     WebElement serviceSubType8;
