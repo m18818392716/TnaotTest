@@ -66,7 +66,8 @@ public class MainPage extends AppiumBaseExecutor {
     @FindElementBy(type = "className", value="money", isWeb = true)
     WebElement estateListDiscussType;
     /** 首页-房地产-列表-更多 */
-    @FindElementBy(type = "className", value="more", isWeb = true)
+//    @FindElementBy(type = "className", value="more", isWeb = true)
+    @FindElementBy(type = "xpath", value="/hierarchy/android.widget.FrameLayout/cn.bingoogolapple.swipebacklayout.BGASwipeBackLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View[3]/android.widget.ListView[2]/android.view.View[1]/android.view.View[9]/android.view.View[2]")
     WebElement estateListMore;
     /** 首页-房地产-列表-更多-收藏 */
     @FindElementBy(type = "xpath", value="//span[contains(text(),'收藏')]", isWeb = true)
@@ -971,7 +972,7 @@ public class MainPage extends AppiumBaseExecutor {
     @AndroidFindBy(id="com.tnaot.news:id/tv_more_cancel")
     WebElement cancelButton;
 
-    @AndroidFindBy(id="com.tnaot.news:id/iv_update_close")
+    @AndroidFindBy(id="com.tnaot.news:id/ivClose")
     WebElement mainCloseButton;
 
 
