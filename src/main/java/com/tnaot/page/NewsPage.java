@@ -482,6 +482,12 @@ public class NewsPage extends AppiumBaseExecutor {
 
 
 
+    /** 资讯-新手引导页-关闭按钮 */
+    @AndroidFindBy(id="com.tnaot.news:id/ivClose")
+    WebElement noviceBootPageCloseButton;
+
+
+
 
 
 

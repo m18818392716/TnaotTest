@@ -5,17 +5,25 @@
     <test verbose="2" preserve-order="true" name="Google Nexus">
         <parameter name="environment" value="test"/>
         <!--<parameter name="environment" value="produce"/>-->
+    <test verbose="2" preserve-order="true" name="Google Nexus 6">
+        <parameter name="report.config" value="src/main/resources/config/extent-config.xml" />
+        <parameter name="system.info" value="com.tnaot.utils.extentutils.MySystemInfo" />
+        <!--<parameter name="environment" value="test" />-->
         <parameter name="serverURL" value="http://127.0.0.1:4723/wd/hub"/>
         <parameter name="automationName" value="UiAutomator2"/>
         <parameter name="platformName" value="ANDROID"/>
+
         <parameter name="platformVersion" value="7.0"/>
-        <!--<parameter name="platformVersion" value="6.0"/>-->
-        <!--<parameter name="deviceName" value="Samsung Galaxy"/>-->
         <parameter name="deviceName" value="Google Nexus"/>
+
         <parameter name="appPackage" value="com.tnaot.news"/>
         <parameter name="appActivity" value=".mctnews.detail.activity.MainActivity"/>
         <parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190808.apk"/>
         <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_release_20190815.apk"/>-->
+        <parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190828.apk"/>
+        <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190821.apk"/>-->
+        <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_release_20190815.apk"/>-->
+        <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_release_20190821.apk"/>-->
         <parameter name="elementTimeOut" value="10"/>
         <classes>
             <!--<class name="com.tnaot.demo.demoTest"/>-->
@@ -24,9 +32,26 @@
 
             <class name="com.tnaot.demo.TestCaseFactory"/>
 
+            <!--<class name="com.tnaot.demo.LoginPageTest"/>-->
+
             <!--<class name="com.tnaot.demo.SampleTest"/>-->
         </classes>
     </test>
+
+    <!--<test verbose="2" preserve-order="true" name="vivo测试机">-->
+        <!--<parameter name="serverURL" value="http://127.0.0.1:4723/wd/hub"/>-->
+        <!--<parameter name="automationName" value="UiAutomator2"/>-->
+        <!--<parameter name="platformName" value="ANDROID"/>-->
+        <!--<parameter name="platformVersion" value="7.1.2"/>-->
+        <!--<parameter name="deviceName" value="vivo X9i"/>-->
+        <!--<parameter name="appPackage" value="com.tnaot.news"/>-->
+        <!--<parameter name="appActivity" value=".mctnews.detail.activity.MainActivity"/>-->
+        <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190808.apk"/>-->
+        <!--<parameter name="elementTimeOut" value="10"/>-->
+        <!--<classes>-->
+            <!--<class name="com.tnaot.demo.TestCaseFactory"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
 
     <!--用例失败重跑机制-->

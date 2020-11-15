@@ -108,10 +108,10 @@ public class ExcelUtil {
                 }
             }
 
-            System.out.println("Case excel数据：");
-            for (String key : ExcelUtil.getTestCases().keySet()) {
-                System.out.println(key + " : " + ExcelUtil.getTestCases().get(key));
-            }
+//            System.out.println("Case excel数据：");
+//            for (String key : ExcelUtil.getTestCases().keySet()) {
+//                System.out.println(key + " : " + ExcelUtil.getTestCases().get(key));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Read Case Excel Fail!");
