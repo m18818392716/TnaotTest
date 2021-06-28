@@ -57,7 +57,7 @@ public class LoginStep implements ITest {
         Thread.sleep(5000);
         loginPage.getAreaText().click();
         Thread.sleep(3000);
-        loginPage.getAreaSelect().click();
+//        loginPage.getAreaSelect().click();
         loginPage.getPhoneText().sendKeys("18818392716");
         Thread.sleep(3000);
         loginPage.getPwdText().sendKeys("cq183158");

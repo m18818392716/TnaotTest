@@ -28,6 +28,8 @@ public class RunTestCase implements ITest {
 
     private TestCase testCase;
 
+    public JedisDemo jedisDemo = new JedisDemo();
+
     public RunTestCase(String caseId) {
         this.testCase = ExcelUtil.getTestCases().get(caseId);
     }
@@ -272,13 +274,25 @@ public class RunTestCase implements ITest {
         if (StringUtils.isNotBlank(elementPath)) {
             webElement = AppiumUtil.getWebElement(elementPath);
         }
+        // 判断当前页面是原生还是H5页面
+        SelectDriver selectDriver = new SelectDriver();
+        selectDriver.
+
         switch (action) {
             case ACTION_CLICK:
                 webElement.click();
                 break;
             case ACTION_SEND_KEY:
+                String verify_code = "";
+                if (data.contains("TNAOT_PHONE")) {
+                    verify_code = jedisDemo.getValue(data);
+                    System.out.println("获取后的验证码：" + verify_code);
+                    jedisDemo.quitConnection();
+                } else {
+                    verify_code = data;
+                }
                 webElement.clear();
-                webElement.sendKeys(data);
+                webElement.sendKeys(verify_code);
                 break;
             case ACTION_CLEAR:
                 webElement.clear();

@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.tnaot.enums.DriverContext;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.Data;
 import org.apache.log4j.LogManager;
@@ -140,13 +141,13 @@ public class SelectDriver {
              * */
             if (environment.equalsIgnoreCase("test")) {// 测试环境
                 ExcelUtil.excelPath = "TestTnaot.xls";
-                File app = new File(classpathRoot, "src/main/resources/news_v3.2.0_google_debug_20190904.apk");
-                //File app = new File(classpathRoot, "src/main/resources/news_v3.1.0_google_preview_20190828.apk");
+                //File app = new File(classpathRoot, "src/main/resources/news_v3.2.0_google_debug_20190904.apk");
+                File app = new File(classpathRoot, "src/main/resources/TNAOT_Android_v5.2.0_gtest_20210319.apk");
                 logger.info("App: " + app.getAbsolutePath());
                 capabilities.setCapability("app", app.getAbsolutePath());
             } else {// 正式环境
                 ExcelUtil.excelPath = "ProduceTnaot.xls";
-                File app = new File(classpathRoot, "src/main/resources/news_v3.2.0_google_release_20190904.apk");
+                File app = new File(classpathRoot, "src/main/resources/news_v5.1.0_googleNewspro_test_20210128.apk");
                 logger.info("App: " + app.getAbsolutePath());
                 capabilities.setCapability("app", app.getAbsolutePath());
             }
@@ -206,13 +207,17 @@ public class SelectDriver {
         for(String contextName : context) {
             System.out.println(contextName);//打印当前上下文
             //if(contextName != null && contextName.contains("WEBVIEW_com.tnaot.news")){
-            if(contextName.contains("WEBVIEW_com.tnaot.news")){
-                driver.context("WEBVIEW_com.tnaot.news");//切换至H5页面
+            if(contextName.contains("WEBVIEW_com.tnaot.newspro")){
+                driver.context("WEBVIEW_com.tnaot.newspro");//切换至H5页面
                 System.out.println("已经进入webview");
                 System.out.println("当前context" + driver.getContext());
                 System.out.println(driver.getContext());
                 //driver.findElement(By.className("none-accounts")).click();
                 driver.getPageSource();
+                return;
+            }
+            else {
+                driver.context("NATIVE_APP");
                 return;
             }
         }
@@ -235,6 +240,7 @@ public class SelectDriver {
 
     }
 
+
     public void switchTo_WEBVIEW(AppiumDriver<WebElement> driver) {
 
 //        String targetContext;
@@ -255,7 +261,7 @@ public class SelectDriver {
         //String str = appActivity;//检查当前APP
         try {
             if(appActivity.contains(".MainActivity")){
-                //driver.context("WEBVIEW_com.tnaot.news");
+                //driver.context("WEBVIEW_com.tnaot.newspro");
                 driver.context("WEBVIEW");
                 return;
             }
@@ -309,4 +315,28 @@ public class SelectDriver {
             }
         }
     }
+
+
+    public void swith_app(AndroidDriver AndroidDriver){
+        //切换到源生app
+        System.out.println(AndroidDriver.getContextHandles());//输出现有的context
+        System.out.println("切换到NATIVE_APP");
+        AndroidDriver.context("NATIVE_APP");
+
+    }
+
+    public void swith_web(AndroidDriver AndroidDriver){
+        //切换到webview
+        System.out.println(AndroidDriver.getContextHandles());
+        System.out.println("切换到WEBVIEW_com.tnaot.newpro");
+        AndroidDriver.context("WEBVIEW_com.tnaot.newspro");
+
+
+        // 切换原生或者Webview
+        AndroidDriver.context("WEBVIEW"); //切换到webview
+        AndroidDriver.findElementById("").click(); //点击webview里边的元素，一个m站的网页元素。
+        AndroidDriver.context("NATIVE_APP"); //切换到原生app
+
+    }
+
 }
