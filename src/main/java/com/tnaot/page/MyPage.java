@@ -19,8 +19,46 @@ public class MyPage extends AppiumBaseExecutor {
     }
 
     /** 我的 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_mine")
+    @AndroidFindBy(id="com.tnaot.newspro:id/iv_mine")
     WebElement rlMine;
+    /** 我的-登录 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/tv_login_btn")
+    WebElement loginButton;
+    /** 我的-登录-手机注册登录 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/tv_main_phone_login")
+    WebElement registerButton;
+    /** 我的-登录-账号密码登录 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/tv_main_password_login")
+    WebElement userNamePwdButton;
+    /** 我的-登录-Faceboo登录 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/tv_main_facebook_login")
+    WebElement facebookButton;
+
+    /** 我的-登录-区号选择 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/ll_password_area_code")
+    WebElement areaSelect;
+    /** 我的-登录-区号选择-中国 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.TextView[2]")
+    WebElement areaSelectZH;
+    /** 我的-登录-区号选择-柬埔寨 */
+    @AndroidFindBy(xpath="/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[2]/android.widget.TextView")
+    WebElement areaSelectJP;
+
+    /** 我的-登录-注册-输入手机号 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/et_phone_num")
+    WebElement phoneNumInput;
+    /** 我的-登录-注册-下一步 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/ibtn_login")
+    WebElement nextStepButton;
+    /** 我的-登录-注册-输入验证码 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/et_verify_code")
+    WebElement verifyCodeInput;
+    /** 我的-登录-注册-输入验证码-下一步 */
+    @AndroidFindBy(id="com.tnaot.newspro:id/ibtn_check")
+    WebElement finishCodeButton;
+
+
+
     /** 我的-版本更新弹窗关闭按钮 */
     @AndroidFindBy(id="com.tnaot.news:id/iv_update_close")
     WebElement updateCloseButton;
@@ -101,70 +139,70 @@ public class MyPage extends AppiumBaseExecutor {
 
 
 
-    /** 手机号登录 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_phone")
-    WebElement phoneLoginType;
-
-    /** 区域 */
-    @AndroidFindBy(id="com.tnaot.news:id/et_country")
-    WebElement areaText;
-
-    /** 区域-选择 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvName")
-    WebElement areaSelect;
-
-    /** 手机号 */
-    @AndroidFindBy(id="com.tnaot.news:id/user_name")
-    WebElement phoneText;
-
-    /** 密码 */
-    @AndroidFindBy(id="com.tnaot.news:id/user_pwd")
-    WebElement pwdText;
-
-    /** 登录按钮 */
-    @AndroidFindBy(id="com.tnaot.news:id/tvLogin")
-    WebElement loginButton;
-
-    /** 快速注册 */
-    @AndroidFindBy(id="com.tnaot.news:id/tv_quick_registration")
-    WebElement quickRegistration;
-
-    /** 忘记密码 */
-    @AndroidFindBy(id="com.tnaot.news:id/tv_forget_pwd")
-    WebElement forgetPwd;
-
-
-    /** 谷歌账号登录 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_google")
-    WebElement googleLoginType;
-
-    /** Facebook登录 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_facebook")
-    WebElement facebookLoginType;
-
-    /** Twitter登录 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_twitter")
-    WebElement twitterLoginType;
-
-    /** Line登录 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_line")
-    WebElement lineLoginType;
-
-    /** 向右按钮 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_login_right_arrow")
-    WebElement loginRightArrow;
-
-    /** QQ登录 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_qq")
-    WebElement qqLoginType;
-
-    /** 微信登录 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_wechat")
-    WebElement wechatLoginType;
-
-    /** 向左按钮 */
-    @AndroidFindBy(id="com.tnaot.news:id/iv_login_left_arrow")
-    WebElement loginLeftArrow;
+//    /** 手机号登录 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_phone")
+//    WebElement phoneLoginType;
+//
+//    /** 区域 */
+//    @AndroidFindBy(id="com.tnaot.news:id/et_country")
+//    WebElement areaText;
+//
+//    /** 区域-选择 */
+//    @AndroidFindBy(id="com.tnaot.news:id/tvName")
+//    WebElement areaSelect;
+//
+//    /** 手机号 */
+//    @AndroidFindBy(id="com.tnaot.news:id/user_name")
+//    WebElement phoneText;
+//
+//    /** 密码 */
+//    @AndroidFindBy(id="com.tnaot.news:id/user_pwd")
+//    WebElement pwdText;
+//
+//    /** 登录按钮 */
+//    @AndroidFindBy(id="com.tnaot.news:id/tvLogin")
+//    WebElement loginButton;
+//
+//    /** 快速注册 */
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_quick_registration")
+//    WebElement quickRegistration;
+//
+//    /** 忘记密码 */
+//    @AndroidFindBy(id="com.tnaot.news:id/tv_forget_pwd")
+//    WebElement forgetPwd;
+//
+//
+//    /** 谷歌账号登录 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_google")
+//    WebElement googleLoginType;
+//
+//    /** Facebook登录 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_facebook")
+//    WebElement facebookLoginType;
+//
+//    /** Twitter登录 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_twitter")
+//    WebElement twitterLoginType;
+//
+//    /** Line登录 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_line")
+//    WebElement lineLoginType;
+//
+//    /** 向右按钮 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_login_right_arrow")
+//    WebElement loginRightArrow;
+//
+//    /** QQ登录 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_qq")
+//    WebElement qqLoginType;
+//
+//    /** 微信登录 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_wechat")
+//    WebElement wechatLoginType;
+//
+//    /** 向左按钮 */
+//    @AndroidFindBy(id="com.tnaot.news:id/iv_login_left_arrow")
+//    WebElement loginLeftArrow;
 
 
 
