@@ -2,6 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
 
+    <test verbose="2" preserve-order="true" name="Google Nexus">
+        <parameter name="environment" value="test"/>
+        <!--<parameter name="environment" value="produce"/>-->
     <test verbose="2" preserve-order="true" name="Google Nexus 6">
         <parameter name="report.config" value="src/main/resources/config/extent-config.xml" />
         <parameter name="system.info" value="com.tnaot.utils.extentutils.MySystemInfo" />
@@ -13,14 +16,21 @@
         <parameter name="platformVersion" value="7.0"/>
         <parameter name="deviceName" value="Google Nexus 6"/>
 
+        <!--<parameter name="appPackage" value="com.tnaot.news"/>-->
+        <!--<parameter name="appActivity" value=".mctnews.detail.activity.MainActivity"/>-->
+        <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190808.apk"/>-->
+        <!--&lt;!&ndash;<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_release_20190815.apk"/>&ndash;&gt;-->
+        <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190828.apk"/>-->
+
+
         <parameter name="appPackage" value="com.tnaot.newspro"/>
         <parameter name="appActivity" value="com.tnaot.news.mctnews.detail.activity.MainActivity"/>
         <parameter name="androidAppPath" value="src/main/resources/TNAOT_Android_v5.2.0_gtest_20210319.apk"/>
+
         <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_debug_20190821.apk"/>-->
         <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_release_20190815.apk"/>-->
         <!--<parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_release_20190821.apk"/>-->
         <parameter name="elementTimeOut" value="10"/>
-        <!--<parameter name="androidAppPath" value="src/main/resources/GPB_Mobile_AOS_sprint2.apk"/>-->
         <classes>
             <!--<class name="com.tnaot.demo.demoTest"/>-->
             <!--<class name="com.tnaot.step.LoginStep"/>-->
